@@ -1,0 +1,9 @@
+@import "tailwindcss";
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(circle, #250234, #1f0c30, #1b122a, #1a1723, #1a1a1a) !important;
+  background-attachment: fixed; 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
