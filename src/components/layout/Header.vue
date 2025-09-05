@@ -2,21 +2,9 @@
   <header class="w-full py-2 text-white flex items-center justify-center">
     <div class="glass-container">
       <div class="nav-items gap-2">
-        <router-link to="/" class="glass-nav-item" :class="{ active: activeItem === 'home' }"
-          @click="setActive('home')">
-          Home
-        </router-link>
-        <router-link to="/about" class="glass-nav-item" :class="{ active: activeItem === 'about' }"
-          @click="setActive('about')">
-          About
-        </router-link>
-        <router-link to="/experience" class="glass-nav-item" :class="{ active: activeItem === 'experience' }"
-          @click="setActive('experience')">
-          Services
-        </router-link>
-        <router-link to="/contact" class="glass-nav-item" :class="{ active: activeItem === 'contact' }"
-          @click="setActive('contact')">
-          Contact
+        <router-link v-for="menu in menus" :key="menu.index" :to="menu.route" class="glass-nav-item"
+          >
+          {{ menu.name }}
         </router-link>
       </div>
     </div>
@@ -24,15 +12,30 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+const menus = ref([
+  {
+    index: 1,
+    route: "/",
+    name: "Home"
+  },
+  {
+    index: 2,
+    route: "/about",
+    name: "About"
+  },
+  {
+    index: 3,
+    route: "/experience",
+    name: "Experience"
+  },
+  {
+    index: 4,
+    route: "/contact",
+    name: "Contact"
+  }
+])
 
-const route = useRouter()
-const activeItem = computed(()=> route.name)
-
-const setActive = (item) => {
-  activeItem.value = item
-}
 </script>
 
 <style scoped>
@@ -124,6 +127,4 @@ const setActive = (item) => {
     inset 0 1px 1px rgba(255, 255, 255, 0.1),
     0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
-
 </style>
