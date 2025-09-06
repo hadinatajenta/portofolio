@@ -6,7 +6,7 @@
             <slot />
         </main>
 
-        <Footers class="w-full bg-white border-t border-gray-200 mt-auto" />
+        <Footers />
     </div>
 </template>
 

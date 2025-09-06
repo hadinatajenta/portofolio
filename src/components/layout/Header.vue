@@ -1,18 +1,24 @@
 <template>
-  <header class="w-full py-2 text-white flex items-center justify-center">
-    <div class="glass-container">
-      <div class="nav-items gap-2">
-        <router-link v-for="menu in menus" :key="menu.index" :to="menu.route" class="glass-nav-item"
-          >
-          {{ menu.name }}
-        </router-link>
+  <header class="w-full py-3 text-white sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="glass-container">
+        <nav class="nav-items">
+          <router-link v-for="menu in menus" :key="menu.index" :to="menu.route" class="glass-nav-item"
+            :class="{ 'active-nav-item': isActiveRoute(menu.route) }">
+            {{ menu.name }}
+          </router-link>
+        </nav>
       </div>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
 const menus = ref([
   {
     index: 1,
@@ -36,6 +42,9 @@ const menus = ref([
   }
 ])
 
+const isActiveRoute = (routePath) => {
+  return route.path === routePath
+}
 </script>
 
 <style scoped>
@@ -53,35 +62,28 @@ const menus = ref([
     inset 0 1px 1px rgba(255, 255, 255, 0.15),
     inset 0 10px 20px rgba(255, 255, 255, 0.05);
   border-radius: 24px;
-  padding: 4px;
+  padding: 6px;
   position: relative;
   overflow: hidden;
 }
 
-.glass-container::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: 1;
-  pointer-events: none;
-}
-
 .nav-items {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   z-index: 2;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 20px;
   padding: 4px;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .glass-nav-item {
   position: relative;
   overflow: hidden;
-  padding: 0.875rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 16px;
   color: white;
   font-weight: 500;
@@ -92,6 +94,8 @@ const menus = ref([
   text-align: center;
   min-width: 90px;
   cursor: pointer;
+  flex: 1;
+  max-width: 160px;
 }
 
 .glass-nav-item::before {
@@ -118,13 +122,86 @@ const menus = ref([
   left: 100%;
 }
 
-
-.router-link-active {
+.active-nav-item {
   background: linear-gradient(45deg,
       rgba(255, 255, 255, 0.15),
-      rgba(255, 255, 255, 0.05));
+      rgba(255, 255, 255, 0.05)) !important;
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    0 2px 5px rgba(0, 0, 0, 0.2);
+    0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+@media (max-width: 768px) {
+  header {
+    position: fixed;
+    bottom: 0;
+    top: auto; /* reset biar ga nempel atas */
+    width: 100%;
+    z-index: 50;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .glass-container {
+    border-radius: 16px;
+    padding: 4px;
+  }
+
+  .nav-items {
+    border-radius: 14px;
+    gap: 2px;
+  }
+
+  .glass-nav-item {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    min-width: 70px;
+    border-radius: 12px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .glass-container {
+    border-radius: 12px;
+  }
+
+  .nav-items {
+    border-radius: 10px;
+    padding: 2px;
+  }
+
+  .glass-nav-item {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+    min-width: 60px;
+    border-radius: 10px;
+  }
+}
+
+/* Animation for header appearance */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sticky header effect */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(26, 26, 26, 0.8);
 }
 </style>
