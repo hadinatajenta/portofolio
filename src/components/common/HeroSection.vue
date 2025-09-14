@@ -20,7 +20,7 @@
                 </p>
                 <div class="flex gap-4 flex-wrap justify-center animate-fade-in-delay-2">
                     <BaseButton :to="'/projects'" :label="'View Projects'" />
-                    <SecondaryButton :to="'contact'" :label="'Contact'"/>
+                    <!-- <SecondaryButton :to="'contact'" :label="'Contact'"/> -->
                 </div>
             </div>
         </BaseCard>
@@ -30,7 +30,7 @@
 <script setup>
 import BaseCard from "../common/BaseCard.vue"
 import BaseButton from "./BaseButton.vue";
-import SecondaryButton from "./SecondaryButton.vue";
+// import SecondaryButton from "./SecondaryButton.vue";
 </script>
 
 <style scoped>
