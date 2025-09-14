@@ -1,16 +1,13 @@
 <template>
   <footer class="w-full py-8 text-white mt-12">
     <div class="container mx-auto px-4">
-      <!-- Main footer content with glass effect -->
       <div class="glass-container max-w-4xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-center p-6">
-          <!-- Brand/Name section -->
           <div class="text-center md:text-left mb-6 md:mb-0">
             <h3 class="text-xl font-semibold mb-2">{{name}}</h3>
             <p class="text-sm opacity-80">Creating digital experiences</p>
           </div>
 
-          <!-- Quick links -->
           <div class="mb-6 md:mb-0">
             <h4 class="text-sm font-medium mb-3 text-center md:text-left">Quick Links</h4>
             <div class="flex flex-wrap justify-center md:justify-start gap-4">
@@ -21,7 +18,6 @@
             </div>
           </div>
 
-          <!-- Social links -->
           <div>
             <h4 class="text-sm font-medium mb-3 text-center md:text-left">Connect with me</h4>
             <div class="flex justify-center md:justify-start space-x-4">
@@ -32,10 +28,8 @@
           </div>
         </div>
 
-        <!-- Divider -->
         <div class="border-t border-white border-opacity-20 mx-6"></div>
 
-        <!-- Copyright -->
         <div class="text-center py-4 text-sm opacity-75">
           &copy; {{ new Date().getFullYear() }} {{ name }}. All rights reserved.
         </div>
@@ -63,15 +57,9 @@ const menus = ref([
     index: 3,
     route: "/experience",
     name: "Experience"
-  },
-  {
-    index: 4,
-    route: "/contact",
-    name: "Contact"
   }
 ])
 
-// Social media links with inline SVGs
 const socials = ref([
   {
     name: 'GitHub',
@@ -131,7 +119,6 @@ const socials = ref([
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .glass-container {
     border-radius: 16px;

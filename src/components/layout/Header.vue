@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -27,19 +27,14 @@ const menus = ref([
   },
   {
     index: 2,
-    route: "/about",
-    name: "About"
+    route: "/projects",
+    name: "Project"
   },
   {
     index: 3,
     route: "/experience",
     name: "Experience"
   },
-  {
-    index: 4,
-    route: "/contact",
-    name: "Contact"
-  }
 ])
 
 const isActiveRoute = (routePath) => {
@@ -135,7 +130,8 @@ const isActiveRoute = (routePath) => {
   header {
     position: fixed;
     bottom: 0;
-    top: auto; /* reset biar ga nempel atas */
+    top: auto;
+    /* reset biar ga nempel atas */
     width: 100%;
     z-index: 50;
     padding-top: 0.3rem;
@@ -184,7 +180,6 @@ const isActiveRoute = (routePath) => {
   }
 }
 
-/* Animation for header appearance */
 @keyframes slide-down {
   from {
     opacity: 0;
@@ -197,7 +192,6 @@ const isActiveRoute = (routePath) => {
   }
 }
 
-/* Sticky header effect */
 .sticky-header {
   position: sticky;
   top: 0;
