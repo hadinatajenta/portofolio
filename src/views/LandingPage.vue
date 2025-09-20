@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <HeroSection class="w-full"/>
+    <HeroSection />
     <ProjectSection/>
     <Career/>
   </DefaultLayout>
