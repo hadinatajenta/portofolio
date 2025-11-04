@@ -1,10 +1,10 @@
 <template>
-    <section id="projects" class=" relative py-20 px-6 md:px-6 flex flex-col items-center">
+    <section id="projects" class="relative py-16 sm:py-20 px-4 sm:px-6 flex flex-col items-center">
         <!-- Decorative glow -->
         <div class="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[160px] -z-10">
         </div>
 
-        <BaseCard title="Projects" class="w-full" >
+        <BaseCard title="Projects" class="w-full">
             <div class="flex flex-col gap-10">
                 <!-- Section Title -->
                 <div class="text-center">
