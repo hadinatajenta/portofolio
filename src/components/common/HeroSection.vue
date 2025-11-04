@@ -63,9 +63,13 @@
                                 class="absolute -top-8 -left-6 hidden sm:flex px-4 py-2 rounded-2xl border border-white/15 bg-white/10 text-white/90 text-xs uppercase tracking-wider backdrop-blur">
                                 Currently crafting
                             </div>
-                            <div class="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
-                                <img src="/img/5357.jpg" alt="Hadinata profile" class="w-full h-full object-cover" />
-                            </div>
+                            <button
+                                type="button"
+                                class="group w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl transition transform hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                                @click="showGallery = true"
+                            >
+                                <img src="/img/5357.jpg" alt="Hadinata profile" class="w-full h-full object-cover transition group-hover:scale-105" />
+                            </button>
                             <div
                                 class="absolute -bottom-8 -right-4 hidden sm:flex px-4 py-3 rounded-2xl border border-white/15 bg-gradient-to-r from-purple-500/40 to-cyan-400/30 text-white text-sm shadow-lg">
                                 Vue · Laravel · Tailwind
@@ -102,11 +106,92 @@
                 </div>
             </div>
         </div>
+        <transition name="gallery">
+            <div
+                v-if="showGallery"
+                class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-6 py-12"
+                @click.self="showGallery = false"
+            >
+                <div class="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-black/70 p-6 shadow-[0_40px_140px_rgba(0,0,0,0.55)]">
+                    <button
+                        type="button"
+                        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-gray-200 transition hover:border-cyan-200/60 hover:text-white"
+                        @click="showGallery = false"
+                    >
+                        <span class="sr-only">Close</span>
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                        <img :src="currentImage" alt="Hadinata portrait" class="w-full h-full object-cover" />
+                    </div>
+
+                    <div v-if="galleryImages.length > 1" class="mt-4 flex items-center justify-between">
+                        <button
+                            type="button"
+                            class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-gray-200 transition hover:border-cyan-200/60 hover:text-white"
+                            @click="prevImage"
+                        >
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            Previous
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <button
+                                v-for="(image, index) in galleryImages"
+                                :key="image"
+                                type="button"
+                                class="h-2.5 w-2.5 rounded-full transition"
+                                :class="index === currentIndex ? 'bg-cyan-300' : 'bg-white/30'"
+                                @click="setImage(index)"
+                            ></button>
+                        </div>
+                        <button
+                            type="button"
+                            class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-gray-200 transition hover:border-cyan-200/60 hover:text-white"
+                            @click="nextImage"
+                        >
+                            Next
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </section>
 </template>
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
+import { ref, computed } from "vue";
+
+const galleryImages = [
+    "/img/5357.jpg",
+    "/img/portrait-2.jpg",
+    "/img/portrait-3.jpg"
+];
+
+const showGallery = ref(false);
+const currentIndex = ref(0);
+
+const currentImage = computed(() => galleryImages[currentIndex.value] || galleryImages[0]);
+
+const prevImage = () => {
+    currentIndex.value = (currentIndex.value - 1 + galleryImages.length) % galleryImages.length;
+};
+
+const nextImage = () => {
+    currentIndex.value = (currentIndex.value + 1) % galleryImages.length;
+};
+
+const setImage = (index) => {
+    currentIndex.value = index;
+};
 </script>
 
 <style scoped>
@@ -128,5 +213,15 @@ import BaseButton from "./BaseButton.vue";
 .animate-float-delayed {
     animation: float 14s ease-in-out infinite;
     animation-delay: 2s;
+}
+
+.gallery-enter-active,
+.gallery-leave-active {
+    transition: opacity 0.25s ease;
+}
+
+.gallery-enter-from,
+.gallery-leave-to {
+    opacity: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div class="flex flex-col gap-24 lg:gap-28">
+    <div class="flex flex-col gap-14 lg:gap-28">
       <HeroSection />
       <ProjectSection />
       <Career />
