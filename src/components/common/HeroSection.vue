@@ -1,19 +1,19 @@
 <template>
     <section id="hero" class="relative overflow-hidden">
-        <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 -z-10 pointer-events-none">
             <div
-                class="absolute -top-32 -left-16 w-[420px] h-[420px] rounded-full bg-purple-500/20 blur-[160px] animate-float">
+                class="absolute -top-32 left-1/2 -translate-x-1/2 w-[460px] h-[460px] rounded-full bg-purple-500/20 blur-[160px] animate-float">
             </div>
             <div
-                class="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full bg-cyan-500/15 blur-[180px] animate-float-delayed">
+                class="absolute bottom-0 right-1/2 translate-x-1/2 w-[540px] h-[540px] rounded-full bg-cyan-500/15 blur-[180px] animate-float-delayed">
             </div>
         </div>
 
         <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-32">
             <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-                <div class="space-y-8 text-center lg:text-left">
+                <div class="space-y-8 text-left">
                     <div
-                        class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md text-xs md:text-sm mx-auto lg:mx-0">
+                        class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md text-xs md:text-sm">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span>Crafting immersive digital products</span>
                     </div>
@@ -23,12 +23,12 @@
                             experiences</span> for ambitious teams.
                     </h1>
 
-                    <p class="text-gray-300 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    <p class="text-gray-300 text-lg leading-relaxed max-w-xl">
                         Hadinata is a software engineer blending strong product thinking with clean, scalable
                         code. From prototypes to production apps, every pixel and API is designed with intent.
                     </p>
 
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                    <div class="flex flex-wrap justify-start gap-4">
                         <BaseButton :to="'/projects'" :label="'View Projects'" />
                         <a href="#projects"
                             class="px-6 py-3 rounded-xl font-medium text-white/90 border border-white/20 hover:border-cyan-300 hover:text-cyan-200 transition-all duration-300 backdrop-blur">
@@ -36,16 +36,16 @@
                         </a>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-white/10">
-                        <div class="flex flex-col gap-1 items-center md:items-start">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10">
+                        <div class="flex flex-col gap-1">
                             <span class="text-3xl font-semibold text-white">6+</span>
                             <span class="text-xs uppercase tracking-wider text-gray-400">Years experience</span>
                         </div>
-                        <div class="flex flex-col gap-1 items-center md:items-start">
+                        <div class="flex flex-col gap-1">
                             <span class="text-3xl font-semibold text-white">18+</span>
                             <span class="text-xs uppercase tracking-wider text-gray-400">Projects shipped</span>
                         </div>
-                        <div class="flex flex-col gap-1 items-center md:items-start">
+                        <div class="flex flex-col gap-1">
                             <span class="text-3xl font-semibold text-white">3</span>
                             <span class="text-xs uppercase tracking-wider text-gray-400">Active clients</span>
                         </div>

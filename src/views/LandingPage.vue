@@ -1,8 +1,10 @@
 <template>
   <DefaultLayout>
-    <HeroSection />
-    <ProjectSection/>
-    <Career/>
+    <div class="flex flex-col gap-24 lg:gap-28">
+      <HeroSection />
+      <ProjectSection />
+      <Career />
+    </div>
   </DefaultLayout>
 </template>
 

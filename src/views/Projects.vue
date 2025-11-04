@@ -1,304 +1,618 @@
 <template>
-   <DefaultLayout>
-     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-white mb-4 animate-fade-in">
-                    My Projects
-                </h1>
-                <p class="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-delay">
-                    A collection of projects I've built using various technologies and frameworks
-                </p>
+  <DefaultLayout>
+    <section class="space-y-16">
+      <div class="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] px-6 py-12 sm:px-10 lg:px-14">
+        <div class="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-purple-500/30 blur-[120px]"></div>
+        <div class="absolute -bottom-32 -left-10 h-80 w-80 rounded-full bg-cyan-400/20 blur-[140px]"></div>
+
+        <div class="relative grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-start">
+          <div class="space-y-6">
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
+              Project Archive
+            </span>
+            <div class="space-y-4">
+              <h1 class="text-4xl sm:text-5xl font-semibold leading-tight text-white">
+                Shipping purposeful products with craftsmanship and care.
+              </h1>
+              <p class="text-lg text-gray-300 max-w-xl">
+                A snapshot of products, platforms, and experiments delivered across teams — spanning quick prototypes to full production launches.
+              </p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up">
-                <div v-for="(project, index) in projects" :key="project.id"
-                    class="project-card bg-gradient-to-br from-purple-900/30 to-gray-900/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-purple-400/40"
-                    :style="{ animationDelay: `${index * 0.1}s` }" @click="openModal(project)">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-semibold text-white group-hover:text-purple-300 transition-colors">
-                            {{ project.title }}
-                        </h3>
-                        <div v-if="project.isPrivate" class="flex-shrink-0">
-                            <span
-                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                Private
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span v-for="tech in project.stack" :key="tech"
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100/10 text-purple-200 border border-purple-400/20">
-                            {{ tech }}
-                        </span>
-                    </div>
-
-                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
-                        {{ project.shortDescription }}
-                    </p>
-
-                    <div class="flex justify-between items-center mt-auto">
-                        <span class="text-purple-300 text-sm font-medium">View Details →</span>
-                        <div v-if="!project.isPrivate && project.link" class="flex items-center text-gray-400 text-sm">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Link Available
-                        </div>
-                    </div>
-                </div>
+            <div class="flex flex-wrap gap-4 text-sm text-gray-200">
+              <div class="stat-card">
+                <span class="text-2xl font-semibold text-white">{{ projectStats.total }}</span>
+                <span class="text-xs uppercase tracking-wide text-gray-400">Total projects</span>
+              </div>
+              <div class="stat-card">
+                <span class="text-2xl font-semibold text-white">{{ projectStats.live }}</span>
+                <span class="text-xs uppercase tracking-wide text-gray-400">Live in production</span>
+              </div>
+              <div class="stat-card">
+                <span class="text-2xl font-semibold text-white">{{ projectStats.confidential }}</span>
+                <span class="text-xs uppercase tracking-wide text-gray-400">Confidential</span>
+              </div>
             </div>
+          </div>
+
+          <div class="relative">
+            <div class="rounded-3xl border border-white/15 bg-white/[0.06] p-6 shadow-[0_30px_80px_rgba(65,46,105,0.35)] backdrop-blur-xl">
+              <div class="flex items-center justify-between text-sm text-gray-300">
+                <span class="inline-flex items-center gap-2 rounded-full bg-purple-500/20 px-3 py-1 font-medium text-purple-100">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                  </svg>
+                  Highlight
+                </span>
+                <span class="text-xs uppercase tracking-[0.3em] text-white/60">2024</span>
+              </div>
+              <h2 class="mt-6 text-2xl font-semibold text-white">
+                Featured: Portfolio website refresh
+              </h2>
+              <p class="mt-3 text-sm leading-relaxed text-gray-300">
+                A cohesive brand story across landing, case studies, and onboarding flows. Built with Vue 3, dynamic content modules, and meticulously tuned micro-interactions.
+              </p>
+              <div class="mt-6 flex flex-wrap gap-3 text-xs">
+                <span class="badge badge-primary">Vue 3</span>
+                <span class="badge badge-primary">Tailwind</span>
+                <span class="badge badge-primary">Framer Motion</span>
+              </div>
+              <button
+                type="button"
+                class="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:border-cyan-200/60 hover:text-cyan-100"
+                @click="selectFeatured"
+              >
+                View case study
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-10">
+        <div class="flex flex-wrap items-center gap-3">
+          <button
+            v-for="filter in filters"
+            :key="filter"
+            type="button"
+            class="filter-chip"
+            :class="{ 'filter-chip--active': isActiveFilter(filter) }"
+            @click="selectFilter(filter)"
+          >
+            <span class="text-xs uppercase tracking-wide">{{ filter }}</span>
+          </button>
+          <span class="text-xs uppercase tracking-wide text-gray-400">
+            {{ filteredProjects.length }} results
+          </span>
         </div>
 
-        <div v-if="selectedProject"
-            class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
-            @click.self="closeModal">
-            <div
-                class="modal-content bg-gradient-to-br from-gray-900 to-purple-900/50 backdrop-blur-md border border-purple-500/30 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h2 class="text-3xl font-bold text-white mb-2">{{ selectedProject.title }}</h2>
-                        <div v-if="selectedProject.isPrivate" class="inline-flex items-center">
-                            <span
-                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 mr-3">
-                                🔒 Private Project
-                            </span>
-                        </div>
-                    </div>
-                    <button @click="closeModal"
-                        class="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article
+            v-for="project in filteredProjects"
+            :key="project.id"
+            class="group relative overflow-hidden rounded-[28px] border border-white/12 bg-white/[0.05] p-7 backdrop-blur-xl transition hover:border-cyan-200/40 hover:-translate-y-1 hover:bg-white/[0.08]"
+          >
+            <div class="absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-purple-500/10 blur-[90px] transition group-hover:bg-purple-500/20"></div>
 
-                <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-purple-300 mb-3">Technology Stack</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span v-for="tech in selectedProject.stack" :key="tech"
-                            class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-purple-100/10 text-purple-200 border border-purple-400/30">
-                            {{ tech }}
-                        </span>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <h3 class="text-lg font-semibold text-purple-300 mb-3">Description</h3>
-                    <p class="text-gray-300 leading-relaxed">{{ selectedProject.description }}</p>
-                </div>
-
-                <div v-if="selectedProject.isPrivate"
-                    class="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
-                    <div class="flex items-start">
-                        <svg class="w-5 h-5 text-red-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <div>
-                            <h4 class="text-red-300 font-medium mb-1">Private Repository</h4>
-                            <p class="text-red-200 text-sm">This project contains proprietary code and cannot be
-                                publicly shared due to confidentiality agreements.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <button v-if="!selectedProject.isPrivate && selectedProject.link"
-                        @click="openLink(selectedProject.link)"
-                        class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                        </svg>
-                        {{ selectedProject.link.includes('github') ? 'View on GitHub' : 'Visit Website' }}
-                    </button>
-                    <button @click="closeModal"
-                        class="px-6 py-3 border border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition-all duration-200">
-                        Close
-                    </button>
-                </div>
+            <div class="relative flex items-center justify-between text-xs uppercase tracking-wide text-gray-400">
+              <span class="inline-flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full" :class="project.isPrivate ? 'bg-amber-400' : 'bg-emerald-400'"></span>
+                {{ project.type }}
+              </span>
+              <span>{{ project.year }}</span>
             </div>
+
+            <div class="relative mt-6 space-y-4">
+              <div class="flex items-center gap-3">
+                <h3 class="text-xl font-semibold text-white transition group-hover:text-cyan-200">{{ project.title }}</h3>
+                <span v-if="project.featured" class="rounded-full bg-gradient-to-r from-purple-500/40 to-cyan-400/30 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-white/80">
+                  Featured
+                </span>
+              </div>
+              <p class="text-sm leading-relaxed text-gray-300 line-clamp-3">
+                {{ project.shortDescription }}
+              </p>
+            </div>
+
+            <div class="relative mt-6 flex flex-wrap gap-2">
+              <span
+                v-for="tech in project.stack"
+                :key="tech"
+                class="badge"
+              >
+                {{ tech }}
+              </span>
+            </div>
+
+            <div class="relative mt-8 flex items-center justify-between">
+              <button
+                type="button"
+                class="inline-flex items-center gap-2 text-sm font-medium text-cyan-200 transition hover:text-cyan-100"
+                @click="openModal(project)"
+              >
+                Read more
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H7" />
+                </svg>
+              </button>
+
+              <button
+                v-if="project.link"
+                type="button"
+                class="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 transition hover:border-cyan-300/60 hover:text-cyan-100"
+                @click="openLink(project.link)"
+              >
+                Visit
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10v11h11" />
+                </svg>
+              </button>
+              <span
+                v-else
+                class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/40"
+              >
+                Private
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c.828 0 1.5-.672 1.5-1.5S12.828 8 12 8s-1.5.672-1.5 1.5S11.172 11 12 11z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 21v-2a4 4 0 118 0v2" />
+                </svg>
+              </span>
+            </div>
+          </article>
         </div>
-    </div>
-   </DefaultLayout>
+      </div>
+    </section>
+
+    <transition name="modal-fade">
+      <div
+        v-if="selectedProject"
+        class="modal-backdrop"
+        @click.self="closeModal"
+      >
+        <div class="modal-panel">
+          <button
+            type="button"
+            class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-gray-200 transition hover:border-cyan-200/60 hover:text-white"
+            @click="closeModal"
+          >
+            <span class="sr-only">Close</span>
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div class="space-y-8">
+            <header class="space-y-3">
+              <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-gray-400">
+                <span class="inline-flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full" :class="selectedProject?.isPrivate ? 'bg-amber-400' : 'bg-emerald-400'"></span>
+                  {{ selectedProject?.type }}
+                </span>
+                <span>·</span>
+                <span>{{ selectedProject?.status }}</span>
+                <span>·</span>
+                <span>{{ selectedProject?.year }}</span>
+              </div>
+              <h2 class="text-3xl font-semibold text-white">
+                {{ selectedProject?.title }}
+              </h2>
+              <p class="max-w-2xl text-base leading-relaxed text-gray-300">
+                {{ selectedProject?.description }}
+              </p>
+            </header>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="info-card">
+                <span class="info-label">Role</span>
+                <span class="info-value">{{ selectedProject?.role }}</span>
+              </div>
+              <div class="info-card">
+                <span class="info-label">Scope</span>
+                <span class="info-value">{{ selectedProject?.scope }}</span>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-gray-300">Tech & tooling</h3>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  v-for="tech in selectedProject?.stack || []"
+                  :key="tech"
+                  class="badge badge-primary"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-gray-300">Highlights</h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li v-for="(note, index) in selectedProject?.highlights || []" :key="index" class="flex gap-3">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-300"></span>
+                  <span>{{ note }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                v-if="selectedProject?.link"
+                type="button"
+                class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-white transition hover:border-cyan-200/60 hover:text-cyan-100"
+                @click="openLink(selectedProject?.link)"
+              >
+                Open project
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10v11h11" />
+                </svg>
+              </button>
+              <span
+                v-else
+                class="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-sm font-medium text-white/50"
+              >
+                Private engagement
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c.828 0 1.5-.672 1.5-1.5S12.828 8 12 8s-1.5.672-1.5 1.5S11.172 11 12 11z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 21v-2a4 4 0 118 0v2" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </DefaultLayout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import DefaultLayout from '../layouts/DefaultLayout.vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import DefaultLayout from '../layouts/DefaultLayout.vue';
 
-const selectedProject = ref(null)
+const selectedProject = ref(null);
+const selectedFilter = ref('All');
 
-const projects = [
-    {
-        id: 1,
-        title: 'Portfolio Website',
-        stack: ['Vue 3', 'TailwindCSS'],
-        shortDescription: 'Personal portfolio website built with Vue 3 and TailwindCSS featuring modern design and smooth animations.',
-        description: 'A modern and responsive portfolio website showcasing my projects and skills. Built with Vue 3 for reactive functionality and styled with TailwindCSS for a clean, professional appearance. Features smooth animations, responsive design, and optimized performance.',
-        link: 'https://github.com/hadinatajenta/portofolio',
-        isPrivate: false
-    },
-    {
-        id: 2,
-        title: 'Vue Kanji',
-        stack: ['Vue 3', 'API Integration'],
-        shortDescription: 'Interactive Kanji learning application with API integration for Japanese character study.',
-        description: 'An educational web application designed to help users learn Japanese Kanji characters. Features API integration for fetching Kanji data, interactive learning modules, and a user-friendly interface built with Vue 3. Perfect for Japanese language learners of all levels.',
-        link: 'https://github.com/hadinatajenta/vue-kanji',
-        isPrivate: false
-    },
-    {
-        id: 3,
-        title: 'Andalasnet',
-        stack: ['Laravel', 'MySQL'],
-        shortDescription: 'Network management platform built with Laravel and MySQL for comprehensive connectivity solutions.',
-        description: 'A comprehensive network management platform developed using Laravel framework and MySQL database. Provides tools for network monitoring, user management, and connectivity solutions. Features robust backend architecture and efficient database design for optimal performance.',
-        link: 'https://andalasnet.com',
-        isPrivate: false
-    },
-    {
-        id: 4,
-        title: 'SIG Palembang',
-        stack: ['Leaflet', 'Laravel', 'MySQL'],
-        shortDescription: 'Geographic Information System for Palembang with interactive mapping and location-based services.',
-        description: 'A Geographic Information System (GIS) application for Palembang city featuring interactive maps powered by Leaflet.js. Built with Laravel backend and MySQL database to manage geographic data and provide location-based services. Includes features for mapping, data visualization, and spatial analysis.',
-        link: 'https://github.com/hadinatajenta/TUBES-SIG',
-        isPrivate: false
-    },
-    {
-        id: 5,
-        title: 'Merchant Management System',
-        stack: ['Go Gin', 'Laravel', 'Express', 'Vue'],
-        shortDescription: 'Comprehensive merchant management solution using microservices architecture with multiple technologies.',
-        description: 'A sophisticated merchant management system built using microservices architecture. Combines Go Gin for high-performance API services, Laravel for administrative features, Express.js for additional backend services, and Vue.js for the frontend interface. Designed to handle complex merchant operations, payment processing, and business analytics.',
-        link: null,
-        isPrivate: true
-    },
-    {
-        id: 6,
-        title: 'Dashboard Laravel',
-        stack: ['Laravel', 'Blade'],
-        shortDescription: 'Administrative dashboard built with Laravel framework and Blade templating engine.',
-        description: 'A comprehensive administrative dashboard developed with Laravel framework using Blade templating engine. Features user management, data analytics, reporting tools, and a responsive interface. Designed for efficient backend administration and business process management.',
-        link: 'https://github.com/hadinatajenta/dashboard-laravel',
-        isPrivate: false
-    }
-]
+const projects = ref([
+  {
+    id: 1,
+    title: 'Portfolio Website',
+    stack: ['Vue 3', 'TailwindCSS', 'GSAP'],
+    shortDescription: 'A modern portfolio with immersive hero, dynamic case studies, and component-driven storytelling.',
+    description:
+      'Built a modular Vue 3 system with CMS-ready blocks, advanced route transitions, and custom motion choreography. Focused on balancing aesthetics with performance budgets.',
+    link: 'https://github.com/hadinatajenta/portofolio',
+    isPrivate: false,
+    type: 'Personal Product',
+    role: 'Product design & Frontend engineering',
+    scope: 'Design system, frontend architecture, deployment',
+    status: 'Live',
+    year: 2024,
+    featured: true,
+    highlights: [
+      'Atomic design system with dark-mode first theming.',
+      'Declarative animation utilities for repeatable micro-interactions.',
+      'Optimised Lighthouse score above 95 across core pages.'
+    ]
+  },
+  {
+    id: 2,
+    title: 'Vue Kanji',
+    stack: ['Vue 3', 'API Integration', 'Pinia'],
+    shortDescription: 'Interactive Kanji learning app with spaced repetition, search, and curated content.',
+    description:
+      'Designed to help learners move from recognition to recall. Integrates KanjiAPI.dev, custom study playlists, and session tracking with local-first persistence.',
+    link: 'https://github.com/hadinatajenta/vue-kanji',
+    isPrivate: false,
+    type: 'Personal Product',
+    role: 'Product strategy & Frontend',
+    scope: 'UX flows, accessibility audits, API integration',
+    status: 'Live',
+    year: 2023,
+    highlights: [
+      'Adaptive review sessions driven by interval scheduling.',
+      'Keyword search with phonetic and JLPT-level filters.',
+      'Streamlined for offline-first learning on mobile devices.'
+    ]
+  },
+  {
+    id: 3,
+    title: 'Andalasnet',
+    stack: ['Laravel', 'MySQL', 'Redis'],
+    shortDescription: 'Regional news platform with editorial workflows, custom CMS, and reader analytics.',
+    description:
+      'Collaborated with Andalas Media Group to modernise their news operations. Delivered editorial workflow tooling, modular content layouts, and real-time readership dashboards.',
+    link: 'https://andalasnet.com',
+    isPrivate: false,
+    type: 'Client Delivery',
+    role: 'Full-stack developer',
+    scope: 'Feature discovery, backend services, CMS buildout',
+    status: 'In production',
+    year: 2023,
+    highlights: [
+      'Editor-friendly CMS with scheduled publishing and version history.',
+      'Edge caching and image optimisation for sub-second article loads.',
+      'Live analytics for audience segmentation and ad inventory.'
+    ]
+  },
+  {
+    id: 4,
+    title: 'SIG Palembang',
+    stack: ['Leaflet', 'Laravel', 'MySQL'],
+    shortDescription: 'Geographic information system to map Palembang facilities with powerful query tooling.',
+    description:
+      'Delivered an interactive GIS portal that surfaces critical city data. Built custom layers, geospatial search, and administrative dashboards for data stewardship.',
+    link: 'https://github.com/hadinatajenta/TUBES-SIG',
+    isPrivate: false,
+    type: 'Client Delivery',
+    role: 'Backend & mapping engineer',
+    scope: 'API design, map rendering, stakeholder training',
+    status: 'Launched',
+    year: 2023,
+    highlights: [
+      'Advanced filtering across administrative regions and service types.',
+      'Leaflet custom tiles with clustered markers and density views.',
+      'Admin console for dataset imports and change approvals.'
+    ]
+  },
+  {
+    id: 5,
+    title: 'Merchant Management Platform',
+    stack: ['Go Gin', 'Laravel', 'Express', 'Vue'],
+    shortDescription: 'Microservices platform orchestrating merchant onboarding, settlement, and support flows.',
+    description:
+      'Multi-team engagement to streamline merchant operations. Built resilient APIs, async workflows, and unified UI for finance, onboarding, and compliance teams.',
+    link: null,
+    isPrivate: true,
+    type: 'Enterprise',
+    role: 'Backend architect',
+    scope: 'Service mesh, API gateway, observability',
+    status: 'Internal',
+    year: 2024,
+    highlights: [
+      'Event-driven onboarding pipeline across five business units.',
+      'Unified identity and access controls with audit trails.',
+      'Dashboard abstractions for KPI visibility across stakeholders.'
+    ]
+  },
+  {
+    id: 6,
+    title: 'Operational Dashboard',
+    stack: ['Laravel', 'Blade', 'Livewire'],
+    shortDescription: 'Administrative dashboard for internal teams, tailored to reporting and daily operations.',
+    description:
+      'Implemented reusable dashboard widgets, dynamic reporting, and notification pipelines for operational teams requiring at-a-glance health metrics.',
+    link: 'https://github.com/hadinatajenta/dashboard-laravel',
+    isPrivate: false,
+    type: 'Client Delivery',
+    role: 'Full-stack developer',
+    scope: 'Data modelling, interface design, QA automation',
+    status: 'Live',
+    year: 2022,
+    highlights: [
+      'Configurable reporting widgets with export-ready datasets.',
+      'Role-based permissions exposed through simple admin tooling.',
+      'Automated regression testing suite covering critical workflows.'
+    ]
+  }
+]);
+
+const filters = computed(() => {
+  const stacks = new Set();
+  projects.value.forEach((project) => {
+    project.stack.forEach((tech) => stacks.add(tech));
+  });
+  return ['All', ...Array.from(stacks)];
+});
+
+const filteredProjects = computed(() => {
+  if (selectedFilter.value === 'All') {
+    return projects.value;
+  }
+  return projects.value.filter((project) => project.stack.includes(selectedFilter.value));
+});
+
+const projectStats = computed(() => {
+  const total = projects.value.length;
+  const live = projects.value.filter((project) => !project.isPrivate).length;
+  const confidential = projects.value.filter((project) => project.isPrivate).length;
+  return { total, live, confidential };
+});
+
+const selectFilter = (filter) => {
+  if (filter === 'All') {
+    selectedFilter.value = 'All';
+    return;
+  }
+
+  selectedFilter.value = selectedFilter.value === filter ? 'All' : filter;
+};
+
+const isActiveFilter = (filter) => selectedFilter.value === filter;
+
+const selectFeatured = () => {
+  const featured = projects.value.find((project) => project.featured);
+  if (featured) {
+    openModal(featured);
+  }
+};
 
 const openModal = (project) => {
-    selectedProject.value = project
-    document.body.style.overflow = 'hidden'
-}
+  selectedProject.value = project;
+};
 
 const closeModal = () => {
-    selectedProject.value = null
-    document.body.style.overflow = 'auto'
-}
+  selectedProject.value = null;
+};
 
 const openLink = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer')
-}
+  if (!url) return;
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
+
+const toggleBodyScroll = (shouldLock) => {
+  if (typeof document === 'undefined') return;
+  document.body.style.overflow = shouldLock ? 'hidden' : '';
+};
+
+watch(selectedProject, (value) => {
+  toggleBodyScroll(Boolean(value));
+});
+
+onBeforeUnmount(() => {
+  toggleBodyScroll(false);
+});
 </script>
 
 <style scoped>
-@keyframes fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.2rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(31, 41, 55, 0.35) 100%);
+  backdrop-filter: blur(22px);
 }
 
-@keyframes slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(226, 232, 240, 0.95);
+  transition: border 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
-@keyframes scale-in {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.badge-primary {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(45, 212, 191, 0.25));
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
 }
 
-.animate-fade-in {
-    animation: fade-in 0.6s ease-out;
+.badge:hover {
+  border-color: rgba(165, 243, 252, 0.6);
+  color: #e0f2fe;
 }
 
-.animate-fade-in-delay {
-    animation: fade-in 0.8s ease-out 0.2s both;
+.filter-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(226, 232, 240, 0.6);
+  transition: border 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.animate-slide-up {
-    animation: slide-up 0.8s ease-out 0.4s both;
+.filter-chip:hover {
+  border-color: rgba(165, 243, 252, 0.35);
+  color: #e0f2fe;
 }
 
-.animate-scale-in {
-    animation: scale-in 0.3s ease-out;
+.filter-chip--active {
+  border-color: rgba(165, 243, 252, 0.6);
+  color: #f8fafc;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(45, 212, 191, 0.2));
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
 }
 
-.project-card {
-    animation: slide-up 0.6s ease-out both;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 4rem 1.5rem;
+  background: rgba(5, 2, 15, 0.7);
+  backdrop-filter: blur(14px);
 }
 
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.modal-panel {
+  position: relative;
+  width: min(680px, 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(125deg, rgba(21, 16, 36, 0.95) 0%, rgba(11, 14, 26, 0.88) 100%);
+  padding: 3.5rem 2.75rem 2.75rem;
+  box-shadow: 0 35px 120px rgba(91, 55, 167, 0.45);
 }
 
-.backdrop-blur-sm {
-    backdrop-filter: blur(4px);
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.25rem;
 }
 
-.backdrop-blur-md {
-    backdrop-filter: blur(12px);
+.info-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.6);
 }
 
-.modal-content {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+.info-value {
+  font-size: 0.95rem;
+  color: #f8fafc;
+  font-weight: 500;
 }
 
-.modal-content::-webkit-scrollbar {
-    width: 6px;
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.modal-content::-webkit-scrollbar-track {
-    background: transparent;
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
 }
 
-.modal-content::-webkit-scrollbar-thumb {
-    background-color: rgba(139, 92, 246, 0.3);
-    border-radius: 3px;
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(139, 92, 246, 0.5);
+@media (max-width: 768px) {
+  .modal-backdrop {
+    padding-block: 5rem;
+  }
+
+  .modal-panel {
+    padding: 3rem 1.75rem 2.25rem;
+  }
+
+  .stat-card {
+    flex: 1 1 160px;
+  }
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
