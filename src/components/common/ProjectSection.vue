@@ -1,36 +1,32 @@
 <template>
     <section id="projects" class="relative py-16 sm:py-20 px-4 sm:px-6 flex flex-col items-center">
-        <!-- Decorative glow -->
-        <div class="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[160px] -z-10">
-        </div>
-
         <BaseCard title="Projects" class="w-full">
             <div class="flex flex-col gap-10">
                 <!-- Section Title -->
                 <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white animate-slide-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-black">
                         Featured Projects
                     </h2>
-                    <p class="text-gray-300 text-base md:text-lg mt-3 max-w-2xl mx-auto animate-fade-in-delay">
+                    <p class="text-black/60 text-base md:text-lg mt-3 max-w-2xl mx-auto">
                         Here are some of my works – from personal experiments to full-stack
                         systems in production.
                     </p>
                 </div>
 
                 <!-- Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-delay-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div v-for="project in previewProjects" :key="project.id"
-                        class="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
-                        <h3 class="text-xl font-semibold text-purple-300 mb-2">
+                        class="bg-white border-2 border-black/10 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col hover:border-black">
+                        <h3 class="text-xl font-bold text-black mb-2">
                             {{ project.name }}
                         </h3>
-                        <p class="text-gray-300 text-sm flex-grow">
+                        <p class="text-black/60 text-sm flex-grow">
                             {{ project.description }}
                         </p>
                         <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs text-gray-400">{{ project.stack }}</span>
+                            <span class="text-xs text-black/50">{{ project.stack }}</span>
                             <a v-if="project.link" :href="project.link" target="_blank" rel="noopener noreferrer"
-                                class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">
+                                class="text-black hover:text-black/70 text-sm font-semibold">
                                 View →
                             </a>
                         </div>
@@ -40,7 +36,7 @@
                 <!-- View All Button -->
                 <div class="text-center mt-6">
                     <router-link to="/projects"
-                        class="px-6 py-3 bg-purple-500/80 hover:bg-purple-600 text-white font-medium rounded-xl shadow-lg transition-all duration-300">
+                        class="px-6 py-3 bg-black hover:bg-black/80 text-white font-semibold rounded-lg shadow-md transition-all duration-300">
                         View All Projects
                     </router-link>
                 </div>

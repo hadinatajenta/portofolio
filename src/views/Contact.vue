@@ -16,7 +16,10 @@
             <p class="text-lg text-gray-300 max-w-xl">
               Send a note about what you’re building, where you need support, and the impact you want to unlock. I’ll respond within two business days.
             </p>
-            <div class="flex flex-col gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-6 text-sm text-gray-200">
+            <div
+              v-if="isContactInfoAvailable"
+              class="flex flex-col gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-6 text-sm text-gray-200"
+            >
               <div class="flex items-center gap-3">
                 <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20 text-purple-100">
                   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -25,8 +28,8 @@
                 </div>
                 <div>
                   <p class="text-xs uppercase tracking-[0.2em] text-gray-400">Email</p>
-                  <a class="text-white hover:text-cyan-200 transition" href="mailto:hadinatajenta122@gmail.com">
-                    hadinatajenta122@gmail.com
+                  <a class="text-white hover:text-cyan-200 transition" :href="`mailto:${contact.email}`">
+                    {{ contact.email }}
                   </a>
                 </div>
               </div>
@@ -38,8 +41,8 @@
                 </div>
                 <div>
                   <p class="text-xs uppercase tracking-[0.2em] text-gray-400">WhatsApp</p>
-                  <a class="text-white hover:text-cyan-200 transition" href="https://wa.me/628982681391" target="_blank" rel="noopener">
-                    +62 898 268 1391
+                  <a class="text-white hover:text-cyan-200 transition" :href="`https://wa.me/${contact.phone}`" target="_blank" rel="noopener">
+                    {{ contact.displayPhone }}
                   </a>
                 </div>
               </div>
@@ -53,8 +56,8 @@
                 </div>
                 <div>
                   <p class="text-xs uppercase tracking-[0.2em] text-gray-400">LinkedIn</p>
-                  <a class="text-white hover:text-cyan-200 transition" href="https://linkedin.com/in/hadinata-jenta" target="_blank" rel="noopener">
-                    Hadinata Jenta
+                  <a class="text-white hover:text-cyan-200 transition" :href="contact.linkedin" target="_blank" rel="noopener">
+                    {{ contact.linkedinLabel }}
                   </a>
                 </div>
               </div>
@@ -162,8 +165,18 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
+
+const contact = {
+  email: import.meta.env.VITE_CONTACT_EMAIL,
+  phone: import.meta.env.VITE_CONTACT_PHONE,
+  displayPhone: import.meta.env.VITE_CONTACT_PHONE_DISPLAY || import.meta.env.VITE_CONTACT_PHONE,
+  linkedin: import.meta.env.VITE_CONTACT_LINKEDIN,
+  linkedinLabel: import.meta.env.VITE_CONTACT_LINKEDIN_LABEL || 'LinkedIn'
+};
+
+const isContactInfoAvailable = computed(() => contact.email || contact.phone || contact.linkedin);
 
 const form = reactive({
   name: '',

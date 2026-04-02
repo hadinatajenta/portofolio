@@ -1,7 +1,5 @@
 <template>
-  <router-link :to="to" class="px-6 py-3 rounded-xl font-medium text-white shadow-lg transition-all duration-300
-           bg-gradient-to-r from-purple-600/80 to-purple-800/80 border border-white/10
-           hover:from-purple-500 hover:to-cyan-500 hover:shadow-cyan-400/30 hover:shadow-xl">
+  <router-link :to="to" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white bg-black border border-black transition-all duration-300 hover:bg-black/80 hover:shadow-lg">
     <slot>{{ label }}</slot>
   </router-link>
 </template>
@@ -21,10 +19,7 @@ defineProps({
 
 <style scoped>
 .router-link-active {
-  background: linear-gradient(90deg,
-      rgba(168, 85, 247, 0.3),
-      rgba(34, 211, 238, 0.3));
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+  background-color: #000000;
+  border-color: #000000;
 }
 </style>

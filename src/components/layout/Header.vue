@@ -1,27 +1,27 @@
 <template>
-  <header class="sticky top-0 inset-x-0 z-50 bg-black/40 border-b border-white/10 backdrop-blur-xl">
+  <header class="sticky top-0 inset-x-0 z-50 bg-white/95 border-b border-black/5 backdrop-blur-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between gap-4">
         <router-link
           to="/"
-          class="flex items-center gap-2 text-lg font-semibold text-purple-200 transition hover:text-purple-100"
+          class="flex items-center gap-2 text-lg font-bold text-black transition hover:text-black/70"
         >
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20 text-base font-bold">E</span>
-          <span class="hidden sm:block tracking-wide uppercase text-xs text-gray-300">Erendt.dev</span>
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-sm font-bold">E</span>
+          <span class="hidden sm:block tracking-wide font-semibold text-sm text-black">Erendt</span>
         </router-link>
 
-        <nav class="hidden md:flex items-center gap-6">
+        <nav class="hidden md:flex items-center gap-8">
           <router-link
             v-for="menu in menus"
             :key="menu.index"
             :to="menu.route"
-            class="group text-sm font-medium transition-colors relative px-1 py-1 text-gray-300 hover:text-white"
-            :class="{ 'text-white': isActive(menu.route) }"
+            class="group text-sm font-medium transition-colors relative px-1 py-1 text-black/60 hover:text-black"
+            :class="{ 'text-black font-semibold': isActive(menu.route) }"
           >
             {{ menu.name }}
             <span
-              class="absolute left-0 right-0 bottom-0 h-0.5 origin-left rounded-full bg-gradient-to-r from-purple-400 to-cyan-300 transition-transform duration-200"
-              :class="isActive(menu.route) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
+              class="absolute left-0 right-0 bottom-0 h-0.5 origin-left rounded-full bg-black transition-transform duration-200"
+              :class="isActive(menu.route) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'"
             ></span>
           </router-link>
         </nav>
@@ -29,15 +29,15 @@
         <div class="hidden md:flex">
           <router-link
             to="/contact"
-            class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:border-cyan-300/60 hover:bg-white/10"
+            class="inline-flex items-center gap-2 rounded-lg border border-black bg-black px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-black/80"
           >
-            Let's Collaborate
+            Let's Talk
           </router-link>
         </div>
 
         <button
           type="button"
-          class="md:hidden inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 p-2 text-gray-100 transition hover:border-cyan-300/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+          class="md:hidden inline-flex items-center justify-center rounded-lg border border-black/10 bg-white p-2 text-black transition hover:border-black/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
           @click="toggleMenu"
           :aria-expanded="isOpen"
           aria-controls="mobile-navigation"
@@ -57,20 +57,20 @@
       <div
         v-if="isOpen"
         id="mobile-navigation"
-        class="md:hidden border-t border-white/10 bg-black/80 backdrop-blur-xl"
+        class="md:hidden border-t border-black/5 bg-white/95 backdrop-blur-sm"
       >
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-2">
           <router-link
             v-for="menu in menus"
             :key="menu.index"
             :to="menu.route"
-            class="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/10"
-            :class="isActive(menu.route) ? 'text-white bg-white/10' : 'text-gray-300'"
+            class="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium transition hover:bg-black/5"
+            :class="isActive(menu.route) ? 'text-black bg-black/5 font-semibold' : 'text-black/60'"
             @click="closeMenu"
           >
             <span>{{ menu.name }}</span>
             <svg
-              class="h-4 w-4 text-purple-300"
+              class="h-4 w-4 text-black/40"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
@@ -84,10 +84,10 @@
           </router-link>
           <router-link
             to="/contact"
-            class="flex items-center justify-center rounded-xl border border-white/15 bg-gradient-to-r from-purple-500/30 to-cyan-500/30 px-4 py-3 text-sm font-semibold text-white transition hover:from-purple-400/40 hover:to-cyan-400/40"
+            class="flex items-center justify-center rounded-lg border border-black bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-black/80 mt-2"
             @click="closeMenu"
           >
-            Let's Collaborate
+            Let's Talk
           </router-link>
         </nav>
       </div>

@@ -4,19 +4,14 @@
       <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
         <!-- Left Column: Text Content -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
-            <span
-              class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-lg">
-              Hi, I'm
-            </span>
-            <span class="text-white">{{ name }}</span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <span class="text-black">Hi, I'm {{ name }}</span>
           </h1>
 
-          <p class="text-lg md:text-xl text-purple-200 mb-6 leading-relaxed">
+          <p class="text-lg md:text-xl text-black/70 mb-6 leading-relaxed">
             Full Stack Developer with 3+ years building scalable web & microservice apps.
             Skilled in
-            <span
-              class="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent font-semibold">
+            <span class="text-black font-semibold">
               Laravel, Go, Vue, React, and Node.js
             </span>
             — from banking systems at BRI to freelance projects in NGOs, media, and education.
@@ -26,7 +21,7 @@
 
           <div class="flex flex-wrap gap-4 mt-2">
             <a href="#"
-              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-black text-white font-semibold shadow-md transition-all duration-300 hover:bg-black/80 hover:shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
@@ -37,7 +32,7 @@
             </a>
 
             <router-link to="/contact"
-              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-purple-400 text-purple-300 font-semibold transition-all duration-300 hover:bg-purple-500 hover:text-white hover:scale-105">
+              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-black text-black font-semibold transition-all duration-300 hover:bg-black/5">
               <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
@@ -51,14 +46,8 @@
 
         <div class="w-full lg:w-1/2 flex flex-col items-center">
           <div class="relative mb-8">
-            <div class="w-90 aspect-square overflow-hidden rounded-lg">
+            <div class="w-90 aspect-square overflow-hidden rounded-lg border-2 border-black/20">
               <img src="/img/5357.jpg" alt="photo" class="w-full h-full object-cover object-top" />
-            </div>
-            <div
-              class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full opacity-20 blur-xl z-0">
-            </div>
-            <div
-              class="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-tr from-indigo-500 to-purple-400 rounded-full opacity-20 blur-xl z-0">
             </div>
           </div>
         </div>
@@ -80,140 +69,18 @@ const skills = ref([
 </script>
 
 <style scoped>
+.animate-fade-in {
+  animation: fade-in 1s ease forwards;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(15px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.8s ease-out both;
-}
-
-
-.glass-container {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background: linear-gradient(125deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 40%,
-      rgba(255, 255, 255, 0.05) 60%,
-      rgba(255, 255, 255, 0.1) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15),
-    inset 0 10px 20px rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-}
-
-.profile-image-container {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.2),
-    0 5px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.profile-image-container:hover {
-  transform: translateY(-5px);
-}
-
-.profile-image-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg,
-      rgba(90, 36, 130, 0.2) 0%,
-      rgba(112, 26, 117, 0.1) 50%,
-      rgba(58, 12, 163, 0.2) 100%);
-  z-index: 1;
-}
-
-.skill-pill {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e9d5ff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-}
-
-.skill-pill:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.cta-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.cta-btn.primary {
-  background: linear-gradient(45deg, #8b5cf6, #ec4899);
-  color: white;
-  box-shadow: 0 4px 6px rgba(139, 92, 246, 0.3);
-}
-
-.cta-btn.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(139, 92, 246, 0.4);
-}
-
-.cta-btn.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  backdrop-filter: blur(10px);
-}
-
-.cta-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .text-6xl {
-    font-size: 3.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .text-6xl {
-    font-size: 3rem;
-  }
-
-  .glass-container {
-    border-radius: 12px;
-  }
-}
-
-@media (max-width: 640px) {
-  .text-6xl {
-    font-size: 2.5rem;
-  }
-
-  .cta-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.875rem;
   }
 }
 </style>
