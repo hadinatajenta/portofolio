@@ -1,254 +1,284 @@
 <template>
   <DefaultLayout>
     <section class="space-y-16">
-      <header class="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.05] px-6 py-14 sm:px-10 lg:px-16">
-        <div class="absolute -top-20 -left-24 h-60 w-60 rounded-full bg-purple-500/30 blur-[120px]"></div>
-        <div class="absolute -bottom-32 right-1/3 h-72 w-72 rounded-full bg-cyan-400/20 blur-[160px]"></div>
+      <!-- Hero Header with Animation -->
+      <header class="relative overflow-hidden rounded-3xl border border-black/10 bg-white px-6 py-20 sm:px-10 lg:px-16 dark:bg-white/5 dark:border-white/10">
+        <div class="absolute -top-40 -left-40 w-80 h-80 bg-blue-200/40 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-200/40 rounded-full blur-3xl animate-float-delayed"></div>
 
-        <div class="relative grid gap-12 lg:grid-cols-[1fr,0.9fr] items-start">
-          <div class="space-y-6">
-            <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
-              Contact
+        <div class="relative space-y-8">
+          <div class="space-y-4 animate-fade-in-up" style="animation-delay: 0s">
+            <span class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black dark:border-white/20 dark:bg-white/10 dark:text-white">
+              Let's Connect
             </span>
-            <h1 class="text-4xl sm:text-5xl font-semibold leading-tight text-white">
-              Let’s plan the next milestone for your product or team.
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-black dark:text-white">
+              Get in <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-pulse-slow">Touch</span>
             </h1>
-            <p class="text-lg text-gray-300 max-w-xl">
-              Send a note about what you’re building, where you need support, and the impact you want to unlock. I’ll respond within two business days.
+            <p class="text-lg text-black/60 max-w-2xl leading-relaxed dark:text-white/70">
+              Let's discuss your project, ideas, or just say hello. I'm always interested in connecting with talented people and exploring new opportunities.
             </p>
-            <div
-              v-if="isContactInfoAvailable"
-              class="flex flex-col gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-6 text-sm text-gray-200"
-            >
-              <div class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20 text-purple-100">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-gray-400">Email</p>
-                  <a class="text-white hover:text-cyan-200 transition" :href="`mailto:${contact.email}`">
-                    {{ contact.email }}
-                  </a>
-                </div>
-              </div>
-              <div class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20 text-purple-100">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h.28a2 2 0 011.897 1.368l.518 1.553a2 2 0 01-.45 2.013l-1.291 1.29a16 16 0 007.071 7.071l1.29-1.291a2 2 0 012.013-.45l1.553.518A2 2 0 0121 18.72V19a2 2 0 01-2 2h-.5C10.825 21 3 13.175 3 3.5V3z" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-gray-400">WhatsApp</p>
-                  <a class="text-white hover:text-cyan-200 transition" :href="`https://wa.me/${contact.phone}`" target="_blank" rel="noopener">
-                    {{ contact.displayPhone }}
-                  </a>
-                </div>
-              </div>
-              <div class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20 text-purple-100">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 9h4v12H2z" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-gray-400">LinkedIn</p>
-                  <a class="text-white hover:text-cyan-200 transition" :href="contact.linkedin" target="_blank" rel="noopener">
-                    {{ contact.linkedinLabel }}
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <form class="space-y-6 rounded-[28px] border border-white/12 bg-white/[0.05] p-8 backdrop-blur-xl shadow-[0_32px_120px_rgba(55,34,102,0.35)]" @submit.prevent="handleSubmit">
-            <div class="space-y-2">
-              <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-200">
-                Project Inquiry
-              </span>
-              <p class="text-sm text-gray-300">
-                Share a few details and I’ll follow up with next steps.
-              </p>
-            </div>
-
-            <div class="grid gap-4 sm:grid-cols-2">
-              <label class="field">
-                <span class="field-label">Name</span>
-                <input v-model="form.name" type="text" name="name" autocomplete="name" required class="field-input" placeholder="Jane Doe" />
-              </label>
-              <label class="field">
-                <span class="field-label">Email</span>
-                <input v-model="form.email" type="email" name="email" autocomplete="email" required class="field-input" placeholder="you@company.com" />
-              </label>
-              <label class="field">
-                <span class="field-label">Company / Team</span>
-                <input v-model="form.company" type="text" name="company" class="field-input" placeholder="Acme Labs" />
-              </label>
-              <label class="field">
-                <span class="field-label">Project timeline</span>
-                <select v-model="form.timeline" name="timeline" class="field-input">
-                  <option value="">Choose one</option>
-                  <option value="immediately">Immediately</option>
-                  <option value="1-2 months">1–2 months</option>
-                  <option value="quarter">This quarter</option>
-                  <option value="not-sure">Not sure yet</option>
-                </select>
-              </label>
-            </div>
-
-            <label class="field">
-              <span class="field-label">What should we tackle together?</span>
-              <textarea
-                v-model="form.project"
-                name="project"
-                rows="4"
-                class="field-input"
-                placeholder="Tell me about the problem, team, and what success looks like."
-                required
-              ></textarea>
-            </label>
-
-            <label class="field">
-              <span class="field-label">Anything else?</span>
-              <textarea
-                v-model="form.context"
-                name="context"
-                rows="3"
-                class="field-input"
-                placeholder="Share links, constraints, or questions."
-              ></textarea>
-            </label>
-
-            <div class="flex flex-wrap items-center gap-3 text-xs text-gray-400">
-              <span class="inline-flex items-center gap-2">
-                <input v-model="form.subscribe" type="checkbox" id="subscribe" class="h-4 w-4 rounded border-white/20 bg-transparent text-purple-400 focus:ring-0" />
-                <label for="subscribe">Keep me posted on new case studies</label>
-              </span>
-            </div>
-
-            <button
-              type="submit"
-              class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-gradient-to-r from-purple-500/50 to-cyan-400/40 px-5 py-3 text-sm font-semibold text-white transition hover:from-purple-400/60 hover:to-cyan-300/50"
+          <!-- Social Links with Animation -->
+          <div class="flex flex-wrap gap-4 animate-fade-in-up" style="animation-delay: 0.1s">
+            <a
+              v-for="social in socialLinks"
+              :key="social.name"
+              :href="social.url"
+              :aria-label="social.name"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-3 rounded-xl border-2 border-black/10 bg-white px-6 py-3 transition-all duration-300 hover:border-black hover:shadow-lg hover:scale-105 dark:border-white/20 dark:bg-white/5 dark:hover:border-white dark:hover:bg-white/10"
             >
-              Send inquiry
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4l16 8-16 8 4-8-4-8z" />
-              </svg>
-            </button>
-
-            <p v-if="submitted" class="text-xs text-cyan-200">
-              Thanks! I’ll be in touch shortly. For urgent matters reach me via email or WhatsApp.
-            </p>
-          </form>
+              <span class="text-xl transition-transform duration-300 group-hover:scale-125">{{ social.icon }}</span>
+              <span class="font-semibold text-black/80 group-hover:text-black dark:text-white/80 dark:group-hover:text-white">{{ social.name }}</span>
+            </a>
+          </div>
         </div>
       </header>
 
-      <section class="grid gap-8 lg:grid-cols-3">
-        <article class="insight-card">
-          <h2>What to expect</h2>
-          <p>We’ll schedule a 30-minute discovery call. You’ll walk away with next steps—even if we don’t end up partnering.</p>
-        </article>
-        <article class="insight-card">
-          <h2>Typical response time</h2>
-          <p>Within 36 hours, Monday through Friday. I’ll confirm availability and any pre-read material upfront.</p>
-        </article>
-        <article class="insight-card">
-          <h2>Time zones</h2>
-          <p>Based in Jakarta (UTC+7) and comfortable collaborating async across APAC, EMEA, and US overlap hours.</p>
-        </article>
-      </section>
+      <!-- Contact Methods Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div
+          v-for="(method, index) in contactMethods"
+          :key="method.id"
+          class="group relative rounded-2xl border-2 border-black/10 bg-white p-8 transition-all duration-300 hover:border-black hover:shadow-xl hover:scale-105 animate-fade-in-up dark:bg-white/5 dark:border-white/10 dark:hover:border-white dark:hover:bg-white/10"
+          :style="{ 'animation-delay': `${(index + 2) * 0.1}s` }"
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+          <div class="relative">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-black/5 group-hover:bg-black/10 transition-colors duration-300 mb-4 dark:bg-white/5 dark:group-hover:bg-white/10">
+              <span class="text-3xl">{{ method.icon }}</span>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-2 dark:text-white">{{ method.title }}</h3>
+            <p class="text-black/60 text-sm mb-4 dark:text-white/70">{{ method.description }}</p>
+            <a
+              :href="method.link"
+              :target="method.target"
+              :rel="method.rel"
+              class="inline-flex items-center gap-2 text-black font-semibold hover:gap-3 transition-all duration-300 dark:text-white"
+            >
+              {{ method.linkText }}
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form Section -->
+      <div class="relative rounded-3xl border border-black/10 bg-white px-6 py-12 sm:px-10 lg:px-16 dark:bg-white/5 dark:border-white/10">
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl dark:bg-blue-500/20"></div>
+        <div class="relative space-y-8">
+          <div class="space-y-3 animate-fade-in-up" style="animation-delay: 0.4s">
+            <h2 class="text-3xl sm:text-4xl font-bold text-black dark:text-white">Send me a message</h2>
+            <p class="text-black/60 text-lg dark:text-white/70">I'll get back to you within 24 hours</p>
+          </div>
+
+          <form class="grid gap-6 max-w-2xl" @submit.prevent="handleSubmit">
+            <!-- Name and Email Row -->
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div class="animate-fade-in-up" style="animation-delay: 0.45s">
+                <label class="block text-sm font-semibold text-black mb-2 dark:text-white">Full Name *</label>
+                <input
+                  v-model="form.name"
+                  type="text"
+                  placeholder="Jane Doe"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-black/10 bg-white focus:border-black focus:outline-none transition-colors duration-300 dark:border-white/20 dark:bg-white/5 dark:text-white dark:focus:border-white dark:placeholder-white/50"
+                />
+              </div>
+              <div class="animate-fade-in-up" style="animation-delay: 0.5s">
+                <label class="block text-sm font-semibold text-black mb-2 dark:text-white">Email *</label>
+                <input
+                  v-model="form.email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-black/10 bg-white focus:border-black focus:outline-none transition-colors duration-300 dark:border-white/20 dark:bg-white/5 dark:text-white dark:focus:border-white dark:placeholder-white/50"
+                />
+              </div>
+            </div>
+
+            <!-- Subject -->
+            <div class="animate-fade-in-up" style="animation-delay: 0.55s">
+              <label class="block text-sm font-semibold text-black mb-2 dark:text-white">Subject *</label>
+              <input
+                v-model="form.subject"
+                type="text"
+                placeholder="Project Inquiry / Collaboration / Just saying hi"
+                required
+                class="w-full px-4 py-3 rounded-lg border-2 border-black/10 bg-white focus:border-black focus:outline-none transition-colors duration-300 dark:border-white/20 dark:bg-white/5 dark:text-white dark:focus:border-white dark:placeholder-white/50"
+              />
+            </div>
+
+            <!-- Message -->
+            <div class="animate-fade-in-up" style="animation-delay: 0.6s">
+              <label class="block text-sm font-semibold text-black mb-2 dark:text-white">Message *</label>
+              <textarea
+                v-model="form.message"
+                placeholder="Tell me about your project, ideas, or just say hello..."
+                rows="5"
+                required
+                class="w-full px-4 py-3 rounded-lg border-2 border-black/10 bg-white focus:border-black focus:outline-none transition-colors duration-300 resize-none dark:border-white/20 dark:bg-white/5 dark:text-white dark:focus:border-white dark:placeholder-white/50"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button with Animation -->
+            <div class="animate-fade-in-up" style="animation-delay: 0.65s">
+              <button
+                type="submit"
+                :disabled="isSubmitting"
+                class="w-full px-6 py-3 bg-black text-white font-bold rounded-lg transition-all duration-300 hover:bg-black/90 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 dark:bg-white dark:text-black dark:hover:bg-white/90"
+              >
+                <span v-if="!isSubmitting">Send Message</span>
+                <span v-else>Sending...</span>
+                <svg v-if="!isSubmitting" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4l16 8-16 8 4-8-4-8z" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              v-if="submitted"
+              class="p-4 rounded-lg bg-green-50 border-2 border-green-200 text-green-800 animate-bounce-in dark:bg-green-950/30 dark:border-green-900 dark:text-green-200"
+            >
+              <p class="font-semibold">✓ Message sent successfully!</p>
+              <p class="text-sm">Thanks for reaching out. I'll get back to you soon.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="relative rounded-3xl border border-black/10 bg-gradient-to-br from-black to-black/80 px-6 py-16 sm:px-10 lg:px-16 text-center overflow-hidden dark:from-white dark:to-white/80 dark:text-black">
+        <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl dark:bg-black/5"></div>
+        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-white/5 rounded-full blur-3xl dark:bg-black/5"></div>
+        
+        <div class="relative space-y-6 animate-fade-in-up" style="animation-delay: 0.7s">
+          <h2 class="text-3xl sm:text-4xl font-bold text-white dark:text-black">Prefer a quick chat?</h2>
+          <p class="text-white/80 text-lg max-w-xl mx-auto dark:text-black/80">
+            Connect with me on WhatsApp or LinkedIn for a more immediate conversation.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+            <a
+              href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-black dark:bg-black dark:text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+            >
+              <span>💬 WhatsApp</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/YOUR_LINKEDIN"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-white text-white dark:border-black dark:text-black font-bold rounded-lg transition-all duration-300 hover:bg-white/10 hover:scale-105 active:scale-95 dark:hover:bg-black/10"
+            >
+              <span>🔗 LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
   </DefaultLayout>
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue';
-import DefaultLayout from '../layouts/DefaultLayout.vue';
+import DefaultLayout from '../layouts/DefaultLayout.vue'
+import { useContactData } from '../composables/useContactData'
+import { useContactForm } from '../composables/useContactForm'
 
-const contact = {
-  email: import.meta.env.VITE_CONTACT_EMAIL,
-  phone: import.meta.env.VITE_CONTACT_PHONE,
-  displayPhone: import.meta.env.VITE_CONTACT_PHONE_DISPLAY || import.meta.env.VITE_CONTACT_PHONE,
-  linkedin: import.meta.env.VITE_CONTACT_LINKEDIN,
-  linkedinLabel: import.meta.env.VITE_CONTACT_LINKEDIN_LABEL || 'LinkedIn'
-};
-
-const isContactInfoAvailable = computed(() => contact.email || contact.phone || contact.linkedin);
-
-const form = reactive({
-  name: '',
-  email: '',
-  company: '',
-  timeline: '',
-  project: '',
-  context: '',
-  subscribe: false
-});
-
-const submitted = ref(false);
-
-const handleSubmit = () => {
-  submitted.value = true;
-};
+// Composables
+const { socialLinks, contactMethods } = useContactData()
+const { form, isSubmitting, submitted, handleSubmit } = useContactForm()
 </script>
 
 <style scoped>
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(0px);
+  }
+  75% {
+    transform: translateY(-20px) translateX(-10px);
+  }
 }
 
-.field-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.6);
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(20px) translateX(-10px);
+  }
+  50% {
+    transform: translateY(40px) translateX(0px);
+  }
+  75% {
+    transform: translateY(20px) translateX(10px);
+  }
 }
 
-.field-input {
-  width: 100%;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(12, 11, 19, 0.55);
-  padding: 0.75rem 1rem;
-  color: #f8fafc;
-  font-size: 0.95rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.field-input:focus {
-  outline: none;
-  border-color: rgba(165, 243, 252, 0.55);
-  box-shadow: 0 0 0 3px rgba(165, 243, 252, 0.2);
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.field-input::placeholder {
-  color: rgba(148, 163, 184, 0.7);
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
-.insight-card {
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.75rem;
-  backdrop-filter: blur(16px);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.animate-float {
+  animation: float 20s ease-in-out infinite;
 }
 
-.insight-card h2 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #f8fafc;
+.animate-float-delayed {
+  animation: float-delayed 20s ease-in-out infinite;
 }
 
-.insight-card p {
-  font-size: 0.95rem;
-  color: rgba(226, 232, 240, 0.8);
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.4s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
 }
 </style>

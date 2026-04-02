@@ -106,7 +106,7 @@ const menus = [
   { index: 1, route: "/", name: "Home" },
   { index: 2, route: "/projects", name: "Projects" },
   { index: 3, route: "/experience", name: "Experience" },
-  { index: 4, route: "/service", name: "Service" },
+  { index: 4, route: "/contact", name: "Contact" }
 ];
 
 const toggleMenu = () => {

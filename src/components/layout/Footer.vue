@@ -113,117 +113,25 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { useFooterData } from '../../composables/useFooterData'
 
-const name = ref('Hadinata')
-const role = ref('Product-focused Software Engineer')
-const location = ref('Jakarta, Indonesia')
-const intro = ref('I help founders and product teams ship purposeful experiences with a balance of craft, velocity, and measurable impact.')
-const ctaBadge = ref('Open for 2025 engagements')
-const ctaTitle = ref('Modern software with purposeful detail')
-const ctaDescription = ref('Partnering with founders and product teams to ship simple, resilient software that customers actually enjoy using.')
-const ctaButtonLabel = ref("Let's collaborate")
-const highlights = ref([
-  {
-    value: '7+',
-    label: 'Years shipping'
-  },
-  {
-    value: '20+',
-    label: 'Products launched'
-  },
-  {
-    value: 'GMT+7',
-    label: 'Time zone'
-  }
-])
-const menus = ref([
-  {
-    index: 1,
-    route: '/',
-    name: 'Home'
-  },
-  {
-    index: 2,
-    route: '/about',
-    name: 'About'
-  },
-  {
-    index: 3,
-    route: '/experience',
-    name: 'Experience'
-  }
-])
-
-const contact = {
-  email: import.meta.env.VITE_CONTACT_EMAIL,
-  phone: import.meta.env.VITE_CONTACT_PHONE,
-  linkedin: import.meta.env.VITE_CONTACT_LINKEDIN
-}
-
-const initials = computed(() =>
-  name.value
-    .split(' ')
-    .filter(Boolean)
-    .map(part => part[0])
-    .join('')
-    .toUpperCase()
-)
-
-const contactChips = computed(() => {
-  const chips = []
-
-  if (contact.email) {
-    chips.push({
-      label: 'Email',
-      url: `mailto:${contact.email}`
-    })
-  }
-
-  if (contact.phone) {
-    chips.push({
-      label: 'WhatsApp',
-      url: `https://wa.me/${contact.phone}`
-    })
-  }
-
-  if (contact.linkedin) {
-    chips.push({
-      label: 'LinkedIn',
-      url: contact.linkedin
-    })
-  }
-
-  return chips
-})
-
-const socials = computed(() => {
-  const base = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/hadinatajenta',
-      svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'
-    },
-    contact.linkedin
-      ? {
-          name: 'LinkedIn',
-          url: contact.linkedin,
-          svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>'
-        }
-      : null,
-    contact.email
-      ? {
-          name: 'Mail',
-          url: `mailto:${contact.email}`,
-          svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>'
-        }
-      : null
-  ]
-
-  return base.filter(Boolean)
-})
-
-const currentYear = new Date().getFullYear()
+// Composables
+const {
+  name,
+  role,
+  location,
+  intro,
+  ctaBadge,
+  ctaTitle,
+  ctaDescription,
+  ctaButtonLabel,
+  highlights,
+  menus,
+  socials,
+  initials,
+  contactChips,
+  currentYear
+} = useFooterData()
 </script>
 
 <style scoped>
