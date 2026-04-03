@@ -37,6 +37,28 @@
     <!-- Robots.txt and Sitemap links -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preload critical fonts for better speed -->
+    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" crossorigin />
+    
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    
+    <!-- Prefetch important pages -->
+    <link rel="prefetch" href="/projects" />
+    <link rel="prefetch" href="/about" />
+    
+    <!-- Theme color for mobile browser -->
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- Mobile app capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Hadinata Jenta" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
     <!-- Structured Data (Schema.org) - This helps Google understand your page better -->
     <script type="application/ld+json">
       {
@@ -47,18 +69,77 @@
         "image": "https://hadinata.vercel.app/profile-image.jpg",
         "sameAs": [
           "https://linkedin.com/in/hadinata-jenta",
-          "https://github.com/hadinatajenta",
+          "https://github.com/hadinatajenta"
         ],
         "jobTitle": "Full-Stack Engineer",
         "worksFor": {
           "@type": "Organization",
           "name": "Freelance"
         },
+        "workLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Palembang",
+            "addressRegion": "South Sumatra",
+            "addressCountry": "ID"
+          }
+        },
+        "knowsAbout": [
+          "Vue.js",
+          "Vue 3",
+          "Laravel",
+          "JavaScript",
+          "Web Development",
+          "Full-Stack Development",
+          "Tailwind CSS",
+          "Vite"
+        ],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "Customer Support",
           "email": "your.email@example.com"
         }
+      }
+    </script>
+    
+    <!-- Breadcrumb Schema for better navigation SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://hadinata.vercel.app"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": "https://hadinata.vercel.app/projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "About",
+            "item": "https://hadinata.vercel.app/about"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Experience",
+            "item": "https://hadinata.vercel.app/experience"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Contact",
+            "item": "https://hadinata.vercel.app/contact"
+          }
+        ]
       }
     </script>
   </head>
