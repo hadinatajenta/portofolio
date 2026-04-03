@@ -1,121 +1,61 @@
 <template>
-    <section id="projects" class="relative py-16 sm:py-20 px-4 sm:px-6 flex flex-col items-center">
-        <BaseCard title="Projects" class="w-full">
-            <div class="flex flex-col gap-10">
-                <!-- Section Title -->
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-black">
-                        Featured Projects
-                    </h2>
-                    <p class="text-black/60 text-base md:text-lg mt-3 max-w-2xl mx-auto">
-                        Here are some of my works – from personal experiments to full-stack
-                        systems in production.
-                    </p>
-                </div>
+    <section id="projects" class="py-16 sm:py-20">
+        <div class="flex flex-col gap-10">
+            <!-- Section Header -->
+            <div class="space-y-3">
+                <p class="text-xs font-bold uppercase tracking-widest text-black/30">Selected Work</p>
+                <h2 class="text-4xl sm:text-5xl font-bold text-black leading-tight">
+                    Featured Projects
+                </h2>
+                <p class="text-black/60 text-base max-w-xl">
+                    From personal experiments to production systems — here's what I've built.
+                </p>
+            </div>
 
-                <!-- Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-for="project in previewProjects" :key="project.id"
-                        class="bg-white border-2 border-black/10 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col hover:border-black">
-                        <h3 class="text-xl font-bold text-black mb-2">
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a v-for="project in featuredProjects" :key="project.id"
+                    :href="project.link || '#'"
+                    :target="project.link ? '_blank' : ''"
+                    rel="noopener noreferrer"
+                    class="group flex flex-col gap-4 rounded-2xl border-2 border-black/8 bg-white p-6 transition-all duration-300 hover:border-black hover:shadow-lg active:scale-[0.98]"
+                >
+                    <div class="flex items-start justify-between gap-3">
+                        <h3 class="text-lg font-bold text-black group-hover:text-black leading-tight">
                             {{ project.name }}
                         </h3>
-                        <p class="text-black/60 text-sm flex-grow">
-                            {{ project.description }}
-                        </p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs text-black/50">{{ project.stack }}</span>
-                            <a v-if="project.link" :href="project.link" target="_blank" rel="noopener noreferrer"
-                                class="text-black hover:text-black/70 text-sm font-semibold">
-                                View →
-                            </a>
-                        </div>
+                        <svg class="w-4 h-4 text-black/20 flex-shrink-0 mt-1 transition-all duration-300 group-hover:text-black group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
                     </div>
-                </div>
-
-                <!-- View All Button -->
-                <div class="text-center mt-6">
-                    <router-link to="/projects"
-                        class="px-6 py-3 bg-black hover:bg-black/80 text-white font-semibold rounded-lg shadow-md transition-all duration-300">
-                        View All Projects
-                    </router-link>
-                </div>
+                    <p class="text-black/55 text-sm leading-relaxed flex-grow">
+                        {{ project.description }}
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-black/8">
+                        <span v-for="tag in project.tags" :key="tag"
+                            class="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-black/5 text-black/50">
+                            {{ tag }}
+                        </span>
+                    </div>
+                </a>
             </div>
-        </BaseCard>
+
+            <!-- View All -->
+            <div>
+                <router-link to="/projects"
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-black border-b-2 border-black pb-0.5 hover:gap-3 transition-all duration-200">
+                    View all projects
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </router-link>
+            </div>
+        </div>
     </section>
 </template>
 
 <script setup>
-import BaseCard from "../common/BaseCard.vue"
+import { useProjectsData } from '../../composables/useProjectsData'
 
-const previewProjects = [
-    {
-        id: 1,
-        name: "Vue Kanji",
-        description:
-            "Kanji learning app using Vue 3 + KanjiAPI.dev. Features flashcards, readings, and search from N5 to N1.",
-        stack: "Vue 3, API",
-        link: "https://github.com/hadinatajenta/vue-kanji",
-    },
-    {
-        id: 2,
-        name: "Andalasnet",
-        description:
-            "Full-stack Laravel news portal for PT Andalas Media Group, covering Lampung regional news.",
-        stack: "Laravel, MySQL",
-        link: "https://andalasnet.com",
-    },
-    {
-        id: 3,
-        name: "SIG Palembang",
-        description:
-            "Geographic Information System for mapping facilities in Palembang, built with Leaflet.js + Laravel.",
-        stack: "Leaflet, Laravel, MySQL",
-        link: "https://github.com/hadinatajenta/TUBES-SIG",
-    },
-]
+const { featuredProjects } = useProjectsData()
 </script>
-
-<style scoped>
-@keyframes fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-in {
-    animation: fade-in 1s ease forwards;
-}
-
-.animate-fade-in-delay {
-    animation: fade-in 1.2s ease forwards;
-    animation-delay: 0.3s;
-}
-
-.animate-fade-in-delay-2 {
-    animation: fade-in 1.4s ease forwards;
-    animation-delay: 0.6s;
-}
-
-.animate-slide-up {
-    animation: slide-up 1s ease forwards;
-}
-</style>

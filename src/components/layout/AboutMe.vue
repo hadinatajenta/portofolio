@@ -9,13 +9,10 @@
           </h1>
 
           <p class="text-lg md:text-xl text-black/70 mb-6 leading-relaxed">
-            Full Stack Developer with 3+ years building scalable web & microservice apps.
-            Skilled in
-            <span class="text-black font-semibold">
-              Laravel, Go, Vue, React, and Node.js
-            </span>
-            — from banking systems at BRI to freelance projects in NGOs, media, and education.
-            Quick to adapt, clean code minded, and always pushing practical solutions.
+            Fullstack Developer focused on backend development, distributed systems, and scalable architecture with 6+ years of experience.
+            Experienced in building microservices with <span class="text-black font-semibold">Go, Laravel, and Node.js</span>,
+            optimizing database performance, and integrating services across high-traffic environments. Hands-on experience with
+            financial-grade systems at BRI that required secure coding, structured QA cycles, and reliable release processes.
           </p>
 
 
@@ -58,14 +55,9 @@
 
 <script setup>
 import MacCard from '../common/BaseCard.vue'
-import { ref } from 'vue'
+import { useAboutData } from '../../composables/useAboutData'
 
-const name = ref('Hadinata')
-const skills = ref([
-  'Vue.js', 'React', 'JavaScript', 'TypeScript',
-  'Tailwind CSS', 'Node.js', 'Git', 'Responsive Design',
-  'UI/UX Design', 'REST APIs', 'Vite', 'Webpack'
-])
+const { name, bio, skills } = useAboutData()
 </script>
 
 <style scoped>

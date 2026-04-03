@@ -44,96 +44,118 @@ const PROJECTS_DATA = [
   },
   {
     id: 3,
-    title: 'Andalasnet',
-    stack: ['Laravel', 'MySQL', 'Redis'],
-    shortDescription: 'Regional news platform with editorial workflows, custom CMS, and reader analytics.',
+    title: 'Andalasnet News Portal',
+    stack: ['Laravel 9', 'MySQL', 'Bootstrap', 'CKEditor'],
+    shortDescription: 'Custom online news portal and CMS for regional news network.',
     description:
-      'Collaborated with Andalas Media Group to modernise their news operations. Delivered editorial workflow tooling, modular content layouts, and real-time readership dashboards.',
+      'Collaborated with Andalas Media Group to modernise their news operations. Built a fully custom online news portal from scratch because client requirements could not be fulfilled by off-the-shelf CMS platforms.',
     link: 'https://andalasnet.com',
     isPrivate: false,
     type: 'Client Delivery',
     role: 'Full-stack developer',
-    scope: 'Feature discovery, backend services, CMS buildout',
+    scope: 'Architecture, UI design, backend, QA, deployment',
     status: 'In production',
     year: 2023,
+    featured: true,
     highlights: [
-      'Editor-friendly CMS with scheduled publishing and version history.',
-      'Edge caching and image optimisation for sub-second article loads.',
-      'Live analytics for audience segmentation and ad inventory.'
+      'Complete CMS with article management, categories, and multi-level author roles.',
+      'Advertisement placement, banner schedules, pricing configurations, and printable invoices.',
+      'Maintained production stability handling 500+ published articles.'
     ]
   },
   {
     id: 4,
     title: 'SIG Palembang',
-    stack: ['Leaflet', 'Laravel', 'MySQL'],
-    shortDescription: 'Geographic information system to map Palembang facilities with powerful query tooling.',
+    stack: ['Laravel', 'Leaflet JS', 'MySQL', 'jQuery', 'Bootstrap'],
+    shortDescription: 'Web-based GIS application for mapping healthcare facilities in Palembang.',
     description:
-      'Delivered an interactive GIS portal that surfaces critical city data. Built custom layers, geospatial search, and administrative dashboards for data stewardship.',
+      'Delivered an interactive GIS portal that maps hospitals, puskesmas, and other medical service locations. Built custom layers and enabled mapping via coordinate inputs.',
     link: 'https://github.com/hadinatajenta/TUBES-SIG',
     isPrivate: false,
-    type: 'Client Delivery',
-    role: 'Backend & mapping engineer',
-    scope: 'API design, map rendering, stakeholder training',
-    status: 'Launched',
+    type: 'Academic Project',
+    role: 'GIS Web Developer',
+    scope: 'Mapping integration, backend services, UI styling',
+    status: 'Completed',
     year: 2023,
     highlights: [
-      'Advanced filtering across administrative regions and service types.',
-      'Leaflet custom tiles with clustered markers and density views.',
-      'Admin console for dataset imports and change approvals.'
+      'Add markers via latitude and longitude with area boundary definitions.',
+      'Interactive mapping visualization with detailed facility information, contacts and images.',
+      'Data-driven mapping platform supporting accurate healthcare visualisations.'
     ]
   },
   {
     id: 5,
-    title: 'Merchant Management Platform',
-    stack: ['Go Gin', 'Laravel', 'Express', 'Vue'],
-    shortDescription: 'Microservices platform orchestrating merchant onboarding, settlement, and support flows.',
+    title: 'Merchant Management System',
+    stack: ['Go (Gin, Echo)', 'PHP (Laravel)', 'Node.js', 'Vue.js 3', 'RabbitMQ', 'Redis', 'MinIO'],
+    shortDescription: 'Microservices platform orchestrating merchant operations for BRI.',
     description:
-      'Multi-team engagement to streamline merchant operations. Built resilient APIs, async workflows, and unified UI for finance, onboarding, and compliance teams.',
+      'Developed and maintained internal MMS microservices used by operational teams to manage the merchant lifecycle, EDC registration, QRIS flows, and maintenance.',
     link: null,
     isPrivate: true,
     type: 'Enterprise',
-    role: 'Backend architect',
-    scope: 'Service mesh, API gateway, observability',
-    status: 'Internal',
+    role: 'Backend Developer',
+    scope: 'API design, integration, async processing, caching',
+    status: 'In production',
     year: 2024,
+    featured: true,
     highlights: [
-      'Event-driven onboarding pipeline across five business units.',
-      'Unified identity and access controls with audit trails.',
-      'Dashboard abstractions for KPI visibility across stakeholders.'
+      'Integrated with Way4, Fraud Monitoring, and PTEN systems via secure APIs.',
+      'Engineered asynchronous pipelines using RabbitMQ and Redis caching.',
+      'Maintained code quality with SonarQube, SAST, and deployed on Red Hat OpenShift.'
     ]
   },
   {
     id: 6,
-    title: 'Operational Dashboard',
-    stack: ['Laravel', 'Blade', 'Livewire'],
-    shortDescription: 'Administrative dashboard for internal teams, tailored to reporting and daily operations.',
+    title: 'NGO Basmi Platform',
+    stack: ['Laravel', 'MySQL', 'Bootstrap'],
+    shortDescription: 'Web platform handling advertising, staff management, and scheduling.',
     description:
-      'Implemented reusable dashboard widgets, dynamic reporting, and notification pipelines for operational teams requiring at-a-glance health metrics.',
-    link: 'https://github.com/hadinatajenta/dashboard-laravel',
-    isPrivate: false,
+      'Built a full web platform for NGO Basmi applying a Modified Waterfall development approach to guarantee strict adherence to constraints and requirements from the client.',
+    link: null,
+    isPrivate: true,
     type: 'Client Delivery',
-    role: 'Full-stack developer',
-    scope: 'Data modelling, interface design, QA automation',
-    status: 'Live',
-    year: 2022,
+    role: 'Full Stack Developer',
+    scope: 'Backend logic, scheduling system, UI construction',
+    status: 'Launched',
+    year: 2023,
     highlights: [
-      'Configurable reporting widgets with export-ready datasets.',
-      'Role-based permissions exposed through simple admin tooling.',
-      'Automated regression testing suite covering critical workflows.'
+      'Systematic development methodology ensuring clear client expectations.',
+      'Implemented robust staff coordination and scheduling systems.',
+      'Built custom ad management tooling integrated into the workflow.'
+    ]
+  },
+  {
+    id: 7,
+    title: 'Inventory Lending System',
+    stack: ['Laravel', 'MySQL', 'Bootstrap'],
+    shortDescription: 'Digitized lending and tracking management system for SMPN 28 Bandar Lampung.',
+    description:
+      'Developed a system to modernize and automate the previously manual inventory lending processes for the school\'s equipment and facilities.',
+    link: null,
+    isPrivate: true,
+    type: 'Client Delivery',
+    role: 'Full Stack Developer',
+    scope: 'Requirements analysis, application development, deployment',
+    status: 'Launched',
+    year: 2023,
+    highlights: [
+      'Reduced manual processing dependency by approximately 70%.',
+      'Significantly improved tracking accuracy and operational efficiency.',
+      'Designed a minimal, user-friendly interface for school staff.'
     ]
   }
 ]
+
+// State (global singleton)
+const projects = ref(PROJECTS_DATA)
+const selectedFilter = ref('All')
+const selectedProject = ref(null)
 
 /**
  * Composable for managing projects data and filtering logic
  * Centralizes state and computed properties for projects view
  */
 export function useProjectsData() {
-  // State
-  const projects = ref(PROJECTS_DATA)
-  const selectedFilter = ref('All')
-  const selectedProject = ref(null)
-
   // Computed
   const filters = computed(() => {
     const stacks = new Set()
@@ -166,6 +188,18 @@ export function useProjectsData() {
       privateCount,
       avgYear
     }
+  })
+
+  const featuredProjects = computed(() => {
+    return projects.value
+      .filter((project) => project.featured)
+      .map((project) => ({
+        id: project.id,
+        name: project.title,
+        description: project.shortDescription,
+        tags: project.stack, // Match the legacy property name for ProjectSection compatibility
+        link: project.link
+      }))
   })
 
   // Methods
@@ -209,6 +243,7 @@ export function useProjectsData() {
     // Computed
     filters,
     filteredProjects,
+    featuredProjects,
     projectStats,
     // Methods
     setFilter,
