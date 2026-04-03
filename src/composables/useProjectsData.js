@@ -232,7 +232,7 @@ const PROJECTS_DATA = [
     link: 'https://github.com/hadinatajenta/go-mini-iam-service',
     isPrivate: false,
     status: 'Completed',
-    year: 2024,
+    year: 2026,
     featured: true,
     highlights: [
       'JWT authentication with 15-min access tokens, 7-day refresh tokens, and account lockout after 5 failed attempts.',
