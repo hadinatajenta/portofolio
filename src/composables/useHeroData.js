@@ -2,8 +2,8 @@ import { ref, computed } from 'vue'
 
 const heroContent = {
   title: 'Full Stack Developer.',
-  subtitle: 'Backend-focused engineer building distributed systems and microservices — currently at Bank Rakyat Indonesia.',
-  description: '',
+  subtitle: 'Full stack engineer specializing in distributed microservices and high-concurrency systems.',
+  description: 'Full Stack Engineer with 3+ years of professional experience building high-traffic distributed systems. From architecting mission-critical merchant operations within major financial ecosystems to scaling regional news platforms and optimizing specialized inventory workflows, I blend technical rigor with a product-driven mindset to deliver reliable, high-performance software.',
   primaryCta: {
     label: 'View My Work',
     to: '/projects'
@@ -13,9 +13,9 @@ const heroContent = {
     to: '/experience'
   },
   stats: [
-    { label: 'Years Active', value: '6+' },
-    { label: 'Projects', value: '18+' },
-    { label: 'Teams', value: '3+' }
+    { label: 'Professional Exp.', value: '3+ Yrs' },
+    { label: 'Systems Built', value: '10+' },
+    { label: 'Articles Live', value: '500+' }
   ],
   profileImage: {
     src: '/img/5357.jpg',

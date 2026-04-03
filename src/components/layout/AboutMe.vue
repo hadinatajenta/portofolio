@@ -17,7 +17,7 @@
 
 
           <div class="flex flex-wrap gap-4 mt-2">
-            <a href="#"
+            <a href="/Hadinata_Jenta_Latest.pdf" download
               class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-black text-white font-semibold shadow-md transition-all duration-300 hover:bg-black/80 hover:shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"

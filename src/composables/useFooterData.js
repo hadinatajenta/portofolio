@@ -14,15 +14,15 @@ const ctaButtonLabel = ref("Let's collaborate")
 
 // Highlights
 const highlights = ref([
-  { value: '6+', label: 'Years active' },
-  { value: '18+', label: 'Projects delivered' },
-  { value: 'GMT+7', label: 'Time zone' }
+  { value: '3+ Yrs', label: 'Prof. Experience' },
+  { value: '10+', label: 'Systems Built' },
+  { value: '500+', label: 'Articles Live' }
 ])
 
 // Navigation
 const menus = ref([
   { index: 1, route: '/', name: 'Home' },
-  { index: 2, route: '/about', name: 'About' },
+  { index: 2, route: '/projects', name: 'Projects' },
   { index: 3, route: '/experience', name: 'Experience' },
   { index: 4, route: '/contact', name: 'Contact' }
 ])

@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 const aboutData = {
   name: 'Hadinata Jenta',
-  bio: 'Fullstack Developer focused on backend development, distributed systems, and scalable architecture with 6+ years of experience. Experienced in building microservices with Go, Laravel, and Node.js, optimizing database performance, and integrating services across high-traffic environments. Hands-on experience with financial-grade systems at BRI that required secure coding, structured QA cycles, and reliable release processes.',
+  bio: 'Fullstack Developer with 3+ years of professional and internship experience, focused on backend development, distributed systems, and scalable architecture. Experienced in building microservices with Go and Laravel, optimizing database performance, and integrating services across high-traffic financial environments at Bank Rakyat Indonesia.',
   skills: [
     'PHP', 'Go', 'JavaScript', 'Python', 'Kotlin', 'C++',
     'Laravel', 'Express.js', 'Vue.js', 'Gin/Echo', 'React Native',

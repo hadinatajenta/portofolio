@@ -58,9 +58,9 @@ const PROJECTS_DATA = [
     year: 2023,
     featured: true,
     highlights: [
-      'Complete CMS with article management, categories, and multi-level author roles.',
+      'Complete CMS Article management, categories, and multi-level author roles.',
       'Advertisement placement, banner schedules, pricing configurations, and printable invoices.',
-      'Maintained production stability handling 500+ published articles.'
+      'Maintained production stability with 500+ published articles without major incidents.'
     ]
   },
   {

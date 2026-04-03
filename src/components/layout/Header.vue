@@ -6,8 +6,8 @@
           to="/"
           class="flex items-center gap-2 text-lg font-bold text-black transition hover:text-black/70"
         >
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-sm font-bold">E</span>
-          <span class="hidden sm:block tracking-wide font-semibold text-sm text-black">Erendt</span>
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-sm font-bold">H</span>
+          <span class="hidden sm:block tracking-wide font-semibold text-sm text-black">Hadinata Jenta</span>
         </router-link>
 
         <nav class="hidden md:flex items-center gap-8">
