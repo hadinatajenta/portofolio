@@ -1,6 +1,6 @@
 <template>
     <section id="hero" class="relative overflow-hidden">
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-32">
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 ">
             <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16 items-center">
                 <div class="space-y-8 text-left">
                     <div class="space-y-4">
@@ -12,7 +12,8 @@
                         </p>
                     </div>
 
-                    <div v-if="heroContent.description" class="space-y-3 text-black/60 text-base leading-relaxed max-w-2xl">
+                    <div v-if="heroContent.description"
+                        class="space-y-3 text-black/60 text-base leading-relaxed max-w-2xl">
                         <p>
                             {{ heroContent.description }}
                         </p>

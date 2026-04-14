@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div class="flex flex-col gap-14 lg:gap-28">
+    <div class="flex flex-col gap-14 lg:gap-26">
       <HeroSection />
       <ProjectSection />
     </div>
@@ -32,5 +32,4 @@ useHead({
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
