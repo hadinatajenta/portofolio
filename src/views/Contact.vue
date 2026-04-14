@@ -21,10 +21,10 @@
           <div class="space-y-12 order-1 lg:order-2">
             <div class="space-y-6">
               <h1 class="text-5xl sm:text-7xl font-bold tracking-tight text-black leading-none">
-                Let's <br /> <span class="text-black/40">connect.</span>
+                Contact <span class="text-black/40">Hadinata Jenta</span>
               </h1>
               <p class="text-xl text-black/60 max-w-md leading-relaxed">
-                I'm currently available for new projects and collaborations. Choose your preferred way to reach out.
+                Let's connect — I'm currently available for freelance projects, backend development, and collaborations. Choose your preferred way to reach out.
               </p>
             </div>
 
@@ -67,10 +67,29 @@
 </template>
 
 <script setup>
+import { useHead } from '@unhead/vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import { useContactData } from '../composables/useContactData'
 
 const { contactMethods } = useContactData()
+
+useHead({
+  title: 'Contact — Hadinata Jenta',
+  meta: [
+    {
+      name: 'description',
+      content: 'Get in touch with Hadinata Jenta for backend development, freelance projects, or collaboration. Reach out via Email, WhatsApp, or LinkedIn.'
+    },
+    { property: 'og:title', content: 'Contact — Hadinata Jenta' },
+    { property: 'og:description', content: 'Get in touch with Hadinata Jenta for backend development, freelance, or collaboration.' },
+    { property: 'og:url', content: 'https://hadinata.vercel.app/contact' },
+    { name: 'twitter:title', content: 'Contact — Hadinata Jenta' },
+    { name: 'twitter:description', content: 'Reach out to Hadinata Jenta via Email, WhatsApp, or LinkedIn.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://hadinata.vercel.app/contact' }
+  ]
+})
 </script>
 
 <style scoped>

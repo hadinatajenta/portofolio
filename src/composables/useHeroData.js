@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 
 const heroContent = {
-  title: 'Full Stack Developer.',
+  title: 'Hi, I\'m Hadinata Jenta',
   subtitle: 'Full stack engineer specializing in distributed microservices and high-concurrency systems.',
   description: 'Full Stack Engineer with 3+ years of professional experience building high-traffic distributed systems. From architecting mission-critical merchant operations within major financial ecosystems to scaling regional news platforms and optimizing specialized inventory workflows, I blend technical rigor with a product-driven mindset to deliver reliable, high-performance software.',
   primaryCta: {

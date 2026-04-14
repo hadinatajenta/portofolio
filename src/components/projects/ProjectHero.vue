@@ -1,6 +1,6 @@
 <template>
   <section class="space-y-4">
-    <p class="text-xs font-bold uppercase tracking-widest text-black/30">Engineering Portfolio</p>
+    <p class="text-xs font-bold uppercase tracking-widest text-black/30">Hadinata Jenta · Engineering Portfolio</p>
     <h1 class="text-4xl sm:text-5xl font-bold leading-tight text-black max-w-2xl">
       Systems I've built, decisions I've made.
     </h1>

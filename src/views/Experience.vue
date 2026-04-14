@@ -3,11 +3,11 @@
     <section class="space-y-12">
       <div class="space-y-6">
         <h1 class="text-5xl sm:text-6xl font-bold leading-tight text-black">
-          My work history
+          Hadinata Jenta — Work History
         </h1>
         <p class="max-w-2xl text-lg text-black/60">
-          Full-time roles, freelance partnerships, and short-term contracts spanning six years across startups,
-          agencies, and enterprises.
+          Full-time roles, freelance partnerships, and short-term contracts — from backend engineering at
+          Bank Rakyat Indonesia (BRI) to teaching at Sumatera Institute of Technology (ITERA).
         </p>
       </div>
 
@@ -26,7 +26,10 @@
                   </p>
                 </div>
                 <div>
-                  <time class="text-sm font-bold leading-tight text-black">
+                  <time
+                    :datetime="item.dateEnd ? item.dateStart + '/' + item.dateEnd : item.dateStart"
+                    class="text-sm font-bold leading-tight text-black"
+                  >
                     {{ item.period }}
                   </time>
                 </div>
@@ -59,10 +62,53 @@
 </template>
 
 <script setup>
+import { useHead } from '@unhead/vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import { useExperienceData } from '../composables/useExperienceData'
 
 const { experiences } = useExperienceData()
+
+useHead({
+  title: 'Experience — Hadinata Jenta',
+  meta: [
+    {
+      name: 'description',
+      content: 'Work history of Hadinata Jenta — Backend Developer at Bank Rakyat Indonesia (BRI), Lecturer Assistant at Sumatera Institute of Technology (ITERA), and Full Stack Developer across startups and freelance projects.'
+    },
+    { property: 'og:title', content: 'Experience — Hadinata Jenta' },
+    { property: 'og:description', content: 'Work history of Hadinata Jenta — backend engineering at BRI, teaching at ITERA, and full-stack freelance development.' },
+    { property: 'og:url', content: 'https://hadinata.vercel.app/experience' },
+    { name: 'twitter:title', content: 'Experience — Hadinata Jenta' },
+    { name: 'twitter:description', content: 'Work history of Hadinata Jenta — Backend Developer at BRI and Full Stack Developer.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://hadinata.vercel.app/experience' }
+  ],
+  script: [
+    {
+      key: 'work-history-schema',
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Hadinata Jenta',
+          url: 'https://hadinata.vercel.app',
+          worksFor: {
+            '@type': 'Organization',
+            name: 'Bank Rakyat Indonesia (BRI)'
+          },
+          alumniOf: {
+            '@type': 'EducationalOrganization',
+            name: 'Sumatera Institute of Technology (ITERA)',
+            sameAs: 'https://itera.ac.id'
+          }
+        }
+      })
+    }
+  ]
+})
 </script>
 
 <style scoped>

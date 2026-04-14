@@ -3,6 +3,8 @@ import { ref } from 'vue'
 const experiences = [
   {
     period: 'Dec 2023 - Present',
+    dateStart: '2023-12',
+    dateEnd: null,
     title: 'Backend Developer',
     company: 'Bank Rakyat Indonesia (BRI)',
     description:
@@ -36,6 +38,8 @@ const experiences = [
   },
   {
     period: 'Aug 2023 – Dec 2023',
+    dateStart: '2023-08',
+    dateEnd: '2023-12',
     title: 'Lecturer Assistant – Project TI',
     company: 'Sumatera Institute of Technology (ITERA)',
     description:
@@ -50,6 +54,8 @@ const experiences = [
   },
   {
     period: 'Aug 2023 – Dec 2023',
+    dateStart: '2023-08',
+    dateEnd: '2023-12',
     title: 'Lecturer Assistant – Web Programming',
     company: 'Sumatera Institute of Technology (ITERA)',
     description:
@@ -64,6 +70,8 @@ const experiences = [
   },
   {
     period: 'May 2023',
+    dateStart: '2023-05',
+    dateEnd: '2023-05',
     title: 'Full Stack GIS Web Developer',
     company: 'Sumatera Institute of Technology (ITERA)',
     description:
@@ -77,6 +85,8 @@ const experiences = [
   },
   {
     period: 'Dec 2022 – Jul 2023',
+    dateStart: '2022-12',
+    dateEnd: '2023-07',
     title: 'Full Stack Developer (Contract)',
     company: 'PT Andalas Media Group',
     description:
@@ -92,6 +102,8 @@ const experiences = [
   },
   {
     period: 'Feb 2023',
+    dateStart: '2023-02',
+    dateEnd: '2023-02',
     title: 'Full Stack Developer',
     company: 'SMPN 28 Bandar Lampung',
     description:
@@ -104,6 +116,8 @@ const experiences = [
   },
   {
     period: 'Nov 2023',
+    dateStart: '2023-11',
+    dateEnd: '2023-11',
     title: 'Full Stack Developer (Freelance)',
     company: 'NGO Basmi',
     description:
@@ -117,6 +131,8 @@ const experiences = [
   },
   {
     period: 'Jun 2022 – Jul 2022',
+    dateStart: '2022-06',
+    dateEnd: '2022-07',
     title: 'Content Writer Intern',
     company: 'PT Andalas Media Group',
     description:

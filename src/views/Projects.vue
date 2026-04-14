@@ -40,6 +40,7 @@
 </template>
 
 <script setup>
+import { useHead } from '@unhead/vue'
 import { onBeforeUnmount, watch } from 'vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import ProjectHero from '../components/projects/ProjectHero.vue'
@@ -77,5 +78,23 @@ watch(selectedProject, (value) => {
 
 onBeforeUnmount(() => {
   toggleScroll(false)
+})
+
+useHead({
+  title: 'Projects — Hadinata Jenta',
+  meta: [
+    {
+      name: 'description',
+      content: 'Engineering projects by Hadinata Jenta — distributed systems, microservices, web platforms, and backend applications built with Go, Laravel, Vue.js, and more.'
+    },
+    { property: 'og:title', content: 'Projects — Hadinata Jenta' },
+    { property: 'og:description', content: 'Engineering projects by Hadinata Jenta — distributed systems, microservices, and backend applications.' },
+    { property: 'og:url', content: 'https://hadinata.vercel.app/projects' },
+    { name: 'twitter:title', content: 'Projects — Hadinata Jenta' },
+    { name: 'twitter:description', content: 'Engineering projects by Hadinata Jenta — microservices, backend systems, and web platforms.' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://hadinata.vercel.app/projects' }
+  ]
 })
 </script>
