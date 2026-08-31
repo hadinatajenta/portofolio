@@ -25,7 +25,7 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid gap-4 sm:grid-cols-2">
+    <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
       <div
         v-for="item in filtered"
         :key="item.id"
@@ -33,7 +33,7 @@
         @click="openViewer(item)"
       >
         <!-- Preview -->
-        <div class="relative h-40 bg-[var(--color-surface-hover)] overflow-hidden border-b border-[var(--color-border)]">
+        <div class="relative h-32 sm:h-40 bg-[var(--color-surface-hover)] overflow-hidden border-b border-[var(--color-border)]">
           <img
             v-if="item.imageUrl"
             :src="item.imageUrl"

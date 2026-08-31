@@ -124,3 +124,16 @@ html, body, #app {
     clip-path: circle(var(--ripple-radius) at var(--ripple-x) var(--ripple-y));
   }
 }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE UTILITIES
+   ═══════════════════════════════════════════ */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

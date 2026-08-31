@@ -15,16 +15,60 @@
       <p class="text-xs text-[var(--color-text-muted)] max-w-xs">This project is a private engagement — source code is not available publicly.</p>
     </div>
 
-    <!-- Repository table -->
-    <div v-else class="overflow-x-auto rounded-xl border border-[var(--color-border)]">
+    <!-- Mobile: Card layout -->
+    <div v-else class="space-y-3 sm:hidden">
+      <div
+        v-for="repo in items"
+        :key="repo.id"
+        class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3"
+      >
+        <div class="flex items-start justify-between gap-3">
+          <div class="min-w-0">
+            <p class="font-semibold text-[var(--color-text)] font-mono text-sm truncate">{{ repo.title }}</p>
+            <p v-if="repo.description" class="text-[11px] text-[var(--color-text-muted)] mt-0.5 line-clamp-2">{{ repo.description }}</p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold flex-shrink-0" :class="statusColor(repo.status)">
+            <span class="h-1.5 w-1.5 rounded-full flex-shrink-0" :class="statusDot(repo.status)"></span>
+            {{ repo.status }}
+          </span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-surface-hover)] px-2 py-0.5 text-[10px] font-mono font-medium text-[var(--color-text-secondary)] border border-[var(--color-border)]">
+            <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+              <path d="M18 9a9 9 0 01-9 9"/>
+            </svg>
+            {{ repo.branch }}
+          </span>
+          <span class="text-[10px] font-medium text-[var(--color-text-muted)]">{{ repo.visibility }}</span>
+          <span v-if="repo.lastCommit" class="text-[10px] text-[var(--color-text-muted)]">· {{ repo.lastCommit }}</span>
+        </div>
+        <a
+          v-if="repo.repoUrl"
+          :href="repo.repoUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+        >
+          View on GitHub
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10v11h11" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop: Table layout -->
+    <div v-if="items.length > 0" class="hidden sm:block overflow-x-auto rounded-xl border border-[var(--color-border)]">
       <table class="w-full text-sm">
         <thead>
           <tr class="border-b border-[var(--color-border)] text-left">
             <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)]">Repository</th>
-            <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] hidden sm:table-cell">Branch</th>
+            <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)]">Branch</th>
             <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] hidden md:table-cell">Last Commit</th>
             <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)]">Status</th>
-            <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] hidden sm:table-cell">Visibility</th>
+            <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] hidden md:table-cell">Visibility</th>
             <th class="w-24"></th>
           </tr>
         </thead>
@@ -34,14 +78,11 @@
             :key="repo.id"
             class="border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-surface-hover)] transition-colors"
           >
-            <!-- Name + description -->
             <td class="px-5 py-4">
               <p class="font-semibold text-[var(--color-text)] font-mono text-sm">{{ repo.title }}</p>
               <p v-if="repo.description" class="text-[11px] text-[var(--color-text-muted)] mt-0.5 max-w-[280px]">{{ repo.description }}</p>
             </td>
-
-            <!-- Branch -->
-            <td class="px-5 py-4 hidden sm:table-cell">
+            <td class="px-5 py-4">
               <span class="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-surface-hover)] px-2.5 py-1 text-[11px] font-mono font-medium text-[var(--color-text-secondary)] border border-[var(--color-border)]">
                 <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
@@ -50,26 +91,18 @@
                 {{ repo.branch }}
               </span>
             </td>
-
-            <!-- Last commit -->
             <td class="px-5 py-4 text-sm text-[var(--color-text-muted)] hidden md:table-cell">
               {{ repo.lastCommit }}
             </td>
-
-            <!-- Status dot -->
             <td class="px-5 py-4">
               <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold" :class="statusColor(repo.status)">
                 <span class="h-1.5 w-1.5 rounded-full flex-shrink-0" :class="statusDot(repo.status)"></span>
                 {{ repo.status }}
               </span>
             </td>
-
-            <!-- Visibility -->
-            <td class="px-5 py-4 hidden sm:table-cell">
+            <td class="px-5 py-4 hidden md:table-cell">
               <span class="text-[11px] font-medium text-[var(--color-text-muted)]">{{ repo.visibility }}</span>
             </td>
-
-            <!-- Action -->
             <td class="px-5 py-4 text-right">
               <a
                 :href="repo.repoUrl"

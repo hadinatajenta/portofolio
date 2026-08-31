@@ -3,22 +3,22 @@
     <div class="space-y-10">
 
       <!-- Page Header -->
-      <section class="space-y-5">
-        <div class="flex items-end justify-between gap-4 flex-wrap">
+      <section class="space-y-4 sm:space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div class="space-y-1">
             <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Hadinata Jenta · Engineering Portfolio</p>
-            <h1 class="text-4xl sm:text-5xl font-bold leading-tight text-[var(--color-text)]">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[var(--color-text)]">
               Systems I've built, decisions I've made.
             </h1>
           </div>
-          <div class="hidden sm:flex items-center gap-6 text-center">
+          <div class="flex items-center gap-4 sm:gap-6 text-center">
             <div v-for="stat in stats" :key="stat.label">
-              <p class="text-2xl font-bold text-[var(--color-text)]">{{ stat.value }}</p>
-              <p class="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] mt-0.5">{{ stat.label }}</p>
+              <p class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">{{ stat.value }}</p>
+              <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] mt-0.5">{{ stat.label }}</p>
             </div>
           </div>
         </div>
-        <p class="text-base text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
+        <p class="text-sm sm:text-base text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
           Each project reflects a real engineering problem — with context on what was built, why, and the trade-offs made along the way.
         </p>
       </section>
@@ -50,7 +50,7 @@
       </div>
 
       <!-- Grid View -->
-      <div v-else-if="viewMode === 'grid'" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <div v-else-if="viewMode === 'grid'" class="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
         <ProjectCard v-for="project in processedProjects" :key="project.id" :project="project" />
       </div>
 

@@ -18,16 +18,16 @@
   </aside>
 
   <!-- Mobile: horizontal tab strip -->
-  <div class="md:hidden -mx-6 px-6 mb-6 overflow-x-auto">
-    <div class="flex gap-1 pb-1 min-w-max">
+  <div class="md:hidden -mx-4 px-4 sm:-mx-6 sm:px-6 mb-6 overflow-x-auto scrollbar-hide border-b border-[var(--color-border)]">
+    <div class="flex gap-1 min-w-max">
       <button
         v-for="section in sections"
         :key="section.id"
         type="button"
-        class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all"
+        class="flex-shrink-0 px-4 py-2.5 text-xs font-semibold transition-all border-b-2 -mb-px"
         :class="active === section.id
-          ? 'bg-[var(--color-text)] text-[var(--color-bg)]'
-          : 'text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)]'"
+          ? 'border-[var(--color-text)] text-[var(--color-text)]'
+          : 'border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)]'"
         @click="$emit('select', section.id)"
       >
         {{ section.label }}

@@ -7,14 +7,14 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid gap-4 sm:grid-cols-2">
+    <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
       <div
         v-for="item in items"
         :key="item.id"
         class="group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md"
       >
         <!-- Thumbnail area -->
-        <div class="relative h-44 bg-[var(--color-surface-hover)] flex items-center justify-center overflow-hidden border-b border-[var(--color-border)]">
+        <div class="relative h-36 sm:h-44 bg-[var(--color-surface-hover)] flex items-center justify-center overflow-hidden border-b border-[var(--color-border)]">
           <img
             v-if="item.thumbnail"
             :src="item.thumbnail"

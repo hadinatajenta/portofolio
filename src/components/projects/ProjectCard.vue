@@ -1,6 +1,6 @@
 <template>
   <article
-    class="group flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
+    class="group flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-6 transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
     @click="navigate"
   >
     <!-- Type + Year -->
@@ -14,7 +14,7 @@
     </div>
 
     <!-- Title + Description -->
-    <h3 class="mt-4 text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-text-secondary)] transition-colors leading-snug">
+    <h3 class="mt-3 sm:mt-4 text-base sm:text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-text-secondary)] transition-colors leading-snug">
       {{ project.title }}
     </h3>
     <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)] line-clamp-2 flex-grow">

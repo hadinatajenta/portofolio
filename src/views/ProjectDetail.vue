@@ -31,8 +31,8 @@
           All Projects
         </router-link>
 
-        <div class="flex items-start justify-between gap-4 flex-wrap">
-          <div class="space-y-1.5">
+        <div class="space-y-3 sm:space-y-0 sm:flex sm:items-start sm:justify-between sm:gap-4">
+          <div class="space-y-1.5 min-w-0">
             <div class="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-wide text-[var(--color-text-muted)]">
               <span class="flex items-center gap-1.5">
                 <span class="h-1.5 w-1.5 rounded-full" :class="project.isPrivate ? 'bg-amber-400' : 'bg-emerald-400'"></span>
@@ -41,11 +41,11 @@
               <span v-if="project.domain">· {{ project.domain }}</span>
               <span>· {{ project.year }}</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-bold text-[var(--color-text)] leading-tight">{{ project.title }}</h1>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--color-text)] leading-tight">{{ project.title }}</h1>
           </div>
 
-          <div class="flex items-center gap-3 flex-shrink-0">
-            <span class="text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full border" :class="statusBadgeClass">
+          <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wide px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border" :class="statusBadgeClass">
               {{ project.status }}
             </span>
             <a
@@ -53,7 +53,7 @@
               :href="project.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 rounded-lg border-2 border-[var(--color-btn-bg)] bg-[var(--color-btn-bg)] px-4 py-2 text-xs font-semibold text-[var(--color-btn-text)] transition hover:opacity-80"
+              class="inline-flex items-center gap-1.5 rounded-lg border-2 border-[var(--color-btn-bg)] bg-[var(--color-btn-bg)] px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-[var(--color-btn-text)] transition hover:opacity-80"
             >
               Visit
               <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -66,7 +66,7 @@
       </div>
 
       <!-- Body -->
-      <div class="flex gap-8 items-start">
+      <div class="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
 
         <!-- Sidebar Nav -->
         <ProjectSidebar
