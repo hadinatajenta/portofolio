@@ -1,23 +1,23 @@
 <template>
-    <section class="text-black px-4 sm:px-6 py-12 sm:py-16">
+    <section class="text-[var(--color-text)] px-4 sm:px-6 py-12 sm:py-16">
         <h2 class="text-3xl font-bold text-center mb-10 sm:mb-14">Career Path</h2>
 
-        <div class="relative max-w-3xl mx-auto sm:border-l-2 sm:border-black sm:pl-6">
+        <div class="relative max-w-3xl mx-auto sm:border-l-2 sm:border-[var(--color-border-strong)] sm:pl-6">
             <div v-for="(step, idx) in careerSteps" :key="idx"
                 class="relative mb-10 sm:mb-14 pl-4 sm:pl-10">
                 <div
-                    class="hidden sm:flex items-center justify-center absolute left-0 top-1.5 w-6 h-6 rounded-full bg-black border-2 border-black">
-                    <span class="w-2 h-2 bg-white rounded-full"></span>
+                    class="hidden sm:flex items-center justify-center absolute left-0 top-1.5 w-6 h-6 rounded-full bg-[var(--color-border-strong)] border-2 border-[var(--color-border-strong)]">
+                    <span class="w-2 h-2 bg-[var(--color-bg)] rounded-full"></span>
                 </div>
 
                 <div
-                    class="bg-white border-2 border-black/10 rounded-lg shadow-sm p-5 sm:p-6 text-center sm:text-left hover:border-black transition-colors">
-                    <h3 class="text-lg sm:text-xl font-bold text-black">{{ step.title }}</h3>
-                    <p class="text-sm text-black/50 mt-1 mb-3">{{ step.period }}</p>
-                    <p class="leading-relaxed text-sm sm:text-base text-black/60">{{ step.desc }}</p>
+                    class="bg-[var(--color-surface)] border-2 border-[var(--color-border)] rounded-lg shadow-sm p-5 sm:p-6 text-center sm:text-left hover:border-[var(--color-border-strong)] transition-colors">
+                    <h3 class="text-lg sm:text-xl font-bold text-[var(--color-text)]">{{ step.title }}</h3>
+                    <p class="text-sm text-[var(--color-text-secondary)] mt-1 mb-3">{{ step.period }}</p>
+                    <p class="leading-relaxed text-sm sm:text-base text-[var(--color-text-secondary)]">{{ step.desc }}</p>
                     <div class="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
                         <span v-for="(tech, i) in step.tech" :key="i"
-                            class="px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded-full bg-black/10 text-black/70 border border-black/20">
+                            class="px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded-full bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] border border-[var(--color-border)]">
                             {{ tech }}
                         </span>
                     </div>
@@ -82,11 +82,11 @@ const careerSteps = [
 </script>
 
 <style scoped>
-.bg-white {
+.bg-\[var\(--color-surface\)\] {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.bg-white:hover {
+.bg-\[var\(--color-surface\)\]:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }

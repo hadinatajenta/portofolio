@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "node server.mjs",
     "build": "vite-ssg build",
     "preview": "vite preview"
   },
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
     "autoprefixer": "^10.4.21",
+    "json-server": "^0.17.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12",
     "vite": "^7.1.2",

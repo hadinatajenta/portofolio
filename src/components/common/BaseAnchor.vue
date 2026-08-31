@@ -1,6 +1,6 @@
 <template>
     <RouterLink :to="to"
-        class="nav-link font-semibold text-base md:text-lg transition-all duration-300 text-black hover:text-black/70">
+        class="nav-link font-semibold text-base md:text-lg transition-all duration-300 text-[var(--color-text)] hover:text-[var(--color-text-secondary)]">
         <span class="link-text">
             <slot />
         </span>
@@ -40,14 +40,14 @@ defineProps({
     left: 0;
     width: 100%;
     height: 2px;
-    background: #000000;
+    background: var(--color-text);
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #000000;
+    color: var(--color-text);
 }
 
 .nav-link:hover::after {

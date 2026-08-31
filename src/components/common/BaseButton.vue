@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="to" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white bg-black border border-black transition-all duration-300 hover:bg-black/80 hover:shadow-lg">
+  <router-link :to="to" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[var(--color-btn-text)] bg-[var(--color-btn-bg)] border border-[var(--color-btn-bg)] transition-all duration-300 hover:opacity-85 hover:shadow-lg">
     <slot>{{ label }}</slot>
   </router-link>
 </template>
@@ -19,7 +19,7 @@ defineProps({
 
 <style scoped>
 .router-link-active {
-  background-color: #000000;
-  border-color: #000000;
+  background-color: var(--color-btn-bg);
+  border-color: var(--color-btn-bg);
 }
 </style>

@@ -1,21 +1,21 @@
 <template>
   <article
-    class="group relative rounded-2xl border-2 border-black/8 bg-white p-8 transition-all duration-300 hover:border-black/20 hover:shadow-lg"
+    class="group relative rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 transition-all duration-300 hover:border-[var(--color-border-hover)] hover:shadow-lg"
   >
     <!-- Header -->
     <div class="flex items-start justify-between gap-4">
       <div class="space-y-1">
         <div class="flex items-center gap-3">
-          <h3 class="text-2xl font-bold text-black">{{ project.title }}</h3>
+          <h3 class="text-2xl font-bold text-[var(--color-text)]">{{ project.title }}</h3>
           <span
             v-if="project.isPrivate"
-            class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700"
+            class="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400"
           >
             <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
             Confidential
           </span>
         </div>
-        <div class="flex items-center gap-2 text-xs text-black/50">
+        <div class="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
           <span class="font-semibold uppercase tracking-wide">{{ project.type }}</span>
           <span v-if="project.domain">·</span>
           <span v-if="project.domain">{{ project.domain }}</span>
@@ -26,7 +26,7 @@
       <button
         v-if="project.link"
         type="button"
-        class="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg border-2 border-black/10 px-3 py-1.5 text-xs font-semibold text-black/70 transition hover:border-black hover:text-black"
+        class="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg border-2 border-[var(--color-border-hover)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
         @click.stop="$emit('open-link', project.link)"
       >
         Visit
@@ -38,12 +38,12 @@
     </div>
 
     <!-- Value Proposition -->
-    <p class="mt-4 text-base leading-relaxed text-black/70">
+    <p class="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
       {{ project.shortDescription }}
     </p>
 
     <!-- Why It Matters -->
-    <p class="mt-3 text-sm text-black/50 italic">
+    <p class="mt-3 text-sm text-[var(--color-text-muted)] italic">
       → {{ project.whyItMatters }}
     </p>
 
@@ -52,17 +52,17 @@
       <div
         v-for="(metric, idx) in project.impact"
         :key="idx"
-        class="flex flex-col gap-0.5 rounded-lg border border-black/8 bg-black/[0.02] px-4 py-3"
+        class="flex flex-col gap-0.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-hover)] px-4 py-3"
       >
-        <span class="text-sm font-bold text-black">{{ metric.result }}</span>
-        <span class="text-[11px] text-black/45">{{ metric.context }}</span>
+        <span class="text-sm font-bold text-[var(--color-text)]">{{ metric.result }}</span>
+        <span class="text-[11px] text-[var(--color-text-tertiary)]">{{ metric.context }}</span>
       </div>
     </div>
 
     <!-- My Role -->
     <div class="mt-5 flex items-start gap-2">
-      <span class="text-[11px] font-bold uppercase tracking-wider text-black/40 mt-0.5 flex-shrink-0">My Role</span>
-      <span class="text-sm text-black/60">{{ project.myRole }}</span>
+      <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] mt-0.5 flex-shrink-0">My Role</span>
+      <span class="text-sm text-[var(--color-text-secondary)]">{{ project.myRole }}</span>
     </div>
 
     <!-- Stack -->
@@ -70,7 +70,7 @@
       <span
         v-for="tech in project.stack"
         :key="tech"
-        class="rounded-full bg-black/5 border border-black/8 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-black/55"
+        class="rounded-full bg-[var(--color-surface-hover)] border border-[var(--color-border)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]"
       >
         {{ tech }}
       </span>
@@ -79,7 +79,7 @@
     <!-- CTA -->
     <button
       type="button"
-      class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-black transition hover:gap-3"
+      class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text)] transition hover:gap-3"
       @click="$emit('select', project)"
     >
       View technical details

@@ -2,8 +2,8 @@
   <div class="space-y-4">
 
     <div class="flex items-center justify-between">
-      <h2 class="text-lg font-bold text-black">Documentation</h2>
-      <span class="text-xs text-black/35 font-medium">{{ items.length }} doc{{ items.length !== 1 ? 's' : '' }}</span>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Documentation</h2>
+      <span class="text-xs text-[var(--color-text-muted)] font-medium">{{ items.length }} doc{{ items.length !== 1 ? 's' : '' }}</span>
     </div>
 
     <!-- Vertical list -->
@@ -11,16 +11,16 @@
       <div
         v-for="item in items"
         :key="item.id"
-        class="group rounded-xl border border-black/8 bg-white transition-all duration-150 hover:border-black/20"
+        class="group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] transition-all duration-150 hover:border-[var(--color-border-hover)]"
         :class="item.url ? 'cursor-pointer' : ''"
       >
         <div class="px-5 py-4 flex items-start justify-between gap-4">
           <div class="space-y-1.5 flex-1 min-w-0">
-            <p class="font-semibold text-black leading-snug">{{ item.title }}</p>
-            <p v-if="item.preview" class="text-sm text-black/50 leading-relaxed line-clamp-2">
+            <p class="font-semibold text-[var(--color-text)] leading-snug">{{ item.title }}</p>
+            <p v-if="item.preview" class="text-sm text-[var(--color-text-secondary)] leading-relaxed line-clamp-2">
               {{ item.preview }}
             </p>
-            <p v-if="item.lastUpdated" class="text-[11px] text-black/30">
+            <p v-if="item.lastUpdated" class="text-[11px] text-[var(--color-text-muted)]">
               Updated {{ item.lastUpdated }}
             </p>
           </div>
@@ -32,7 +32,7 @@
               :href="item.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-semibold text-black/50 hover:text-black transition-colors"
+              class="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
               @click.stop
             >
               Read
@@ -41,7 +41,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 10v11h11" />
               </svg>
             </a>
-            <span v-else class="text-[11px] text-black/20 font-medium">Coming soon</span>
+            <span v-else class="text-[11px] text-[var(--color-text-tertiary)] font-medium">Coming soon</span>
           </div>
         </div>
       </div>

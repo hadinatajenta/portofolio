@@ -2,14 +2,14 @@
   <div class="flex flex-wrap items-center gap-3">
     <!-- Search -->
     <div class="relative flex-1 min-w-[200px] max-w-xs">
-      <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-text-muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" />
       </svg>
       <input
         :value="search"
         type="search"
         placeholder="Search projects, stack..."
-        class="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-black/10 bg-white placeholder:text-black/30 focus:outline-none focus:border-black/30 focus:ring-2 focus:ring-black/5 transition"
+        class="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] placeholder:text-[var(--color-text-muted)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-border-strong)] focus:ring-2 focus:ring-[var(--color-surface-hover)] transition"
         @input="$emit('update:search', $event.target.value)"
       />
     </div>
@@ -17,43 +17,43 @@
     <!-- Type filter -->
     <select
       :value="filterType"
-      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-black/10 bg-white text-black/60 focus:outline-none focus:border-black/30 transition appearance-none cursor-pointer"
+      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
       @change="$emit('update:filterType', $event.target.value)"
     >
-      <option v-for="t in types" :key="t" :value="t">{{ t === 'All' ? 'All types' : t }}</option>
+      <option v-for="t in types" :key="t" :value="t" class="bg-[var(--color-surface)]">{{ t === 'All' ? 'All types' : t }}</option>
     </select>
 
     <!-- Status filter -->
     <select
       :value="filterStatus"
-      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-black/10 bg-white text-black/60 focus:outline-none focus:border-black/30 transition appearance-none cursor-pointer"
+      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
       @change="$emit('update:filterStatus', $event.target.value)"
     >
-      <option v-for="s in statuses" :key="s" :value="s">{{ s === 'All' ? 'All statuses' : s }}</option>
+      <option v-for="s in statuses" :key="s" :value="s" class="bg-[var(--color-surface)]">{{ s === 'All' ? 'All statuses' : s }}</option>
     </select>
 
     <!-- Sort -->
     <select
       :value="sortBy"
-      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-black/10 bg-white text-black/60 focus:outline-none focus:border-black/30 transition appearance-none cursor-pointer"
+      class="py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
       @change="$emit('update:sortBy', $event.target.value)"
     >
-      <option value="year">Newest first</option>
-      <option value="name">Name A–Z</option>
+      <option value="year" class="bg-[var(--color-surface)]">Newest first</option>
+      <option value="name" class="bg-[var(--color-surface)]">Name A–Z</option>
     </select>
 
     <!-- Spacer -->
     <div class="flex-1" />
 
     <!-- Count -->
-    <span class="text-xs text-black/35 font-medium hidden sm:block">{{ count }} project{{ count !== 1 ? 's' : '' }}</span>
+    <span class="text-xs text-[var(--color-text-muted)] font-medium hidden sm:block">{{ count }} project{{ count !== 1 ? 's' : '' }}</span>
 
     <!-- View toggle -->
-    <div class="flex items-center gap-1 rounded-lg border border-black/10 p-1 bg-white">
+    <div class="flex items-center gap-1 rounded-lg border border-[var(--color-border)] p-1 bg-[var(--color-surface)]">
       <button
         type="button"
         class="p-1.5 rounded transition"
-        :class="viewMode === 'grid' ? 'bg-black text-white' : 'text-black/40 hover:text-black'"
+        :class="viewMode === 'grid' ? 'bg-[var(--color-text)] text-[var(--color-bg)]' : 'text-[var(--color-text-tertiary)] hover:text-[var(--color-text)]'"
         title="Grid view"
         @click="$emit('update:viewMode', 'grid')"
       >
@@ -65,7 +65,7 @@
       <button
         type="button"
         class="p-1.5 rounded transition"
-        :class="viewMode === 'table' ? 'bg-black text-white' : 'text-black/40 hover:text-black'"
+        :class="viewMode === 'table' ? 'bg-[var(--color-text)] text-[var(--color-bg)]' : 'text-[var(--color-text-tertiary)] hover:text-[var(--color-text)]'"
         title="Table view"
         @click="$emit('update:viewMode', 'table')"
       >

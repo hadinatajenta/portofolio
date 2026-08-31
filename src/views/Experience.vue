@@ -2,10 +2,10 @@
   <DefaultLayout>
     <section class="space-y-12">
       <div class="space-y-6">
-        <h1 class="text-5xl sm:text-6xl font-bold leading-tight text-black">
+        <h1 class="text-5xl sm:text-6xl font-bold leading-tight text-[var(--color-text)]">
           Hadinata Jenta — Work History
         </h1>
-        <p class="max-w-2xl text-lg text-black/60">
+        <p class="max-w-2xl text-lg text-[var(--color-text-secondary)]">
           Full-time roles, freelance partnerships, and short-term contracts — from backend engineering at
           Bank Rakyat Indonesia (BRI) to teaching at Sumatera Institute of Technology (ITERA).
         </p>
@@ -18,38 +18,38 @@
             <div class="relative space-y-4">
               <div class="flex flex-col items-start justify-between sm:flex-row sm:items-center sm:gap-4 mb-4">
                 <div>
-                  <p class="text-xl font-bold text-black">
+                  <p class="text-xl font-bold text-[var(--color-text)]">
                     {{ item.title }}
                   </p>
-                  <p class="text-sm text-black/60">
+                  <p class="text-sm text-[var(--color-text-secondary)]">
                     {{ item.company }}
                   </p>
                 </div>
                 <div>
                   <time
                     :datetime="item.dateEnd ? item.dateStart + '/' + item.dateEnd : item.dateStart"
-                    class="text-sm font-bold leading-tight text-black"
+                    class="text-sm font-bold leading-tight text-[var(--color-text)]"
                   >
                     {{ item.period }}
                   </time>
                 </div>
               </div>
 
-              <p class="text-base leading-relaxed text-black/60">
+              <p class="text-base leading-relaxed text-[var(--color-text-secondary)]">
                 {{ item.description }}
               </p>
 
               <div v-if="item.highlights" class="space-y-3">
-                <ul class="ml-5 space-y-2 text-sm text-black/60">
+                <ul class="ml-5 space-y-2 text-sm text-[var(--color-text-secondary)]">
                   <li v-for="(highlight, idx) in item.highlights" :key="idx" class="flex gap-3">
-                    <span class="mt-1.5 h-1 w-1 rounded-full bg-black flex-shrink-0"></span>
+                    <span class="mt-1.5 h-1 w-1 rounded-full bg-[var(--color-text)] flex-shrink-0"></span>
                     <span>{{ highlight }}</span>
                   </li>
                 </ul>
               </div>
 
               <div v-if="item.tags" class="flex flex-wrap gap-2 pt-2">
-                <span v-for="tag in item.tags" :key="tag" class="tag-pill">
+                <span v-for="tag in item.tags" :key="tag" class="tag-pill text-[var(--color-text-secondary)] bg-[var(--color-surface-hover)] border-[var(--color-border)] hover:bg-[var(--color-border-hover)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)]">
                   {{ tag }}
                 </span>
               </div>
@@ -122,16 +122,11 @@ useHead({
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.08);
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.7);
+  border-width: 2px;
   transition: border 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .tag-pill:hover {
-  border-color: rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.9);
 }
 
 @media (max-width: 640px) {

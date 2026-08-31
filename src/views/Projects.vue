@@ -6,19 +6,19 @@
       <section class="space-y-5">
         <div class="flex items-end justify-between gap-4 flex-wrap">
           <div class="space-y-1">
-            <p class="text-xs font-bold uppercase tracking-widest text-black/30">Hadinata Jenta · Engineering Portfolio</p>
-            <h1 class="text-4xl sm:text-5xl font-bold leading-tight text-black">
+            <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Hadinata Jenta · Engineering Portfolio</p>
+            <h1 class="text-4xl sm:text-5xl font-bold leading-tight text-[var(--color-text)]">
               Systems I've built, decisions I've made.
             </h1>
           </div>
           <div class="hidden sm:flex items-center gap-6 text-center">
             <div v-for="stat in stats" :key="stat.label">
-              <p class="text-2xl font-bold text-black">{{ stat.value }}</p>
-              <p class="text-xs font-semibold uppercase tracking-wide text-black/40 mt-0.5">{{ stat.label }}</p>
+              <p class="text-2xl font-bold text-[var(--color-text)]">{{ stat.value }}</p>
+              <p class="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] mt-0.5">{{ stat.label }}</p>
             </div>
           </div>
         </div>
-        <p class="text-base text-black/60 max-w-2xl leading-relaxed">
+        <p class="text-base text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
           Each project reflects a real engineering problem — with context on what was built, why, and the trade-offs made along the way.
         </p>
       </section>
@@ -35,11 +35,16 @@
         :count="processedProjects.length"
       />
 
+      <!-- Loading state -->
+      <div v-if="isLoading && projects.length === 0" class="flex flex-col items-center justify-center py-20 gap-3 text-center">
+        <p class="text-2xl font-bold text-[var(--color-text-muted)]">Loading projects...</p>
+      </div>
+
       <!-- Empty state -->
-      <div v-if="processedProjects.length === 0" class="flex flex-col items-center justify-center py-20 gap-3 text-center">
-        <p class="text-2xl font-bold text-black/20">No projects match</p>
-        <p class="text-sm text-black/40">Try adjusting your filters or search term.</p>
-        <button type="button" class="mt-2 text-sm font-semibold text-black underline underline-offset-4" @click="resetFilters">
+      <div v-else-if="processedProjects.length === 0" class="flex flex-col items-center justify-center py-20 gap-3 text-center">
+        <p class="text-2xl font-bold text-[var(--color-text-muted)]">No projects match</p>
+        <p class="text-sm text-[var(--color-text-tertiary)]">Try adjusting your filters or search term.</p>
+        <button type="button" class="mt-2 text-sm font-semibold text-[var(--color-text)] underline underline-offset-4" @click="resetFilters">
           Clear all filters
         </button>
       </div>
@@ -50,15 +55,15 @@
       </div>
 
       <!-- Table View -->
-      <div v-else class="overflow-x-auto rounded-xl border border-black/8">
+      <div v-else class="overflow-x-auto rounded-xl border border-[var(--color-border)]">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-black/8 text-left">
-              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-black/40 w-[35%]">Project</th>
-              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-black/40 hidden md:table-cell">Stack</th>
-              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-black/40 hidden lg:table-cell">Artifacts</th>
-              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-black/40">Status</th>
-              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-black/40 text-right">Year</th>
+            <tr class="border-b border-[var(--color-border)] text-left">
+              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)] w-[35%]">Project</th>
+              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)] hidden md:table-cell">Stack</th>
+              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)] hidden lg:table-cell">Artifacts</th>
+              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)]">Status</th>
+              <th class="px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)] text-right">Year</th>
               <th class="w-10"></th>
             </tr>
           </thead>
@@ -81,7 +86,7 @@ import ProjectControlBar from '../components/projects/ProjectControlBar.vue'
 import ProjectTableRow from '../components/projects/ProjectTableRow.vue'
 import { useProjectsData } from '../composables/useProjectsData'
 
-const { projects, projectStats } = useProjectsData()
+const { projects, projectStats, isLoading } = useProjectsData()
 
 // Control bar state
 const search = ref('')

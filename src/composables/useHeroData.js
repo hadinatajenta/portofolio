@@ -1,50 +1,90 @@
 import { ref, computed } from 'vue'
+import { apiGet } from '../services/apiClient'
+import { localDb } from '../data/localDb'
 
-const heroContent = {
-  title: 'Hi, I\'m Hadinata Jenta',
-  subtitle: 'Full stack engineer specializing in distributed microservices and high-concurrency systems.',
-  description: 'Full Stack Engineer with 3+ years of professional experience building high-traffic distributed systems. From architecting mission-critical merchant operations within major financial ecosystems to scaling regional news platforms and optimizing specialized inventory workflows, I blend technical rigor with a product-driven mindset to deliver reliable, high-performance software.',
-  primaryCta: {
-    label: 'View My Work',
-    to: '/projects'
-  },
-  secondaryCta: {
-    label: 'My Experience',
-    to: '/experience'
-  },
-  stats: [
-    { label: 'Professional Exp.', value: '3+ Yrs' },
-    { label: 'Systems Built', value: '10+' },
-    { label: 'Articles Live', value: '500+' }
-  ],
-  profileImage: {
-    src: '/img/5357.jpg',
-    alt: 'Hadinata Jenta'
+const fallbackHero = localDb?.hero || {}
+const fallbackHeroContent = fallbackHero?.content || {}
+const fallbackGalleryImages = Array.isArray(fallbackHero?.galleryImages) ? fallbackHero.galleryImages : []
+
+const heroContent = ref({
+  title: fallbackHeroContent?.title || '',
+  subtitle: fallbackHeroContent?.subtitle || '',
+  description: fallbackHeroContent?.description || '',
+  primaryCta: fallbackHeroContent?.primaryCta || { label: '', to: '/' },
+  secondaryCta: fallbackHeroContent?.secondaryCta || { label: '', to: '/' },
+  stats: Array.isArray(fallbackHeroContent?.stats) ? fallbackHeroContent.stats : [],
+  profileImage: fallbackHeroContent?.profileImage || { src: '', alt: '' }
+})
+
+const galleryImages = ref(fallbackGalleryImages)
+const showGallery = ref(false)
+const currentIndex = ref(0)
+const isLoading = ref(false)
+const hasLoaded = ref(false)
+const error = ref(null)
+
+let loadPromise = null
+
+async function loadHeroData(force = false) {
+  if (!force && hasLoaded.value) return true
+  if (!force && loadPromise) return loadPromise
+
+  isLoading.value = true
+  error.value = null
+
+  loadPromise = apiGet('/hero')
+    .then((result) => {
+      heroContent.value = {
+        title: result?.content?.title || '',
+        subtitle: result?.content?.subtitle || '',
+        description: result?.content?.description || '',
+        primaryCta: result?.content?.primaryCta || { label: '', to: '/' },
+        secondaryCta: result?.content?.secondaryCta || { label: '', to: '/' },
+        stats: Array.isArray(result?.content?.stats) ? result.content.stats : [],
+        profileImage: result?.content?.profileImage || { src: '', alt: '' }
+      }
+
+      galleryImages.value = Array.isArray(result?.galleryImages)
+        ? result.galleryImages
+        : []
+
+      hasLoaded.value = true
+      return true
+    })
+    .catch((err) => {
+      error.value = err
+      throw err
+    })
+    .finally(() => {
+      isLoading.value = false
+      loadPromise = null
+    })
+
+  return loadPromise
+}
+
+function ensureLoadedClientSide() {
+  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
+    void loadHeroData()
   }
 }
 
-const galleryImages = [
-  '/img/5357.jpg',
-  '/img/portrait-2.jpg',
-  '/img/portrait-3.jpg'
-]
-
-// Global singleton state for gallery
-const showGallery = ref(false)
-const currentIndex = ref(0)
-
-/**
- * Composable for managing hero section content and gallery logic
- */
 export function useHeroData() {
-  const currentImage = computed(() => galleryImages[currentIndex.value] || galleryImages[0])
+  ensureLoadedClientSide()
+
+  const currentImage = computed(() => {
+    if (!galleryImages.value.length) return heroContent.value.profileImage?.src || ''
+    return galleryImages.value[currentIndex.value] || galleryImages.value[0]
+  })
 
   const prevImage = () => {
-    currentIndex.value = (currentIndex.value - 1 + galleryImages.length) % galleryImages.length
+    if (!galleryImages.value.length) return
+    currentIndex.value = (currentIndex.value - 1 + galleryImages.value.length) % galleryImages.value.length
   }
 
   const nextImage = () => {
-    currentIndex.value = (currentIndex.value + 1) % galleryImages.length
+    if (!galleryImages.value.length) return
+    currentIndex.value = (currentIndex.value + 1) % galleryImages.value.length
   }
 
   const setImage = (index) => {
@@ -62,6 +102,10 @@ export function useHeroData() {
     prevImage,
     nextImage,
     setImage,
-    contactCta
+    contactCta,
+    isLoading,
+    hasLoaded,
+    error,
+    loadHeroData
   }
 }

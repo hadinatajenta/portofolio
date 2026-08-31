@@ -1,31 +1,64 @@
 import { ref } from 'vue'
+import { apiGet } from '../services/apiClient'
+import { localDb } from '../data/localDb'
 
-const aboutData = {
-  name: 'Hadinata Jenta',
-  bio: 'Fullstack Developer with 3+ years of professional and internship experience, focused on backend development, distributed systems, and scalable architecture. Experienced in building microservices with Go and Laravel, optimizing database performance, and integrating services across high-traffic financial environments at Bank Rakyat Indonesia.',
-  skills: [
-    'PHP', 'Go', 'JavaScript', 'Python', 'Kotlin', 'C++',
-    'Laravel', 'Express.js', 'Vue.js', 'Gin/Echo', 'React Native',
-    'MySQL', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes',
-    'RabbitMQ', 'Red Hat OpenShift', 'CI/CD'
-  ],
-  profileImage: '/img/5357.jpg'
+const fallbackAbout = localDb?.about || {}
+
+const name = ref(fallbackAbout?.name || '')
+const bio = ref(fallbackAbout?.bio || '')
+const skills = ref(Array.isArray(fallbackAbout?.skills) ? fallbackAbout.skills : [])
+const profileImage = ref(fallbackAbout?.profileImage || '')
+const isLoading = ref(false)
+const hasLoaded = ref(false)
+const error = ref(null)
+
+let loadPromise = null
+
+async function loadAboutData(force = false) {
+  if (!force && hasLoaded.value) return true
+  if (!force && loadPromise) return loadPromise
+
+  isLoading.value = true
+  error.value = null
+
+  loadPromise = apiGet('/about')
+    .then((result) => {
+      name.value = result?.name || ''
+      bio.value = result?.bio || ''
+      skills.value = Array.isArray(result?.skills) ? result.skills : []
+      profileImage.value = result?.profileImage || ''
+      hasLoaded.value = true
+      return true
+    })
+    .catch((err) => {
+      error.value = err
+      throw err
+    })
+    .finally(() => {
+      isLoading.value = false
+      loadPromise = null
+    })
+
+  return loadPromise
 }
 
-// Global singleton state
-const name = ref(aboutData.name)
-const bio = ref(aboutData.bio)
-const skills = ref(aboutData.skills)
-const profileImage = ref(aboutData.profileImage)
+function ensureLoadedClientSide() {
+  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
+    void loadAboutData()
+  }
+}
 
-/**
- * Composable for managing about me data
- */
 export function useAboutData() {
+  ensureLoadedClientSide()
+
   return {
     name,
     bio,
     skills,
-    profileImage
+    profileImage,
+    isLoading,
+    hasLoaded,
+    error,
+    loadAboutData
   }
 }

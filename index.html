@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.cdnfonts.com/css/coco" rel="stylesheet">
 
     <!-- Primary Meta Tags for SEO -->
     <title>Hadinata Jenta - Full-Stack Developer</title>
@@ -193,6 +194,24 @@
       gtag("js", new Date());
 
       gtag("config", "G-X3TS2N5V8C");
+    </script>
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var isDark = false;
+          if (saved) {
+            isDark = saved === 'dark';
+          }
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+              metaThemeColor.setAttribute('content', '#0f0f11');
+            }
+          }
+        } catch (e) {}
+      })();
     </script>
   </head>
   <body>

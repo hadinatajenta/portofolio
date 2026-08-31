@@ -5,12 +5,12 @@
         <!-- Left Column: Text Content -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            <span class="text-black">Hi, I'm {{ name }}</span>
+            <span class="text-[var(--color-text)]">Hi, I'm {{ name }}</span>
           </h1>
 
-          <p class="text-lg md:text-xl text-black/70 mb-6 leading-relaxed">
+          <p class="text-lg md:text-xl text-[var(--color-text-secondary)] mb-6 leading-relaxed">
             Fullstack Developer focused on backend development, distributed systems, and scalable architecture with 6+ years of experience.
-            Experienced in building microservices with <span class="text-black font-semibold">Go, Laravel, and Node.js</span>,
+            Experienced in building microservices with <span class="text-[var(--color-text)] font-semibold">Go, Laravel, and Node.js</span>,
             optimizing database performance, and integrating services across high-traffic environments. Hands-on experience with
             financial-grade systems at BRI that required secure coding, structured QA cycles, and reliable release processes.
           </p>
@@ -18,7 +18,7 @@
 
           <div class="flex flex-wrap gap-4 mt-2">
             <a href="/Hadinata_Jenta_Latest.pdf" download
-              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-black text-white font-semibold shadow-md transition-all duration-300 hover:bg-black/80 hover:shadow-lg">
+              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--color-btn-bg)] text-[var(--color-btn-text)] font-semibold shadow-md transition-all duration-300 hover:opacity-80 hover:shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
@@ -29,7 +29,7 @@
             </a>
 
             <router-link to="/contact"
-              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-black text-black font-semibold transition-all duration-300 hover:bg-black/5">
+              class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-[var(--color-border-strong)] text-[var(--color-text)] font-semibold transition-all duration-300 hover:bg-[var(--color-surface-hover)]">
               <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +43,7 @@
 
         <div class="w-full lg:w-1/2 flex flex-col items-center">
           <div class="relative mb-8">
-            <div class="w-90 aspect-square overflow-hidden rounded-lg border-2 border-black/20">
+            <div class="w-90 aspect-square overflow-hidden rounded-lg border-2 border-[var(--color-border-hover)]">
               <img src="/img/5357.jpg" alt="photo" class="w-full h-full object-cover object-top" />
             </div>
           </div>

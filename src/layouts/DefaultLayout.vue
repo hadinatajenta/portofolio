@@ -8,12 +8,15 @@
 
 
         <Footers />
+        
+        <ThemeToggle />
     </div>
 </template>
 
 <script setup>
 import Headers from '../components/layout/Header.vue';
 import Footers from '../components/layout/Footer.vue';
+import ThemeToggle from '../components/ui/ThemeToggle.vue';
 </script>
 
 <style scoped>

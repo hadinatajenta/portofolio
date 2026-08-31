@@ -2,11 +2,13 @@ import { ViteSSG } from 'vite-ssg'
 import './style.css'
 import App from './App.vue'
 import { routes } from './router/index'
+import db from '../db.json'
 
 export const createApp = ViteSSG(App, { routes })
 
-// All project IDs — must stay in sync with PROJECTS_DATA in useProjectsData.js
-const PROJECT_IDS = [1, 2, 3, 4, 5, 6, 7, 8]
+const PROJECT_IDS = Array.isArray(db?.projects)
+  ? db.projects.map((project) => project.id).filter((id) => Number.isInteger(id))
+  : []
 
 /**
  * Tells vite-ssg which concrete paths to prerender for dynamic routes.
@@ -19,4 +21,3 @@ export function includedRoutes(paths) {
       : [path]
   )
 }
-

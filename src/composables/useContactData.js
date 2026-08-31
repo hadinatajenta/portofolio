@@ -1,61 +1,68 @@
-const socialLinks = [
-  {
-    name: 'Gmail',
-    icon: '📧',
-    url: 'mailto:hadinatajenta122@gmail.com'
-  },
-  {
-    name: 'WhatsApp',
-    icon: '💬',
-    url: 'https://wa.me/628982681391'
-  },
-  {
-    name: 'LinkedIn',
-    icon: '🔗',
-    url: 'https://linkedin.com/in/hadinatajenta'
-  }
-]
+import { ref } from 'vue'
+import { apiGet } from '../services/apiClient'
+import { localDb } from '../data/localDb'
 
-const contactMethods = [
-  {
-    id: 'email',
-    icon: '📧',
-    title: 'Email',
-    description: 'hadinatajenta122@gmail.com',
-    link: 'mailto:hadinatajenta122@gmail.com',
-    linkText: 'Send Email',
-    target: '',
-    rel: ''
-  },
-  {
-    id: 'whatsapp',
-    icon: '💬',
-    title: 'WhatsApp',
-    description: '08982681391',
-    link: 'https://wa.me/628982681391',
-    linkText: 'Chat on WhatsApp',
-    target: '_blank',
-    rel: 'noopener noreferrer'
-  },
-  {
-    id: 'linkedin',
-    icon: '🔗',
-    title: 'LinkedIn',
-    description: 'Connect with me on LinkedIn',
-    link: 'https://linkedin.com/in/hadinatajenta',
-    linkText: 'View Profile',
-    target: '_blank',
-    rel: 'noopener noreferrer'
-  }
-]
+const fallbackSocialLinks = Array.isArray(localDb?.socialLinks) ? localDb.socialLinks : []
+const fallbackContactMethods = Array.isArray(localDb?.contactMethods) ? localDb.contactMethods : []
 
-/**
- * Composable for managing static contact data
- * Centralized contact information and social links
- */
+const socialLinks = ref(fallbackSocialLinks)
+const contactMethods = ref(fallbackContactMethods)
+const isLoading = ref(false)
+const hasLoaded = ref(false)
+const error = ref(null)
+
+let loadPromise = null
+
+async function loadContactData(force = false) {
+  if (!force && hasLoaded.value) {
+    return {
+      socialLinks: socialLinks.value,
+      contactMethods: contactMethods.value
+    }
+  }
+
+  if (!force && loadPromise) return loadPromise
+
+  isLoading.value = true
+  error.value = null
+
+  loadPromise = Promise.all([apiGet('/socialLinks'), apiGet('/contactMethods')])
+    .then(([social, methods]) => {
+      socialLinks.value = Array.isArray(social) ? social : []
+      contactMethods.value = Array.isArray(methods) ? methods : []
+      hasLoaded.value = true
+      return {
+        socialLinks: socialLinks.value,
+        contactMethods: contactMethods.value
+      }
+    })
+    .catch((err) => {
+      error.value = err
+      throw err
+    })
+    .finally(() => {
+      isLoading.value = false
+      loadPromise = null
+    })
+
+  return loadPromise
+}
+
+function ensureLoadedClientSide() {
+  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
+    void loadContactData()
+  }
+}
+
 export function useContactData() {
+  ensureLoadedClientSide()
+
   return {
     socialLinks,
-    contactMethods
+    contactMethods,
+    isLoading,
+    hasLoaded,
+    error,
+    loadContactData
   }
 }

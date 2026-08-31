@@ -1,14 +1,137 @@
 @import "tailwindcss";
+
+/* ═══════════════════════════════════════════
+   THEME CONFIG — Light / Dark color tokens
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* Background */
+  --color-bg:            #ffffff;
+  --color-bg-secondary:  #f5f5f5;
+  --color-bg-elevated:   #ffffff;
+  --color-bg-overlay:    rgba(0, 0, 0, 0.5);
+  
+  /* Text */
+  --color-text:          #24252a;
+  --color-text-secondary: rgba(0, 0, 0, 0.6);
+  --color-text-tertiary:  rgba(0, 0, 0, 0.4);
+  --color-text-muted:     rgba(0, 0, 0, 0.3);
+  --color-text-inverted:  #ffffff;
+  
+  /* Border */
+  --color-border:        rgba(0, 0, 0, 0.1);
+  --color-border-hover:  rgba(0, 0, 0, 0.2);
+  --color-border-strong: #000000;
+  
+  /* Button Primary */
+  --color-btn-bg:        #000000;
+  --color-btn-text:      #ffffff;
+  --color-btn-hover:     rgba(0, 0, 0, 0.8);
+  
+  /* Card / Surface */
+  --color-surface:       #ffffff;
+  --color-surface-hover: rgba(0, 0, 0, 0.02);
+  --color-surface-subtle: rgba(0, 0, 0, 0.04);
+  
+  /* Footer - Dark in light mode */
+  --color-footer-bg:     #24252a;
+  --color-footer-text:   #ffffff;
+  
+  /* Misc */
+  --color-backdrop:      rgba(255, 255, 255, 0.95);
+  --color-shadow:        rgba(0, 0, 0, 0.08);
+  
+  color-scheme: light;
+}
+
+html.dark {
+  /* Background */
+  --color-bg:            #0f0f11;
+  --color-bg-secondary:  #1a1a1f;
+  --color-bg-elevated:   #1e1e24;
+  --color-bg-overlay:    rgba(0, 0, 0, 0.7);
+
+  /* Text */
+  --color-text:          #e8e8ec;
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
+  --color-text-tertiary:  rgba(255, 255, 255, 0.4);
+  --color-text-muted:     rgba(255, 255, 255, 0.25);
+  --color-text-inverted:  #0f0f11;
+
+  /* Border */
+  --color-border:        rgba(255, 255, 255, 0.1);
+  --color-border-hover:  rgba(255, 255, 255, 0.2);
+  --color-border-strong: #e8e8ec;
+
+  /* Button Primary */
+  --color-btn-bg:        #e8e8ec;
+  --color-btn-text:      #0f0f11;
+  --color-btn-hover:     rgba(232, 232, 236, 0.85);
+
+  /* Card / Surface */
+  --color-surface:       #1a1a1f;
+  --color-surface-hover: rgba(255, 255, 255, 0.03);
+  --color-surface-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Footer - Slightly distinct dark in dark mode */
+  --color-footer-bg:     #161619;
+  --color-footer-text:   #e8e8ec;
+
+  /* Misc */
+  --color-backdrop:      rgba(15, 15, 17, 0.95);
+  --color-shadow:        rgba(0, 0, 0, 0.3);
+
+  color-scheme: dark;
+}
+
 html, body, #app {
   height: 100%;
   margin: 0;
-  background: #ffffff !important;
+  background: var(--color-bg) !important;
   background-attachment: fixed; 
   background-repeat: no-repeat;
   background-size: cover;
-  color: #24252a;
+  color: var(--color-text);
+  /* The transition is handled by View Transitions API, so disable normal transitions for these properties */
+  transition: background-color 0s, color 0s;
 }
 
-* {
-  color-scheme: light;
+/* ═══════════════════════════════════════════
+   THEME TOGGLE RIPPLE ANIMATION
+   (View Transitions API)
+   ═══════════════════════════════════════════ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: ripple-reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes ripple-reveal {
+  from {
+    clip-path: circle(0% at var(--ripple-x) var(--ripple-y));
+  }
+  to {
+    clip-path: circle(var(--ripple-radius) at var(--ripple-x) var(--ripple-y));
+  }
+}
+
+/* Reverse ketika kembali ke light */
+html.dark::view-transition-old(root) {
+  z-index: 9999;
+  animation: ripple-reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+html.dark::view-transition-new(root) {
+  z-index: 1;
+  animation: none;
 }

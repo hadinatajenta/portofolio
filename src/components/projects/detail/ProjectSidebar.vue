@@ -8,8 +8,8 @@
         type="button"
         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150"
         :class="active === section.id
-          ? 'bg-black text-white'
-          : 'text-black/50 hover:text-black hover:bg-black/5'"
+          ? 'bg-[var(--color-text)] text-[var(--color-bg)]'
+          : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'"
         @click="$emit('select', section.id)"
       >
         {{ section.label }}
@@ -26,8 +26,8 @@
         type="button"
         class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all"
         :class="active === section.id
-          ? 'bg-black text-white'
-          : 'text-black/50 border border-black/10 hover:border-black/20 hover:text-black'"
+          ? 'bg-[var(--color-text)] text-[var(--color-bg)]'
+          : 'text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)]'"
         @click="$emit('select', section.id)"
       >
         {{ section.label }}
