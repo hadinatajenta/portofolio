@@ -118,20 +118,9 @@ html, body, #app {
 
 @keyframes ripple-reveal {
   from {
-    clip-path: circle(0% at var(--ripple-x) var(--ripple-y));
+    clip-path: circle(0px at var(--ripple-x) var(--ripple-y));
   }
   to {
     clip-path: circle(var(--ripple-radius) at var(--ripple-x) var(--ripple-y));
   }
-}
-
-/* Reverse ketika kembali ke light */
-html.dark::view-transition-old(root) {
-  z-index: 9999;
-  animation: ripple-reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-html.dark::view-transition-new(root) {
-  z-index: 1;
-  animation: none;
 }
