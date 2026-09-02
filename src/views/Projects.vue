@@ -6,14 +6,14 @@
       <section class="space-y-4 sm:space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div class="space-y-1">
-            <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Hadinata Jenta · Engineering Portfolio</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)] font-dot">Hadinata Jenta · Engineering Portfolio</p>
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[var(--color-text)]">
               Systems I've built, decisions I've made.
             </h1>
           </div>
           <div class="flex items-center gap-4 sm:gap-6 text-center">
             <div v-for="stat in stats" :key="stat.label">
-              <p class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">{{ stat.value }}</p>
+              <p class="text-xl sm:text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
               <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] mt-0.5">{{ stat.label }}</p>
             </div>
           </div>

@@ -3,7 +3,7 @@
         <div class="flex flex-col gap-10">
             <!-- Section Header -->
             <div class="space-y-3">
-                <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Selected Work</p>
+                <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)] font-dot">Selected Work</p>
                 <h2 class="text-4xl sm:text-5xl font-bold text-[var(--color-text)] leading-tight">
                     Featured Projects
                 </h2>
@@ -33,7 +33,7 @@
                     </p>
                     <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--color-border)]">
                         <span v-for="tag in project.tags" :key="tag"
-                            class="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)]">
+                            class="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] font-dot">
                             {{ tag }}
                         </span>
                     </div>

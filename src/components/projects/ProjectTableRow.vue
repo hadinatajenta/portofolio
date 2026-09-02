@@ -29,13 +29,13 @@
         <span
           v-for="tech in project.stack.slice(0, 3)"
           :key="tech"
-          class="rounded-full bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] border border-[var(--color-border)]"
+          class="rounded-full bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-tertiary)] border border-[var(--color-border)] font-dot"
         >
           {{ tech }}
         </span>
         <span
           v-if="project.stack.length > 3"
-          class="rounded-full bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)] border border-[var(--color-border)]"
+          class="rounded-full bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold text-[var(--color-text-muted)] border border-[var(--color-border)] font-dot"
         >
           +{{ project.stack.length - 3 }}
         </span>

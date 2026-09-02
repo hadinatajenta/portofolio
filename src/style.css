@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-dot: "DotGothic16", monospace;
+}
+
 /* ═══════════════════════════════════════════
    THEME CONFIG — Light / Dark color tokens
    ═══════════════════════════════════════════ */
@@ -94,6 +98,10 @@ html, body, #app {
   color: var(--color-text);
   /* The transition is handled by View Transitions API, so disable normal transitions for these properties */
   transition: background-color 0s, color 0s;
+}
+
+h1 {
+  font-family: 'DotGothic16', monospace;
 }
 
 /* ═══════════════════════════════════════════

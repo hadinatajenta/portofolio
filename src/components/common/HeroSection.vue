@@ -34,7 +34,7 @@
                     <div class="grid grid-cols-3 gap-6 pt-8 border-t-2 border-[var(--color-border)]">
                         <div v-for="stat in heroContent.stats" :key="stat.label">
                             <p class="text-xs font-semibold tracking-wide text-[var(--color-text-tertiary)] uppercase">{{ stat.label }}</p>
-                            <p class="mt-2 text-2xl font-bold text-[var(--color-text)]">{{ stat.value }}</p>
+                            <p class="mt-2 text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
                         </div>
                     </div>
                 </div>
