@@ -26,10 +26,11 @@
 
     <!-- Grid -->
     <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
-      <div
+      <button
         v-for="item in filtered"
         :key="item.id"
-        class="group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
+        type="button"
+        class="text-left group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
         @click="openViewer(item)"
       >
         <!-- Preview -->
@@ -76,7 +77,7 @@
           <p class="font-semibold text-sm text-[var(--color-text)] leading-snug">{{ item.title }}</p>
           <p v-if="item.description && !item.imageUrl" class="text-[11px] text-[var(--color-text-muted)] italic">{{ item.description }}</p>
         </div>
-      </div>
+      </button>
     </div>
 
     <!-- Fullscreen Viewer -->

@@ -1,7 +1,7 @@
 <template>
-  <article
+  <router-link
+    :to="{ name: 'project-detail', params: { id: project.id } }"
     class="group flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-6 transition-all duration-200 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
-    @click="navigate"
   >
     <!-- Type + Year -->
     <div class="flex items-center justify-between text-[11px] uppercase tracking-wide text-[var(--color-text-muted)]">
@@ -58,7 +58,7 @@
         {{ project.status }}
       </span>
     </div>
-  </article>
+  </router-link>
 </template>
 
 <script setup>
@@ -81,10 +81,6 @@ const statusColor = computed(() => {
   if (s === 'Completed') return 'text-[var(--color-text-tertiary)]'
   return 'text-[var(--color-text-muted)]'
 })
-
-const navigate = () => {
-  router.push({ name: 'project-detail', params: { id: props.project.id } })
-}
 </script>
 
 <style scoped>

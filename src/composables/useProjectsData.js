@@ -1,5 +1,4 @@
 import { computed, ref } from 'vue'
-import { apiGet } from '../services/apiClient'
 import { localDb } from '../data/localDb'
 
 /**
@@ -21,40 +20,11 @@ const projects = ref(fallbackProjects)
 const selectedFilter = ref('All')
 const selectedProject = ref(null)
 const isLoading = ref(false)
-const hasLoaded = ref(false)
+const hasLoaded = ref(true)
 const error = ref(null)
 
-let loadPromise = null
-
-async function loadProjects(force = false) {
-  if (!force && hasLoaded.value) return projects.value
-  if (!force && loadPromise) return loadPromise
-
-  isLoading.value = true
-  error.value = null
-
-  loadPromise = apiGet('/projects')
-    .then((result) => {
-      projects.value = Array.isArray(result) ? result : []
-      hasLoaded.value = true
-      return projects.value
-    })
-    .catch((err) => {
-      error.value = err
-      throw err
-    })
-    .finally(() => {
-      isLoading.value = false
-      loadPromise = null
-    })
-
-  return loadPromise
-}
-
-function ensureLoadedClientSide() {
-  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
-    void loadProjects()
-  }
+async function loadProjects() {
+  return projects.value
 }
 
 /**
@@ -62,7 +32,6 @@ function ensureLoadedClientSide() {
  * Centralizes state and computed properties for the projects views.
  */
 export function useProjectsData() {
-  ensureLoadedClientSide()
 
   const typeFilters = computed(() => {
     const types = new Set(projects.value.map((p) => p.type))

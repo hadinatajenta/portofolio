@@ -1,5 +1,4 @@
 import { computed, ref } from 'vue'
-import { apiGet } from '../services/apiClient'
 import { localDb } from '../data/localDb'
 
 const fallbackFooter = localDb?.footer || {}
@@ -17,7 +16,7 @@ const menus = ref(Array.isArray(fallbackFooter?.menus) ? fallbackFooter.menus : 
 const socials = ref(Array.isArray(fallbackFooter?.socials) ? fallbackFooter.socials : [])
 
 const isLoading = ref(false)
-const hasLoaded = ref(false)
+const hasLoaded = ref(true)
 const error = ref(null)
 
 const contact = {
@@ -26,52 +25,11 @@ const contact = {
   linkedin: import.meta.env.VITE_CONTACT_LINKEDIN
 }
 
-let loadPromise = null
-
-async function loadFooterData(force = false) {
-  if (!force && hasLoaded.value) return true
-  if (!force && loadPromise) return loadPromise
-
-  isLoading.value = true
-  error.value = null
-
-  loadPromise = apiGet('/footer')
-    .then((result) => {
-      name.value = result?.name || ''
-      role.value = result?.role || ''
-      location.value = result?.location || ''
-      intro.value = result?.intro || ''
-      ctaBadge.value = result?.ctaBadge || ''
-      ctaTitle.value = result?.ctaTitle || ''
-      ctaDescription.value = result?.ctaDescription || ''
-      ctaButtonLabel.value = result?.ctaButtonLabel || ''
-      highlights.value = Array.isArray(result?.highlights) ? result.highlights : []
-      menus.value = Array.isArray(result?.menus) ? result.menus : []
-      socials.value = Array.isArray(result?.socials) ? result.socials : []
-
-      hasLoaded.value = true
-      return true
-    })
-    .catch((err) => {
-      error.value = err
-      throw err
-    })
-    .finally(() => {
-      isLoading.value = false
-      loadPromise = null
-    })
-
-  return loadPromise
-}
-
-function ensureLoadedClientSide() {
-  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
-    void loadFooterData()
-  }
+async function loadFooterData() {
+  return true
 }
 
 export function useFooterData() {
-  ensureLoadedClientSide()
 
   const initials = computed(() =>
     name.value

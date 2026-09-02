@@ -19,10 +19,11 @@
 
     <!-- Archive Grid -->
     <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-      <article
+      <button
         v-for="project in filteredProjects"
         :key="project.id"
-        class="group flex flex-col rounded-xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
+        type="button"
+        class="text-left group flex flex-col rounded-xl border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:border-[var(--color-border-hover)] hover:shadow-md cursor-pointer"
         @click="$emit('select', project)"
       >
         <!-- Type & Year -->
@@ -69,7 +70,7 @@
           <span v-if="project.link" class="text-[10px] font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Live</span>
           <span v-else class="text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Private</span>
         </div>
-      </article>
+      </button>
     </div>
   </section>
 </template>

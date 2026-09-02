@@ -1,5 +1,4 @@
 import { ref, computed } from 'vue'
-import { apiGet } from '../services/apiClient'
 import { localDb } from '../data/localDb'
 
 const fallbackHero = localDb?.hero || {}
@@ -20,57 +19,14 @@ const galleryImages = ref(fallbackGalleryImages)
 const showGallery = ref(false)
 const currentIndex = ref(0)
 const isLoading = ref(false)
-const hasLoaded = ref(false)
+const hasLoaded = ref(true)
 const error = ref(null)
 
-let loadPromise = null
-
-async function loadHeroData(force = false) {
-  if (!force && hasLoaded.value) return true
-  if (!force && loadPromise) return loadPromise
-
-  isLoading.value = true
-  error.value = null
-
-  loadPromise = apiGet('/hero')
-    .then((result) => {
-      heroContent.value = {
-        title: result?.content?.title || '',
-        subtitle: result?.content?.subtitle || '',
-        description: result?.content?.description || '',
-        primaryCta: result?.content?.primaryCta || { label: '', to: '/' },
-        secondaryCta: result?.content?.secondaryCta || { label: '', to: '/' },
-        stats: Array.isArray(result?.content?.stats) ? result.content.stats : [],
-        profileImage: result?.content?.profileImage || { src: '', alt: '' }
-      }
-
-      galleryImages.value = Array.isArray(result?.galleryImages)
-        ? result.galleryImages
-        : []
-
-      hasLoaded.value = true
-      return true
-    })
-    .catch((err) => {
-      error.value = err
-      throw err
-    })
-    .finally(() => {
-      isLoading.value = false
-      loadPromise = null
-    })
-
-  return loadPromise
-}
-
-function ensureLoadedClientSide() {
-  if (typeof window !== 'undefined' && !hasLoaded.value && !loadPromise) {
-    void loadHeroData()
-  }
+async function loadHeroData() {
+  return true
 }
 
 export function useHeroData() {
-  ensureLoadedClientSide()
 
   const currentImage = computed(() => {
     if (!galleryImages.value.length) return heroContent.value.profileImage?.src || ''

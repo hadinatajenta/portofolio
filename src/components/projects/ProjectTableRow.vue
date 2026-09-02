@@ -1,7 +1,11 @@
 <template>
   <tr
     class="group cursor-pointer border-b border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors"
+    tabindex="0"
+    role="link"
     @click="navigate"
+    @keydown.enter="navigate"
+    @keydown.space.prevent="navigate"
   >
     <!-- Project info -->
     <td class="px-5 py-4 align-top w-[35%]">
