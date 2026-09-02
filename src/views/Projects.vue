@@ -148,8 +148,8 @@ useHead({
       content: 'Engineering projects by Hadinata Jenta — distributed systems, microservices, web platforms, and backend applications built with Go, Laravel, Vue.js, and more.'
     },
     { property: 'og:title', content: 'Projects — Hadinata Jenta' },
-    { property: 'og:url', content: 'https://hadinata.vercel.app/projects' },
+    { property: 'og:url', content: 'https://hadinata.me/projects' },
   ],
-  link: [{ rel: 'canonical', href: 'https://hadinata.vercel.app/projects' }]
+  link: [{ rel: 'canonical', href: 'https://hadinata.me/projects' }]
 })
 </script>

@@ -77,12 +77,12 @@ useHead({
     },
     { property: 'og:title', content: 'Experience — Hadinata Jenta' },
     { property: 'og:description', content: 'Work history of Hadinata Jenta — backend engineering at BRI, teaching at ITERA, and full-stack freelance development.' },
-    { property: 'og:url', content: 'https://hadinata.vercel.app/experience' },
+    { property: 'og:url', content: 'https://hadinata.me/experience' },
     { name: 'twitter:title', content: 'Experience — Hadinata Jenta' },
     { name: 'twitter:description', content: 'Work history of Hadinata Jenta — Backend Developer at BRI and Full Stack Developer.' },
   ],
   link: [
-    { rel: 'canonical', href: 'https://hadinata.vercel.app/experience' }
+    { rel: 'canonical', href: 'https://hadinata.me/experience' }
   ],
   script: [
     {
@@ -94,7 +94,7 @@ useHead({
         mainEntity: {
           '@type': 'Person',
           name: 'Hadinata Jenta',
-          url: 'https://hadinata.vercel.app',
+          url: 'https://hadinata.me',
           worksFor: {
             '@type': 'Organization',
             name: 'Bank Rakyat Indonesia (BRI)'

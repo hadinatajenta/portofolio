@@ -82,12 +82,12 @@ useHead({
     },
     { property: 'og:title', content: 'Contact — Hadinata Jenta' },
     { property: 'og:description', content: 'Get in touch with Hadinata Jenta for backend development, freelance, or collaboration.' },
-    { property: 'og:url', content: 'https://hadinata.vercel.app/contact' },
+    { property: 'og:url', content: 'https://hadinata.me/contact' },
     { name: 'twitter:title', content: 'Contact — Hadinata Jenta' },
     { name: 'twitter:description', content: 'Reach out to Hadinata Jenta via Email, WhatsApp, or LinkedIn.' },
   ],
   link: [
-    { rel: 'canonical', href: 'https://hadinata.vercel.app/contact' }
+    { rel: 'canonical', href: 'https://hadinata.me/contact' }
   ]
 })
 </script>

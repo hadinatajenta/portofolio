@@ -22,12 +22,12 @@ useHead({
     },
     { property: 'og:title', content: 'Hadinata Jenta — Full Stack Developer' },
     { property: 'og:description', content: 'Full Stack Developer specializing in distributed microservices, Go, Laravel, and high-traffic backend systems.' },
-    { property: 'og:url', content: 'https://hadinata.vercel.app/' },
+    { property: 'og:url', content: 'https://hadinata.me/' },
     { name: 'twitter:title', content: 'Hadinata Jenta — Full Stack Developer' },
     { name: 'twitter:description', content: 'Full Stack Developer specializing in Go, Laravel, Vue.js, and distributed systems.' },
   ],
   link: [
-    { rel: 'canonical', href: 'https://hadinata.vercel.app/' }
+    { rel: 'canonical', href: 'https://hadinata.me/' }
   ]
 })
 </script>
