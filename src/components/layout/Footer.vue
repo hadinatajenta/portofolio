@@ -39,17 +39,9 @@
           <div class="space-y-4">
             <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-footer-text)]/30">Connect</p>
             <div class="flex flex-col gap-2">
-              <a href="https://wa.me/6282181394215" target="_blank" rel="noopener noreferrer"
+              <a v-for="method in contactMethods" :key="method.id" :href="method.link" :target="method.target" :rel="method.rel"
                 class="text-sm text-[var(--color-footer-text)]/60 hover:text-[var(--color-footer-text)] transition-colors duration-200 flex items-center gap-2">
-                <span class="text-base">💬</span> WhatsApp
-              </a>
-              <a href="https://linkedin.com/in/hadinatajenta" target="_blank" rel="noopener noreferrer"
-                class="text-sm text-[var(--color-footer-text)]/60 hover:text-[var(--color-footer-text)] transition-colors duration-200 flex items-center gap-2">
-                <span class="text-base">🔗</span> LinkedIn
-              </a>
-              <a href="mailto:hadinatajenta122@gmail.com"
-                class="text-sm text-[var(--color-footer-text)]/60 hover:text-[var(--color-footer-text)] transition-colors duration-200 flex items-center gap-2">
-                <span class="text-base">📧</span> Gmail
+                <span class="text-base">{{ method.icon }}</span> {{ method.title }}
               </a>
             </div>
           </div>
@@ -70,6 +62,7 @@
 
 <script setup>
 import { useFooterData } from '../../composables/useFooterData'
+import { useContactData } from '../../composables/useContactData'
 
 const {
   name,
@@ -79,4 +72,6 @@ const {
   menus,
   currentYear
 } = useFooterData()
+
+const { contactMethods } = useContactData()
 </script>
