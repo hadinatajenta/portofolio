@@ -1,25 +1,41 @@
 <template>
     <section id="hero" class="relative overflow-hidden">
         <div class="relative py-6 sm:py-12 lg:py-16">
-            <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16 items-center">
-                <div class="space-y-6 sm:space-y-8 text-left">
-                    <div class="space-y-3 sm:space-y-4">
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text)]">
-                            {{ heroContent.title }}
-                        </h1>
-                        <p class="text-base sm:text-lg text-[var(--color-text-secondary)] font-medium">
-                            {{ heroContent.subtitle }}
-                        </p>
-                    </div>
+            <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-8 lg:gap-x-16 lg:gap-y-6 items-center">
+                <!-- 1. Heading & Subtitle -->
+                <div class="order-1 lg:col-start-1 lg:row-start-1 space-y-3 sm:space-y-4 text-left">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text)]">
+                        {{ heroContent.title }}
+                    </h1>
+                    <p class="text-base sm:text-lg text-[var(--color-text-secondary)] font-medium">
+                        {{ heroContent.subtitle }}
+                    </p>
+                </div>
 
-                    <div v-if="heroContent.description"
-                        class="space-y-3 text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed max-w-2xl">
-                        <p>
-                            {{ heroContent.description }}
-                        </p>
-                    </div>
+                <!-- 2. Photo: Early identity on mobile (order-2); Right column on desktop (col-start-2 row-span-3) -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-3 flex justify-center lg:justify-end self-center">
+                    <button type="button"
+                        aria-haspopup="dialog"
+                        aria-label="View profile photo in gallery"
+                        class="group relative flex h-48 w-48 sm:h-56 sm:w-56 lg:h-72 lg:w-72 xl:h-80 xl:w-80 items-center justify-center overflow-hidden rounded-2xl border-2 border-[var(--color-border-hover)] bg-[var(--color-bg-elevated)] shadow-lg transition hover:border-[var(--color-border-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)]"
+                        @click="showGallery = true">
+                        <img :src="heroContent.profileImage.src" :alt="heroContent.profileImage.alt"
+                            width="320" height="320" decoding="async" fetchpriority="high"
+                            class="h-full w-full object-cover object-[center_18%] transition group-hover:scale-105" />
+                    </button>
+                </div>
 
-                    <div class="flex flex-wrap items-center gap-3 pt-2 sm:pt-4">
+                <!-- 3. Bio / Description -->
+                <div v-if="heroContent.description"
+                    class="order-3 lg:col-start-1 lg:row-start-2 text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed max-w-2xl text-left">
+                    <p>
+                        {{ heroContent.description }}
+                    </p>
+                </div>
+
+                <!-- 4. CTAs & Stats -->
+                <div class="order-4 lg:col-start-1 lg:row-start-3 space-y-6 sm:space-y-8 text-left">
+                    <div class="flex flex-wrap items-center gap-3">
                         <BaseButton :to="heroContent.primaryCta.to" :label="heroContent.primaryCta.label" />
                         <router-link :to="heroContent.secondaryCta.to"
                             class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border-strong)] px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)]">
@@ -37,18 +53,6 @@
                             <p class="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="relative flex justify-center lg:justify-end">
-                    <button type="button"
-                        aria-haspopup="dialog"
-                        aria-label="View profile photo in gallery"
-                        class="group relative flex h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80 items-center justify-center overflow-hidden rounded-2xl border-2 border-[var(--color-border-hover)] bg-[var(--color-bg-elevated)] shadow-lg transition hover:border-[var(--color-border-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] lg:translate-y-10"
-                        @click="showGallery = true">
-                        <img :src="heroContent.profileImage.src" :alt="heroContent.profileImage.alt"
-                            width="320" height="320" decoding="async" fetchpriority="high"
-                            class="h-full w-full object-cover transition group-hover:scale-105" />
-                    </button>
                 </div>
             </div>
         </div>

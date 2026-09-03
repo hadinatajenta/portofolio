@@ -8,10 +8,20 @@ import { localDb } from '../data/localDb'
 export function getArtifactSummary(project) {
   const a = project.artifacts ?? {}
   const parts = []
-  if (a.code?.length) parts.push(`${a.code.length} repo${a.code.length > 1 ? 's' : ''}`)
-  if (a.design?.length) parts.push(`${a.design.length} design${a.design.length > 1 ? 's' : ''}`)
-  if (a.diagrams?.length) parts.push(`${a.diagrams.length} diagram${a.diagrams.length > 1 ? 's' : ''}`)
-  if (a.docs?.length) parts.push(`${a.docs.length} doc${a.docs.length > 1 ? 's' : ''}`)
+  const isReal = (item) => {
+    if (!item) return false
+    const desc = (item.description || '').toLowerCase()
+    return !desc.includes('placeholder') && !desc.includes('replace with')
+  }
+  const code = (a.code ?? []).filter((item) => item.repoUrl && isReal(item))
+  const design = (a.design ?? []).filter((item) => (item.thumbnail || item.figmaUrl) && isReal(item))
+  const diagrams = (a.diagrams ?? []).filter((item) => item.imageUrl && isReal(item))
+  const docs = (a.docs ?? []).filter((item) => item.title && (item.preview || item.url) && isReal(item))
+
+  if (code.length) parts.push(`${code.length} repo${code.length > 1 ? 's' : ''}`)
+  if (design.length) parts.push(`${design.length} design${design.length > 1 ? 's' : ''}`)
+  if (diagrams.length) parts.push(`${diagrams.length} diagram${diagrams.length > 1 ? 's' : ''}`)
+  if (docs.length) parts.push(`${docs.length} doc${docs.length > 1 ? 's' : ''}`)
   return parts.join(' · ') || null
 }
 

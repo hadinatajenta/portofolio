@@ -125,12 +125,22 @@ const { getProjectById, isLoading } = useProjectsData()
 
 const project = computed(() => getProjectById(parseInt(route.params.id)))
 
-const artifacts = computed(() => ({
-  code: project.value?.artifacts?.code ?? [],
-  design: project.value?.artifacts?.design ?? [],
-  diagrams: project.value?.artifacts?.diagrams ?? [],
-  docs: project.value?.artifacts?.docs ?? []
-}))
+const isRealArtifact = (item) => {
+  if (!item) return false
+  const desc = (item.description || '').toLowerCase()
+  if (desc.includes('placeholder') || desc.includes('replace with')) return false
+  return true
+}
+
+const artifacts = computed(() => {
+  const raw = project.value?.artifacts ?? {}
+  return {
+    code: (raw.code ?? []).filter((item) => item.repoUrl && isRealArtifact(item)),
+    design: (raw.design ?? []).filter((item) => (item.thumbnail || item.figmaUrl) && isRealArtifact(item)),
+    diagrams: (raw.diagrams ?? []).filter((item) => item.imageUrl && isRealArtifact(item)),
+    docs: (raw.docs ?? []).filter((item) => item.title && (item.preview || item.url) && isRealArtifact(item))
+  }
+})
 
 const artifactCounts = computed(() => ({
   code: artifacts.value.code.length,

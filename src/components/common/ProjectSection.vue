@@ -33,7 +33,7 @@
                     </p>
                     <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--color-border)]">
                         <span v-for="tag in project.tags" :key="tag"
-                            class="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] font-dot">
+                            class="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-dot">
                             {{ tag }}
                         </span>
                     </div>

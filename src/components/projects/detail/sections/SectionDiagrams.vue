@@ -41,21 +41,6 @@
             :alt="item.title"
             class="absolute inset-0 w-full h-full object-contain p-4"
           />
-          <!-- Grid placeholder -->
-          <div v-else class="absolute inset-0 flex items-center justify-center">
-            <svg class="h-10 w-10 text-[var(--color-border-strong)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <rect x="3" y="3" width="5" height="5" rx="0.5"/>
-              <rect x="10" y="3" width="5" height="5" rx="0.5"/>
-              <rect x="17" y="3" width="5" height="5" rx="0.5"/>
-              <rect x="3" y="10" width="5" height="5" rx="0.5"/>
-              <rect x="10" y="10" width="5" height="5" rx="0.5"/>
-              <rect x="17" y="10" width="5" height="5" rx="0.5"/>
-              <rect x="3" y="17" width="5" height="5" rx="0.5"/>
-              <rect x="10" y="17" width="5" height="5" rx="0.5"/>
-              <rect x="17" y="17" width="5" height="5" rx="0.5"/>
-            </svg>
-            <span class="absolute bottom-3 text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">Placeholder</span>
-          </div>
 
           <!-- Type badge overlay -->
           <span class="absolute top-3 left-3 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
@@ -75,7 +60,7 @@
         <!-- Info -->
         <div class="px-4 py-3 space-y-0.5">
           <p class="font-semibold text-sm text-[var(--color-text)] leading-snug">{{ item.title }}</p>
-          <p v-if="item.description && !item.imageUrl" class="text-[11px] text-[var(--color-text-muted)] italic">{{ item.description }}</p>
+          <p v-if="item.description && !item.description.toLowerCase().includes('placeholder')" class="text-[11px] text-[var(--color-text-muted)]">{{ item.description }}</p>
         </div>
       </button>
     </div>
