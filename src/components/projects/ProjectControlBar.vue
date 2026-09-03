@@ -15,7 +15,7 @@
     </div>
 
     <!-- Filters row — horizontal scroll on mobile -->
-    <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 -mb-1">
+    <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-1">
       <!-- Type filter -->
       <select
         :value="filterType"

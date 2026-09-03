@@ -50,7 +50,7 @@
       </div>
 
       <!-- Grid View -->
-      <div v-else-if="viewMode === 'grid'" class="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+      <div v-else-if="viewMode === 'grid'" class="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <ProjectCard v-for="project in processedProjects" :key="project.id" :project="project" />
       </div>
 

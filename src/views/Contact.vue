@@ -1,24 +1,24 @@
 <template>
   <DefaultLayout>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-24 pb-12">
-      <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
+    <div class="max-w-5xl mx-auto py-6 sm:py-12 lg:py-16">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
 
         <!-- Left Column: Typography & Small Image -->
         <div class="lg:col-span-5 flex flex-col justify-between">
           <div>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--color-text)] leading-none">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text)] leading-none">
               Contact<span class="text-[var(--color-text-muted)] font-dot">.</span>
             </h1>
-            <p class="mt-8 text-lg sm:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-md">
+            <p class="mt-6 sm:mt-8 text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-md">
               Let's connect — I'm currently available for freelance projects, backend development, and collaborations.
             </p>
-            <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] pt-12">
+            <p class="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] pt-8 sm:pt-12">
               DKI JAKARTA, Indonesia • Available Worldwide
             </p>
           </div>
 
           <img src="/img/contact.jpg" alt="Hadinata Jenta"
-            class="w-32 h-40 object-cover grayscale opacity-80 mt-16 hidden lg:block rounded-sm" />
+            class="w-32 h-40 object-cover grayscale opacity-80 mt-12 hidden lg:block rounded-sm" />
         </div>
 
         <!-- Right Column: Border-separated contact list -->
@@ -27,16 +27,16 @@
 
           <a v-for="method in contactMethods" :key="method.id" :href="method.link" target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center justify-between py-10 sm:py-12 border-b border-[var(--color-border)] hover:border-[var(--color-text)] transition-colors duration-300">
+            class="group flex items-center justify-between py-6 sm:py-8 lg:py-10 border-b border-[var(--color-border)] hover:border-[var(--color-text)] transition-colors duration-300">
             <div>
               <h3
-                class="text-3xl sm:text-4xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-text-secondary)] transition-colors">
+                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-text-secondary)] transition-colors">
                 {{ method.title }}</h3>
-              <p class="text-sm sm:text-base text-[var(--color-text-secondary)] font-dot mt-3">{{
+              <p class="text-sm sm:text-base text-[var(--color-text-secondary)] font-dot mt-2 sm:mt-3">{{
                 method.description }}</p>
             </div>
-            <div class="transform group-hover:translate-x-4 transition-transform duration-300">
-              <svg class="w-8 h-8 text-[var(--color-text)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            <div class="transform group-hover:translate-x-3 transition-transform duration-300">
+              <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-text)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
               </svg>

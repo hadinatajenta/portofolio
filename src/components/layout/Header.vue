@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between gap-4">
         <router-link to="/" class="flex items-center gap-2 text-lg text-[var(--color-text)] transition hover:opacity-70 font-dot">
-          <span class="hidden sm:block tracking-wide font-bold text-xl text-[var(--color-text)]">Hadinata Jenta</span>
+          <span class="tracking-wide font-bold text-base sm:text-xl text-[var(--color-text)]">Hadinata Jenta</span>
         </router-link>
 
         <nav class="hidden md:flex items-center gap-8">

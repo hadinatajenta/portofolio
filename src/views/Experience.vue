@@ -1,11 +1,11 @@
 <template>
   <DefaultLayout>
     <section class="space-y-12">
-      <div class="space-y-6">
-        <h1 class="text-5xl sm:text-6xl font-bold leading-tight text-[var(--color-text)]">
+      <div class="space-y-4 sm:space-y-6">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[var(--color-text)]">
           Hadinata Jenta — Work History
         </h1>
-        <p class="max-w-2xl text-lg text-[var(--color-text-secondary)]">
+        <p class="max-w-2xl text-base sm:text-lg text-[var(--color-text-secondary)]">
           Full-time roles, freelance partnerships, and short-term contracts — from backend engineering at
           Bank Rakyat Indonesia (BRI) to teaching at Sumatera Institute of Technology (ITERA).
         </p>
@@ -14,21 +14,21 @@
       <div class="relative space-y-8">
         <div class="relative space-y-12 sm:space-y-16">
           <article v-for="(item, index) in experiences" :key="index"
-            class="relative grid gap-8 sm:grid-cols-[200px,1fr]">
+            class="relative pb-10 sm:pb-12 border-b border-[var(--color-border)] last:border-b-0">
             <div class="relative space-y-4">
-              <div class="flex flex-col items-start justify-between sm:flex-row sm:items-center sm:gap-4 mb-4">
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-2">
                 <div>
-                  <p class="text-xl font-bold text-[var(--color-text)]">
+                  <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">
                     {{ item.title }}
-                  </p>
-                  <p class="text-sm text-[var(--color-text-secondary)]">
+                  </h2>
+                  <p class="text-sm font-medium text-[var(--color-text-secondary)] mt-0.5">
                     {{ item.company }}
                   </p>
                 </div>
-                <div>
+                <div class="flex-shrink-0">
                   <time
                     :datetime="item.dateEnd ? item.dateStart + '/' + item.dateEnd : item.dateStart"
-                    class="text-sm font-bold leading-tight text-[var(--color-text)]"
+                    class="text-xs sm:text-sm font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider font-dot"
                   >
                     {{ item.period }}
                   </time>

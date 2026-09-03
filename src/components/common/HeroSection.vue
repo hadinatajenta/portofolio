@@ -1,28 +1,28 @@
 <template>
     <section id="hero" class="relative overflow-hidden">
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 ">
+        <div class="relative py-6 sm:py-12 lg:py-16">
             <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16 items-center">
-                <div class="space-y-8 text-left">
-                    <div class="space-y-4">
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-[var(--color-text)]">
+                <div class="space-y-6 sm:space-y-8 text-left">
+                    <div class="space-y-3 sm:space-y-4">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text)]">
                             {{ heroContent.title }}
                         </h1>
-                        <p class="text-lg text-[var(--color-text-secondary)] font-medium">
+                        <p class="text-base sm:text-lg text-[var(--color-text-secondary)] font-medium">
                             {{ heroContent.subtitle }}
                         </p>
                     </div>
 
                     <div v-if="heroContent.description"
-                        class="space-y-3 text-[var(--color-text-secondary)] text-base leading-relaxed max-w-2xl">
+                        class="space-y-3 text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed max-w-2xl">
                         <p>
                             {{ heroContent.description }}
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-3 pt-4">
+                    <div class="flex flex-wrap items-center gap-3 pt-2 sm:pt-4">
                         <BaseButton :to="heroContent.primaryCta.to" :label="heroContent.primaryCta.label" />
                         <router-link :to="heroContent.secondaryCta.to"
-                            class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border-strong)] px-6 py-3 text-sm font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)]">
+                            class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border-strong)] px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)]">
                             {{ heroContent.secondaryCta.label }}
                             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,10 +31,10 @@
                         </router-link>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-6 pt-8 border-t-2 border-[var(--color-border)]">
+                    <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8 border-t-2 border-[var(--color-border)]">
                         <div v-for="stat in heroContent.stats" :key="stat.label">
-                            <p class="text-xs font-semibold tracking-wide text-[var(--color-text-tertiary)] uppercase">{{ stat.label }}</p>
-                            <p class="mt-2 text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
+                            <p class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--color-text-tertiary)] uppercase">{{ stat.label }}</p>
+                            <p class="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
                         </div>
                     </div>
                 </div>
