@@ -41,15 +41,21 @@
 
                 <div class="relative flex justify-center lg:justify-end">
                     <button type="button"
+                        aria-haspopup="dialog"
+                        aria-label="View profile photo in gallery"
                         class="group relative flex h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80 items-center justify-center overflow-hidden rounded-2xl border-2 border-[var(--color-border-hover)] bg-[var(--color-bg-elevated)] shadow-lg transition hover:border-[var(--color-border-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] lg:translate-y-10"
                         @click="showGallery = true">
                         <img :src="heroContent.profileImage.src" :alt="heroContent.profileImage.alt"
+                            width="320" height="320" decoding="async" fetchpriority="high"
                             class="h-full w-full object-cover transition group-hover:scale-105" />
                     </button>
                 </div>
             </div>
         </div>
         <div v-if="showGallery"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo gallery modal"
             class="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-bg-overlay)] backdrop-blur-sm px-6 py-12"
             @click.self="showGallery = false">
             <div class="relative w-full max-w-3xl rounded-2xl border-2 border-[var(--color-border-strong)] bg-[var(--color-bg-elevated)] p-6 shadow-2xl">
@@ -97,6 +103,7 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from "vue";
 import BaseButton from "./BaseButton.vue";
 import { useHeroData } from "../../composables/useHeroData";
 
@@ -111,6 +118,20 @@ const {
     setImage,
     contactCta
 } = useHeroData();
+
+const onKeydown = (e) => {
+    if (e.key === "Escape" && showGallery.value) {
+        showGallery.value = false;
+    }
+};
+
+onMounted(() => {
+    window.addEventListener("keydown", onKeydown);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("keydown", onKeydown);
+});
 </script>
 
 <style scoped>

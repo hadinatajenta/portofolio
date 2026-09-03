@@ -17,7 +17,7 @@
             </p>
           </div>
 
-          <img src="/img/contact.jpg" alt="Hadinata Jenta"
+          <img src="/img/contact.webp" alt="Hadinata Jenta" width="128" height="160" loading="lazy" decoding="async"
             class="w-32 h-40 object-cover grayscale opacity-80 mt-12 hidden lg:block rounded-sm" />
         </div>
 

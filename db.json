@@ -825,7 +825,7 @@
       "Red Hat OpenShift",
       "CI/CD"
     ],
-    "profileImage": "/img/5357.jpg"
+    "profileImage": "/img/5357.webp"
   },
   "hero": {
     "content": {
@@ -855,12 +855,12 @@
         }
       ],
       "profileImage": {
-        "src": "/img/5357.jpg",
+        "src": "/img/5357.webp",
         "alt": "Hadinata Jenta"
       }
     },
     "galleryImages": [
-      "/img/5357.jpg",
+      "/img/5357.webp",
       "/img/portrait-2.jpg",
       "/img/portrait-3.jpg"
     ]

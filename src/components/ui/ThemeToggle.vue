@@ -1,8 +1,8 @@
 <template>
   <button
     type="button"
-    class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[999] flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-btn-bg)] text-[var(--color-btn-text)] shadow-lg transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
-    aria-label="Toggle dark mode"
+    class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[999] flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-btn-bg)] text-[var(--color-btn-text)] shadow-lg transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+    :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
     @click="toggleTheme"
   >
     <div class="relative flex h-6 w-6 items-center justify-center overflow-hidden">

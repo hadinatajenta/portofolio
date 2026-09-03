@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 
 const isOpen = ref(false);
@@ -85,6 +85,20 @@ const closeMenu = () => {
 };
 
 const isActive = (path) => route.path === path || route.path.startsWith(`${path}/`);
+
+const onKeydown = (e) => {
+  if (e.key === "Escape" && isOpen.value) {
+    closeMenu();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", onKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", onKeydown);
+});
 
 watch(
   () => route.fullPath,

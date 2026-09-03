@@ -8,6 +8,7 @@
       <input
         :value="search"
         type="search"
+        aria-label="Search projects and technologies"
         placeholder="Search projects, stack..."
         class="w-full pl-9 pr-4 py-2.5 text-sm rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] placeholder:text-[var(--color-text-muted)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-border-strong)] focus:ring-2 focus:ring-[var(--color-surface-hover)] transition"
         @input="$emit('update:search', $event.target.value)"
@@ -19,6 +20,7 @@
       <!-- Type filter -->
       <select
         :value="filterType"
+        aria-label="Filter projects by type"
         class="flex-shrink-0 py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
         @change="$emit('update:filterType', $event.target.value)"
       >
@@ -28,6 +30,7 @@
       <!-- Status filter -->
       <select
         :value="filterStatus"
+        aria-label="Filter projects by status"
         class="flex-shrink-0 py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
         @change="$emit('update:filterStatus', $event.target.value)"
       >
@@ -37,6 +40,7 @@
       <!-- Sort -->
       <select
         :value="sortBy"
+        aria-label="Sort projects"
         class="flex-shrink-0 py-2 pl-3 pr-8 text-xs font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-border-strong)] transition appearance-none cursor-pointer"
         @change="$emit('update:sortBy', $event.target.value)"
       >
@@ -56,6 +60,7 @@
           type="button"
           class="p-1.5 rounded transition"
           :class="viewMode === 'grid' ? 'bg-[var(--color-text)] text-[var(--color-bg)]' : 'text-[var(--color-text-tertiary)] hover:text-[var(--color-text)]'"
+          aria-label="Switch to grid view"
           title="Grid view"
           @click="$emit('update:viewMode', 'grid')"
         >
@@ -68,6 +73,7 @@
           type="button"
           class="p-1.5 rounded transition"
           :class="viewMode === 'table' ? 'bg-[var(--color-text)] text-[var(--color-bg)]' : 'text-[var(--color-text-tertiary)] hover:text-[var(--color-text)]'"
+          aria-label="Switch to table view"
           title="Table view"
           @click="$emit('update:viewMode', 'table')"
         >
