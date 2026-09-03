@@ -14,17 +14,17 @@ import DefaultLayout from '../layouts/DefaultLayout.vue'
 import ProjectSection from '../components/common/ProjectSection.vue'
 
 useHead({
-  title: 'Hadinata Jenta — Full Stack Developer',
+  title: 'Hadinata Jenta — Backend & Systems Engineer',
   meta: [
     {
       name: 'description',
-      content: 'Hadinata Jenta is a Full Stack Developer with 3+ years of experience specializing in distributed microservices, Go, Laravel, and high-traffic web applications.'
+      content: 'Hadinata Jenta is a Backend & Systems Engineer specializing in Go microservices, event-driven pipelines with RabbitMQ, and enterprise integrations at Bank Rakyat Indonesia.'
     },
-    { property: 'og:title', content: 'Hadinata Jenta — Full Stack Developer' },
-    { property: 'og:description', content: 'Full Stack Developer specializing in distributed microservices, Go, Laravel, and high-traffic backend systems.' },
+    { property: 'og:title', content: 'Hadinata Jenta — Backend & Systems Engineer' },
+    { property: 'og:description', content: 'Backend & Systems Engineer specializing in Go microservices, event-driven architectures, and enterprise banking integrations.' },
     { property: 'og:url', content: 'https://hadinata.me/' },
-    { name: 'twitter:title', content: 'Hadinata Jenta — Full Stack Developer' },
-    { name: 'twitter:description', content: 'Full Stack Developer specializing in Go, Laravel, Vue.js, and distributed systems.' },
+    { name: 'twitter:title', content: 'Hadinata Jenta — Backend & Systems Engineer' },
+    { name: 'twitter:description', content: 'Backend & Systems Engineer specializing in Go, RabbitMQ, Laravel, and enterprise microservices.' },
   ],
   link: [
     { rel: 'canonical', href: 'https://hadinata.me/' }

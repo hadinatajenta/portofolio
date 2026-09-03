@@ -17,7 +17,7 @@
       "shortDescription": "Internal microservices handling merchant onboarding, EDC registration, QRIS flows, and corrective maintenance for operational teams.",
       "description": "Developed and maintained multiple MMS microservices used by operational teams to manage the full merchant lifecycle — from onboarding and outlet creation to EDC registration, QRIS parent setup, and corrective maintenance (settlement and non-settlement).",
       "whyItMatters": "These services directly support daily operations for merchant acquisition teams, reducing manual coordination and enabling faster onboarding across branches.",
-      "myRole": "Backend Developer — built and maintained Go and Laravel microservices, designed API contracts, implemented async pipelines, and handled cross-system integrations.",
+      "myRole": "Backend Developer — engineered and maintained Go and Laravel microservices, designed API contracts, implemented asynchronous processing pipelines with RabbitMQ, and integrated services with core banking and third-party payment gateways.",
       "architecture": {
         "system": "Distributed microservices using Go (Gin/Echo), Laravel, and Node.js. Services communicate via REST APIs and RabbitMQ for async processing. Redis for caching, MinIO for file storage.",
         "why": "Microservices were required to isolate merchant lifecycle stages (onboarding, EDC, QRIS) into independently deployable units, each owned by separate squads.",
@@ -25,12 +25,12 @@
       },
       "impact": [
         {
-          "context": "Merchant onboarding pipeline",
-          "result": "Reduced processing overhead through async RabbitMQ pipelines"
+          "context": "Merchant onboarding & third-party verification",
+          "result": "Decoupled merchant registration from downstream PTEN and core banking APIs using RabbitMQ, preventing external API latency from blocking onboarding flows"
         },
         {
-          "context": "Data retrieval on frequently accessed workflows",
-          "result": "Improved with Redis caching strategies"
+          "context": "Merchant configuration & operational lookups",
+          "result": "Cached frequent merchant operational configs in Redis with TTL-based invalidation, reducing repetitive read pressure on primary database tables"
         }
       ],
       "link": null,
@@ -39,10 +39,10 @@
       "year": 2024,
       "featured": true,
       "highlights": [
-        "Integrated with Way4, Fraud Monitoring, Soundbox, and PTEN (IN/OUT) systems via secure APIs.",
-        "Engineered async processing pipelines using RabbitMQ to decouple service dependencies.",
-        "Deployed on Red Hat OpenShift with CI/CD via Bamboo, Bitbucket, and Nexus.",
-        "Maintained code quality through SonarQube analysis and SAST compliance."
+        "Integrated services with Way4, Fraud Monitoring, Soundbox, and PTEN (IN/OUT) systems via secure, standardized APIs.",
+        "Engineered asynchronous processing pipelines using RabbitMQ to decouple services and absorb third-party gateway latency.",
+        "Deployed containerized services on Red Hat OpenShift with CI/CD via Bamboo, Bitbucket, and Nexus.",
+        "Maintained code quality through SonarQube analysis and SAST security compliance standards."
       ],
       "artifacts": {
         "code": [],
@@ -93,6 +93,123 @@
             "title": "API Contract: Merchant Onboarding",
             "preview": "API specifications for the merchant onboarding endpoint — request schema, validation rules, and error codes.",
             "lastUpdated": null,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Auth Service — Centralized IAM Microservice",
+      "stack": [
+        "Go",
+        "Gin",
+        "PostgreSQL",
+        "JWT",
+        "GORM",
+        "Prometheus",
+        "Docker",
+        "Swagger"
+      ],
+      "type": "Backend",
+      "domain": "Security / Identity & Access Management",
+      "shortDescription": "Production-grade centralized Identity & Access Management microservice with JWT authentication, RBAC, service account API keys, audit logging, and an admin dashboard.",
+      "description": "Built a comprehensive IAM microservice that serves as the single source of truth for user authentication, role-based access control, and service-to-service authorization across internal applications. Features include JWT-based stateless auth with refresh token sessions, granular RBAC with in-memory permission caching for O(1) lookups, machine-to-machine API key authentication (service accounts), a full audit trail of security-sensitive operations, Prometheus metrics instrumentation, and a React-based admin dashboard for managing users, roles, permissions, and menus.",
+      "whyItMatters": "Eliminates duplicated auth logic across services by centralizing identity management — a pattern used in enterprise platforms like Keycloak and Auth0, but built from scratch to deeply understand the internals of token-based authentication, session management, and authorization enforcement.",
+      "myRole": "Sole developer — designed the Clean Architecture (Handler → Service → Repository), implemented the full authentication lifecycle (login, refresh, introspect, logout), built RBAC enforcement middleware, created the service account module, and developed the React admin frontend.",
+      "architecture": {
+        "system": "Go/Gin microservice following Clean Architecture with strict layering: HTTP middleware stack (CORS, rate limiting, audit, auth, RBAC) → Handler → Service → Repository → PostgreSQL. In-memory set-based cache for permission lookups. React (Vite) admin dashboard consuming the REST API.",
+        "why": "Go was chosen for high concurrency and low-latency auth operations. Clean Architecture enables independent testing of each layer. In-memory caching avoids DB round-trips on every permission check. GORM provides type-safe queries while PostgreSQL ensures ACID compliance for session and audit data.",
+        "tradeoff": "In-memory permission cache is not distributed — scaling to multiple instances requires migrating to Redis. No OAuth2/OIDC provider support yet. Refresh tokens have a fixed 7-day TTL with no sliding window."
+      },
+      "impact": [
+        {
+          "context": "Auth logic across internal services",
+          "result": "Centralized — eliminated redundant user/permission tables"
+        },
+        {
+          "context": "RBAC enforcement latency",
+          "result": "Sub-millisecond via in-memory permission caching"
+        },
+        {
+          "context": "Security operations",
+          "result": "Full audit trail enabling compliance review and incident investigation"
+        }
+      ],
+      "link": "https://github.com/hadinatajenta/go-mini-iam-service",
+      "isPrivate": false,
+      "status": "Completed",
+      "year": 2026,
+      "featured": true,
+      "highlights": [
+        "JWT authentication with 15-min access tokens, 7-day refresh tokens, and account lockout after 5 failed attempts.",
+        "Granular RBAC with in-memory permission cache achieving O(1) authorization checks.",
+        "Service account module for M2M authentication with cryptographically secure API keys (sk_live_ format).",
+        "Comprehensive audit logging middleware tracking all security-sensitive mutations.",
+        "Prometheus metrics instrumentation (login counters, request latency histograms).",
+        "RFC 7662-inspired token introspection endpoint for internal service token verification.",
+        "React admin dashboard with user, role, permission, and menu management.",
+        "Hierarchical menu system with role-based visibility for frontend navigation."
+      ],
+      "artifacts": {
+        "code": [
+          {
+            "id": "iam-repo",
+            "title": "hadinatajenta/go-mini-iam-service",
+            "repoUrl": "https://github.com/hadinatajenta/go-mini-iam-service",
+            "branch": "main",
+            "lastCommit": "Apr 2026",
+            "status": "Active",
+            "visibility": "Public",
+            "description": "Go/Gin IAM microservice — JWT auth, RBAC, service accounts, audit logging, Prometheus metrics"
+          }
+        ],
+        "design": [
+          {
+            "id": "iam-d1",
+            "title": "Admin Dashboard — React Frontend",
+            "figmaUrl": null,
+            "thumbnail": null,
+            "lastUpdated": null,
+            "description": "Placeholder — replace with Figma link and screenshot"
+          }
+        ],
+        "diagrams": [
+          {
+            "id": "iam-dg1",
+            "title": "IAM Database Schema",
+            "type": "ERD",
+            "imageUrl": null,
+            "description": "Placeholder — replace with ERD image"
+          },
+          {
+            "id": "iam-dg2",
+            "title": "Authentication Flow",
+            "type": "Sequence",
+            "imageUrl": null,
+            "description": "Placeholder — replace with sequence diagram"
+          },
+          {
+            "id": "iam-dg3",
+            "title": "RBAC Architecture",
+            "type": "UML",
+            "imageUrl": null,
+            "description": "Placeholder — replace with UML diagram"
+          }
+        ],
+        "docs": [
+          {
+            "id": "iam-doc1",
+            "title": "API Reference — Authentication Endpoints",
+            "preview": "Covers login, refresh, logout, and token introspection endpoints. Includes request schema, response format, and error codes for each operation.",
+            "lastUpdated": "Apr 2026",
+            "url": null
+          },
+          {
+            "id": "iam-doc2",
+            "title": "RBAC Implementation Guide",
+            "preview": "Explains how the in-memory permission cache is built at startup, how invalidation works on role changes, and how to add new permissions to the system.",
+            "lastUpdated": "Apr 2026",
             "url": null
           }
         ]
@@ -235,6 +352,114 @@
       }
     },
     {
+      "id": 6,
+      "title": "NGO Basmi Platform",
+      "stack": [
+        "Laravel",
+        "MySQL",
+        "Bootstrap"
+      ],
+      "type": "Fullstack",
+      "domain": "Non-profit",
+      "shortDescription": "Web platform for advertising management, staff coordination, and scheduling built for NGO Basmi.",
+      "description": "Built a web platform using Modified Waterfall methodology to ensure strict adherence to client constraints. Features include ad management, staff scheduling, and internal coordination tools.",
+      "whyItMatters": "Provided a non-profit organization with a structured internal tool that replaced manual coordination processes.",
+      "myRole": "Sole developer — requirements gathering, Modified Waterfall planning, full application development, and delivery.",
+      "architecture": {
+        "system": "Laravel monolith with Bootstrap UI. MySQL for persistent data. Standard MVC pattern.",
+        "why": "Modified Waterfall was chosen because the client had fixed requirements and a strict delivery timeline — agile iteration was not feasible.",
+        "tradeoff": "Fixed-scope methodology meant late requirement changes were difficult to accommodate without renegotiating the timeline."
+      },
+      "impact": [],
+      "link": null,
+      "isPrivate": true,
+      "status": "Launched",
+      "year": 2023,
+      "featured": false,
+      "highlights": [
+        "Structured development ensuring clear client expectations at each phase.",
+        "Staff coordination and scheduling system with role-based access.",
+        "Custom ad management tooling integrated into the daily workflow."
+      ],
+      "artifacts": {
+        "code": [],
+        "design": [
+          {
+            "id": "basmi-d1",
+            "title": "Platform UI Design",
+            "figmaUrl": null,
+            "thumbnail": null,
+            "lastUpdated": null,
+            "description": "Placeholder — replace with Figma link and screenshot"
+          }
+        ],
+        "diagrams": [
+          {
+            "id": "basmi-dg1",
+            "title": "Staff Scheduling Flow",
+            "type": "Flow",
+            "imageUrl": null,
+            "description": "Placeholder — replace with flow diagram"
+          }
+        ],
+        "docs": []
+      }
+    },
+    {
+      "id": 7,
+      "title": "Inventory Lending System",
+      "stack": [
+        "Laravel",
+        "MySQL",
+        "Bootstrap"
+      ],
+      "type": "Fullstack",
+      "domain": "Education",
+      "shortDescription": "Digitized lending and tracking system for school equipment at SMPN 28 Bandar Lampung.",
+      "description": "Developed to modernize the school's previously manual inventory lending process. Staff can now track equipment availability, lending history, and returns through a simple web interface.",
+      "whyItMatters": "Directly reduced administrative burden for school staff by replacing paper-based tracking with a searchable digital system.",
+      "myRole": "Sole developer — requirements analysis with school staff, application development, and on-site deployment.",
+      "architecture": {
+        "system": "Laravel monolith with Bootstrap UI. MySQL database tracking items, borrowers, and lending history.",
+        "why": "A simple monolith was appropriate for a single-user school environment with no scaling requirements.",
+        "tradeoff": "No multi-tenant support — the system is purpose-built for one school and would need refactoring to serve multiple institutions."
+      },
+      "impact": [
+        {
+          "context": "Manual inventory processing",
+          "result": "Reduced dependency by approximately 70%"
+        },
+        {
+          "context": "Equipment tracking accuracy",
+          "result": "Significantly improved through digital audit trail"
+        }
+      ],
+      "link": null,
+      "isPrivate": true,
+      "status": "Launched",
+      "year": 2023,
+      "featured": false,
+      "highlights": [
+        "Reduced manual processing dependency by approximately 70%.",
+        "Digital audit trail replacing paper-based equipment tracking.",
+        "Minimal, user-friendly interface designed for non-technical school staff."
+      ],
+      "artifacts": {
+        "code": [],
+        "design": [],
+        "diagrams": [
+          {
+            "id": "inv-dg1",
+            "title": "Inventory Database Schema",
+            "type": "ERD",
+            "imageUrl": null,
+            "description": "Placeholder — replace with ERD image"
+          }
+        ],
+        "docs": []
+      }
+    },
+    {
       "id": 2,
       "title": "Vue Kanji",
       "stack": [
@@ -348,231 +573,6 @@
         ],
         "docs": []
       }
-    },
-    {
-      "id": 6,
-      "title": "NGO Basmi Platform",
-      "stack": [
-        "Laravel",
-        "MySQL",
-        "Bootstrap"
-      ],
-      "type": "Fullstack",
-      "domain": "Non-profit",
-      "shortDescription": "Web platform for advertising management, staff coordination, and scheduling built for NGO Basmi.",
-      "description": "Built a web platform using Modified Waterfall methodology to ensure strict adherence to client constraints. Features include ad management, staff scheduling, and internal coordination tools.",
-      "whyItMatters": "Provided a non-profit organization with a structured internal tool that replaced manual coordination processes.",
-      "myRole": "Sole developer — requirements gathering, Modified Waterfall planning, full application development, and delivery.",
-      "architecture": {
-        "system": "Laravel monolith with Bootstrap UI. MySQL for persistent data. Standard MVC pattern.",
-        "why": "Modified Waterfall was chosen because the client had fixed requirements and a strict delivery timeline — agile iteration was not feasible.",
-        "tradeoff": "Fixed-scope methodology meant late requirement changes were difficult to accommodate without renegotiating the timeline."
-      },
-      "impact": [],
-      "link": null,
-      "isPrivate": true,
-      "status": "Launched",
-      "year": 2023,
-      "featured": false,
-      "highlights": [
-        "Structured development ensuring clear client expectations at each phase.",
-        "Staff coordination and scheduling system with role-based access.",
-        "Custom ad management tooling integrated into the daily workflow."
-      ],
-      "artifacts": {
-        "code": [],
-        "design": [
-          {
-            "id": "basmi-d1",
-            "title": "Platform UI Design",
-            "figmaUrl": null,
-            "thumbnail": null,
-            "lastUpdated": null,
-            "description": "Placeholder — replace with Figma link and screenshot"
-          }
-        ],
-        "diagrams": [
-          {
-            "id": "basmi-dg1",
-            "title": "Staff Scheduling Flow",
-            "type": "Flow",
-            "imageUrl": null,
-            "description": "Placeholder — replace with flow diagram"
-          }
-        ],
-        "docs": []
-      }
-    },
-    {
-      "id": 7,
-      "title": "Inventory Lending System",
-      "stack": [
-        "Laravel",
-        "MySQL",
-        "Bootstrap"
-      ],
-      "type": "Fullstack",
-      "domain": "Education",
-      "shortDescription": "Digitized lending and tracking system for school equipment at SMPN 28 Bandar Lampung.",
-      "description": "Developed to modernize the school's previously manual inventory lending process. Staff can now track equipment availability, lending history, and returns through a simple web interface.",
-      "whyItMatters": "Directly reduced administrative burden for school staff by replacing paper-based tracking with a searchable digital system.",
-      "myRole": "Sole developer — requirements analysis with school staff, application development, and on-site deployment.",
-      "architecture": {
-        "system": "Laravel monolith with Bootstrap UI. MySQL database tracking items, borrowers, and lending history.",
-        "why": "A simple monolith was appropriate for a single-user school environment with no scaling requirements.",
-        "tradeoff": "No multi-tenant support — the system is purpose-built for one school and would need refactoring to serve multiple institutions."
-      },
-      "impact": [
-        {
-          "context": "Manual inventory processing",
-          "result": "Reduced dependency by approximately 70%"
-        },
-        {
-          "context": "Equipment tracking accuracy",
-          "result": "Significantly improved through digital audit trail"
-        }
-      ],
-      "link": null,
-      "isPrivate": true,
-      "status": "Launched",
-      "year": 2023,
-      "featured": false,
-      "highlights": [
-        "Reduced manual processing dependency by approximately 70%.",
-        "Digital audit trail replacing paper-based equipment tracking.",
-        "Minimal, user-friendly interface designed for non-technical school staff."
-      ],
-      "artifacts": {
-        "code": [],
-        "design": [],
-        "diagrams": [
-          {
-            "id": "inv-dg1",
-            "title": "Inventory Database Schema",
-            "type": "ERD",
-            "imageUrl": null,
-            "description": "Placeholder — replace with ERD image"
-          }
-        ],
-        "docs": []
-      }
-    },
-    {
-      "id": 8,
-      "title": "Auth Service — Centralized IAM Microservice",
-      "stack": [
-        "Go",
-        "Gin",
-        "PostgreSQL",
-        "JWT",
-        "GORM",
-        "Prometheus",
-        "Docker",
-        "Swagger"
-      ],
-      "type": "Full-Stack",
-      "domain": "Security / Identity & Access Management",
-      "shortDescription": "Production-grade centralized Identity & Access Management microservice with JWT authentication, RBAC, service account API keys, audit logging, and an admin dashboard.",
-      "description": "Built a comprehensive IAM microservice that serves as the single source of truth for user authentication, role-based access control, and service-to-service authorization across internal applications. Features include JWT-based stateless auth with refresh token sessions, granular RBAC with in-memory permission caching for O(1) lookups, machine-to-machine API key authentication (service accounts), a full audit trail of security-sensitive operations, Prometheus metrics instrumentation, and a React-based admin dashboard for managing users, roles, permissions, and menus.",
-      "whyItMatters": "Eliminates duplicated auth logic across services by centralizing identity management — a pattern used in enterprise platforms like Keycloak and Auth0, but built from scratch to deeply understand the internals of token-based authentication, session management, and authorization enforcement.",
-      "myRole": "Sole developer — designed the Clean Architecture (Handler → Service → Repository), implemented the full authentication lifecycle (login, refresh, introspect, logout), built RBAC enforcement middleware, created the service account module, and developed the React admin frontend.",
-      "architecture": {
-        "system": "Go/Gin microservice following Clean Architecture with strict layering: HTTP middleware stack (CORS, rate limiting, audit, auth, RBAC) → Handler → Service → Repository → PostgreSQL. In-memory set-based cache for permission lookups. React (Vite) admin dashboard consuming the REST API.",
-        "why": "Go was chosen for high concurrency and low-latency auth operations. Clean Architecture enables independent testing of each layer. In-memory caching avoids DB round-trips on every permission check. GORM provides type-safe queries while PostgreSQL ensures ACID compliance for session and audit data.",
-        "tradeoff": "In-memory permission cache is not distributed — scaling to multiple instances requires migrating to Redis. No OAuth2/OIDC provider support yet. Refresh tokens have a fixed 7-day TTL with no sliding window."
-      },
-      "impact": [
-        {
-          "context": "Auth logic across internal services",
-          "result": "Centralized — eliminated redundant user/permission tables"
-        },
-        {
-          "context": "RBAC enforcement latency",
-          "result": "Sub-millisecond via in-memory permission caching"
-        },
-        {
-          "context": "Security operations",
-          "result": "Full audit trail enabling compliance review and incident investigation"
-        }
-      ],
-      "link": "https://github.com/hadinatajenta/go-mini-iam-service",
-      "isPrivate": false,
-      "status": "Completed",
-      "year": 2026,
-      "featured": true,
-      "highlights": [
-        "JWT authentication with 15-min access tokens, 7-day refresh tokens, and account lockout after 5 failed attempts.",
-        "Granular RBAC with in-memory permission cache achieving O(1) authorization checks.",
-        "Service account module for M2M authentication with cryptographically secure API keys (sk_live_ format).",
-        "Comprehensive audit logging middleware tracking all security-sensitive mutations.",
-        "Prometheus metrics instrumentation (login counters, request latency histograms).",
-        "RFC 7662-inspired token introspection endpoint for internal service token verification.",
-        "React admin dashboard with user, role, permission, and menu management.",
-        "Hierarchical menu system with role-based visibility for frontend navigation."
-      ],
-      "artifacts": {
-        "code": [
-          {
-            "id": "iam-repo",
-            "title": "hadinatajenta/go-mini-iam-service",
-            "repoUrl": "https://github.com/hadinatajenta/go-mini-iam-service",
-            "branch": "main",
-            "lastCommit": "Apr 2026",
-            "status": "Active",
-            "visibility": "Public",
-            "description": "Go/Gin IAM microservice — JWT auth, RBAC, service accounts, audit logging, Prometheus metrics"
-          }
-        ],
-        "design": [
-          {
-            "id": "iam-d1",
-            "title": "Admin Dashboard — React Frontend",
-            "figmaUrl": null,
-            "thumbnail": null,
-            "lastUpdated": null,
-            "description": "Placeholder — replace with Figma link and screenshot"
-          }
-        ],
-        "diagrams": [
-          {
-            "id": "iam-dg1",
-            "title": "IAM Database Schema",
-            "type": "ERD",
-            "imageUrl": null,
-            "description": "Placeholder — replace with ERD image"
-          },
-          {
-            "id": "iam-dg2",
-            "title": "Authentication Flow",
-            "type": "Sequence",
-            "imageUrl": null,
-            "description": "Placeholder — replace with sequence diagram"
-          },
-          {
-            "id": "iam-dg3",
-            "title": "RBAC Architecture",
-            "type": "UML",
-            "imageUrl": null,
-            "description": "Placeholder — replace with UML diagram"
-          }
-        ],
-        "docs": [
-          {
-            "id": "iam-doc1",
-            "title": "API Reference — Authentication Endpoints",
-            "preview": "Covers login, refresh, logout, and token introspection endpoints. Includes request schema, response format, and error codes for each operation.",
-            "lastUpdated": "Apr 2026",
-            "url": null
-          },
-          {
-            "id": "iam-doc2",
-            "title": "RBAC Implementation Guide",
-            "preview": "Explains how the in-memory permission cache is built at startup, how invalidation works on role changes, and how to add new permissions to the system.",
-            "lastUpdated": "Apr 2026",
-            "url": null
-          }
-        ]
-      }
     }
   ],
   "experiences": [
@@ -582,7 +582,7 @@
       "dateEnd": null,
       "title": "Backend Developer",
       "company": "Bank Rakyat Indonesia (BRI)",
-      "description": "Develop and maintain distributed microservices for the Merchant Management System (MMS) in a high-throughput financial environment. Focus on secure system integration, reliable data processing, and scalable service architecture supporting merchant lifecycle operations across multiple internal and external systems.",
+      "description": "Develop and maintain distributed microservices for the Merchant Management System (MMS) in an enterprise financial environment at Bank Rakyat Indonesia. Focus on secure system integrations, asynchronous event-driven pipelines, and reliable data processing supporting merchant lifecycle operations across internal and external banking networks.",
       "highlights": [
         "Designed and implemented microservices handling merchant onboarding, outlet creation (single & bulk), EDC registration, QRIS parent setup, and QRIS request flows",
         "Integrated services with core banking and external systems including Way4, Fraud Monitoring, Soundbox management, and PTEN (IN/OUT) using secure and standardized APIs",
@@ -732,24 +732,6 @@
         "MySQL",
         "Bootstrap"
       ]
-    },
-    {
-      "period": "Jun 2022 – Jul 2022",
-      "dateStart": "2022-06",
-      "dateEnd": "2022-07",
-      "title": "Content Writer Intern",
-      "company": "PT Andalas Media Group",
-      "description": "Produced and edited regional news content, learning the full workflow from research and fact-checking to publication.",
-      "highlights": [
-        "Wrote articles following journalistic structure and editorial standards",
-        "Performed fact-checking and content validation",
-        "Gained hands-on experience with newsroom processes and publishing workflows"
-      ],
-      "tags": [
-        "Writing",
-        "Journalism",
-        "Editorial"
-      ]
     }
   ],
   "socialLinks": [
@@ -803,35 +785,37 @@
   ],
   "about": {
     "name": "Hadinata Jenta",
-    "bio": "Fullstack Developer with 3+ years of professional and internship experience, focused on backend development, distributed systems, and scalable architecture. Experienced in building microservices with Go and Laravel, optimizing database performance, and integrating services across high-traffic financial environments at Bank Rakyat Indonesia.",
-    "skills": [
-      "PHP",
-      "Go",
-      "JavaScript",
-      "Python",
-      "Kotlin",
-      "C++",
-      "Laravel",
-      "Express.js",
-      "Vue.js",
-      "Gin/Echo",
-      "React Native",
-      "MySQL",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "Kubernetes",
-      "RabbitMQ",
-      "Red Hat OpenShift",
-      "CI/CD"
-    ],
-    "profileImage": "/img/5357.webp"
+    "bio": "Backend & Systems Engineer with 3+ years of experience building reliable microservices, asynchronous pipelines, and enterprise integrations at Bank Rakyat Indonesia. I specialize in Go, event-driven architectures with RabbitMQ, and relational database design, with secondary capabilities in full-stack product delivery using Laravel and Vue 3.",
+    "skills": {
+      "primaryBackend": [
+        "Go (Gin, Echo)",
+        "PHP / Laravel",
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "RabbitMQ"
+      ],
+      "frontend": [
+        "Vue 3",
+        "JavaScript",
+        "Tailwind CSS"
+      ],
+      "infrastructure": [
+        "Docker",
+        "Red Hat OpenShift",
+        "CI/CD (Bamboo, Nexus)",
+        "SonarQube / SAST"
+      ]
+    },
+    "profileImage": "/img/5357.webp",
+    "role": "Backend & Systems Engineer",
+    "philosophy": "I favor pragmatic architecture, clear service boundaries, and observable systems over premature complexity. In production, explicit trade-offs and reliable error handling matter far more than theoretical perfection."
   },
   "hero": {
     "content": {
       "title": "Hi, I'm Hadinata",
-      "subtitle": "Full stack engineer specializing in distributed microservices and high-concurrency systems.",
-      "description": "Full Stack Engineer with 3+ years of professional experience building high-traffic distributed systems. From architecting mission-critical merchant operations within major financial ecosystems to scaling regional news platforms and optimizing specialized inventory workflows, I blend technical rigor with a product-driven mindset to deliver reliable, high-performance software.",
+      "subtitle": "Backend & Systems Engineer specializing in Go microservices, event-driven pipelines, and enterprise integrations.",
+      "description": "Backend Engineer with 3+ years of experience building reliable microservices and distributed integrations within enterprise financial ecosystems at Bank Rakyat Indonesia. Experienced in architecting event-driven pipelines with RabbitMQ, designing resilient API contracts, and delivering end-to-end web products with Go, Laravel, and Vue 3.",
       "primaryCta": {
         "label": "View My Work",
         "to": "/projects"
@@ -850,8 +834,8 @@
           "value": "10+"
         },
         {
-          "label": "Articles Live",
-          "value": "500+"
+          "label": "Core Integrations",
+          "value": "4+"
         }
       ],
       "profileImage": {
@@ -867,9 +851,9 @@
   },
   "footer": {
     "name": "Hadinata Jenta",
-    "role": "Full Stack Developer · Backend Specialist",
+    "role": "Backend & Systems Engineer",
     "location": "DKI Jakarta, Indonesia",
-    "intro": "Experienced in building microservices with Go and Laravel, optimizing database performance, and integrating services across high-traffic financial environments.",
+    "intro": "Experienced in building microservices with Go and Laravel, event-driven pipelines with RabbitMQ, and enterprise integrations across financial environments at Bank Rakyat Indonesia.",
     "ctaBadge": "Open for engagements",
     "ctaTitle": "Let\\'s build something reliable together",
     "ctaDescription": "Available for backend, full-stack, or system integration work. Let\\'s talk about what you need.",
@@ -884,8 +868,8 @@
         "label": "Systems Built"
       },
       {
-        "value": "500+",
-        "label": "Articles Live"
+        "value": "4+",
+        "label": "Core Integrations"
       }
     ],
     "menus": [

@@ -8,16 +8,14 @@
                     Featured Projects
                 </h2>
                 <p class="text-[var(--color-text-secondary)] text-base max-w-xl">
-                    From personal experiments to production systems — here's what I've built.
+                    Focused on pragmatic architecture, explicit trade-offs, and observable systems — key services and systems I've built.
                 </p>
             </div>
 
             <!-- Projects Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <a v-for="project in featuredProjects" :key="project.id"
-                    :href="project.link || '#'"
-                    :target="project.link ? '_blank' : ''"
-                    rel="noopener noreferrer"
+                <router-link v-for="project in featuredProjects" :key="project.id"
+                    :to="{ name: 'project-detail', params: { id: project.id } }"
                     class="group flex flex-col gap-4 rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 transition-all duration-300 hover:border-[var(--color-border-hover)] hover:shadow-lg active:scale-[0.98]"
                 >
                     <div class="flex items-start justify-between gap-3">
@@ -37,7 +35,7 @@
                             {{ tag }}
                         </span>
                     </div>
-                </a>
+                </router-link>
             </div>
 
             <!-- View All -->
