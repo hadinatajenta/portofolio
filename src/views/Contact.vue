@@ -33,7 +33,7 @@
                 class="text-3xl sm:text-4xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-text-secondary)] transition-colors">
                 {{ method.title }}</h3>
               <p class="text-sm sm:text-base text-[var(--color-text-secondary)] font-dot mt-3">{{
-                getDisplayValue(method) }}</p>
+                method.description }}</p>
             </div>
             <div class="transform group-hover:translate-x-4 transition-transform duration-300">
               <svg class="w-8 h-8 text-[var(--color-text)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -55,12 +55,6 @@ import DefaultLayout from '../layouts/DefaultLayout.vue'
 import { useContactData } from '../composables/useContactData'
 
 const { contactMethods } = useContactData()
-
-const getDisplayValue = (method) => {
-  if (method.id === 'linkedin') return 'linkedin.com/in/hadinatajenta'
-  if (method.id === 'whatsapp') return '+62 898-2681-391'
-  return method.description
-}
 
 useHead({
   title: 'Contact — Hadinata Jenta',

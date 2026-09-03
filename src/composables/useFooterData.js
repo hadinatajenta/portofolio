@@ -51,9 +51,10 @@ export function useFooterData() {
     }
 
     if (contact.phone) {
+      const message = encodeURIComponent(`Hi Eren! Saya [Nama] dari [Perusahaan]. Saya menemukan profil Anda dan tertarik dengan pengalaman Anda sebagai Software Engineer. Kami sedang membuka posisi [Nama Posisi] dan saya ingin berdiskusi lebih lanjut mengenai peluang ini. Apakah Anda sedang terbuka untuk kesempatan baru?`)
       chips.push({
         label: 'WhatsApp',
-        url: `https://wa.me/${contact.phone}`
+        url: `https://wa.me/${contact.phone}?text=${message}`
       })
     }
 

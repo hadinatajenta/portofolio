@@ -761,7 +761,7 @@
     {
       "name": "WhatsApp",
       "icon": "💬",
-      "url": "https://wa.me/628982681391"
+      "url": "https://wa.me/6282181394215"
     },
     {
       "name": "LinkedIn",
@@ -784,8 +784,8 @@
       "id": "whatsapp",
       "icon": "💬",
       "title": "WhatsApp",
-      "description": "08982681391",
-      "link": "https://wa.me/628982681391",
+      "description": "+62 821-8139-4215",
+      "link": "https://wa.me/6282181394215",
       "linkText": "Chat on WhatsApp",
       "target": "_blank",
       "rel": "noopener noreferrer"
@@ -794,8 +794,8 @@
       "id": "linkedin",
       "icon": "🔗",
       "title": "LinkedIn",
-      "description": "Connect with me on LinkedIn",
-      "link": "https://linkedin.com/in/hadinatajenta",
+      "description": "linkedin.com/in/hadinata-jenta",
+      "link": "https://www.linkedin.com/in/hadinata-jenta/",
       "linkText": "View Profile",
       "target": "_blank",
       "rel": "noopener noreferrer"

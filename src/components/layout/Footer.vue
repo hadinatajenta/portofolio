@@ -3,7 +3,8 @@
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
 
       <!-- Top: CTA + Nav -->
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-12 py-16 border-b border-[var(--color-footer-text)]/10">
+      <div
+        class="flex flex-col md:flex-row md:items-start md:justify-between gap-12 py-16 border-b border-[var(--color-footer-text)]/10">
 
         <!-- Left: Identity & CTA -->
         <div class="space-y-6 max-w-md">
@@ -38,7 +39,7 @@
           <div class="space-y-4">
             <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-footer-text)]/30">Connect</p>
             <div class="flex flex-col gap-2">
-              <a href="https://wa.me/628982681391" target="_blank" rel="noopener noreferrer"
+              <a href="https://wa.me/6282181394215" target="_blank" rel="noopener noreferrer"
                 class="text-sm text-[var(--color-footer-text)]/60 hover:text-[var(--color-footer-text)] transition-colors duration-200 flex items-center gap-2">
                 <span class="text-base">💬</span> WhatsApp
               </a>
@@ -57,7 +58,8 @@
       </div>
 
       <!-- Bottom: Copyright -->
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 py-6 text-xs text-[var(--color-footer-text)]/30">
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-3 py-6 text-xs text-[var(--color-footer-text)]/30">
         <p>&copy; {{ currentYear }} {{ name }}. All rights reserved.</p>
         <p>DKI JAKARTA, Indonesia • GMT+7</p>
       </div>
