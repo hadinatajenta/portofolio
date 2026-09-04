@@ -807,7 +807,7 @@
         "SonarQube / SAST"
       ]
     },
-    "profileImage": "/img/5357.webp",
+    "profileImage": "/me.png",
     "role": "Backend & Systems Engineer",
     "philosophy": "I favor pragmatic architecture, clear service boundaries, and observable systems over premature complexity. In production, explicit trade-offs and reliable error handling matter far more than theoretical perfection."
   },
@@ -839,12 +839,12 @@
         }
       ],
       "profileImage": {
-        "src": "/img/5357.webp",
+        "src": "/me.png",
         "alt": "Hadinata Jenta"
       }
     },
     "galleryImages": [
-      "/img/5357.webp",
+      "/me.png",
       "/img/portrait-2.jpg",
       "/img/portrait-3.jpg"
     ]
