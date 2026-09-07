@@ -7,15 +7,35 @@
     </div>
 
     <!-- Not Found -->
-    <div v-else-if="!project" class="flex flex-col items-center justify-center min-h-[40vh] gap-4 text-center">
-      <p class="text-4xl font-bold text-[var(--color-border)]">404</p>
-      <p class="text-lg font-semibold text-[var(--color-text)]">Project not found</p>
-      <router-link
-        :to="{ name: 'projects' }"
-        class="text-sm font-semibold text-[var(--color-text)] underline underline-offset-4 hover:text-[var(--color-text-secondary)] transition-colors"
-      >
-        ← Back to Projects
-      </router-link>
+    <div v-else-if="!project" class="py-12 sm:py-16 max-w-xl mx-auto text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--color-surface-subtle)] border border-[var(--color-border)] text-xs font-mono font-medium text-[var(--color-text-secondary)]">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        HTTP 404 · Project Not Found
+      </div>
+      <div class="space-y-2">
+        <p class="text-6xl sm:text-7xl font-bold font-dot text-[var(--color-text)] tracking-tight select-none">404_</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">Project Not Found</h2>
+        <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+          The requested project ID does not exist in our registry or may have been archived.
+        </p>
+      </div>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <router-link
+          :to="{ name: 'projects' }"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border-strong)] px-5 py-2.5 text-sm font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)]"
+        >
+          ← Back to Projects
+        </router-link>
+        <router-link
+          to="/"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border)] px-5 py-2.5 text-sm font-semibold text-[var(--color-text-secondary)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)]"
+        >
+          Home
+        </router-link>
+      </div>
     </div>
 
     <template v-else>
@@ -176,7 +196,71 @@ useHead({
     {
       name: 'description',
       content: computed(() => project.value?.shortDescription ?? 'Project detail — Hadinata Jenta')
+    },
+    {
+      property: 'og:title',
+      content: computed(() => project.value ? `${project.value.title} — Hadinata Jenta` : 'Project — Hadinata Jenta')
+    },
+    {
+      property: 'og:description',
+      content: computed(() => project.value?.shortDescription ?? 'Project detail — Hadinata Jenta')
+    },
+    {
+      property: 'og:url',
+      content: computed(() => `https://hadinata.me/projects/${route.params.id}`)
+    },
+    {
+      property: 'og:type',
+      content: 'article'
+    },
+    {
+      property: 'og:image',
+      content: 'https://hadinata.me/me.png'
+    },
+    {
+      name: 'twitter:title',
+      content: computed(() => project.value ? `${project.value.title} — Hadinata Jenta` : 'Project — Hadinata Jenta')
+    },
+    {
+      name: 'twitter:description',
+      content: computed(() => project.value?.shortDescription ?? 'Project detail — Hadinata Jenta')
+    },
+    {
+      name: 'twitter:url',
+      content: computed(() => `https://hadinata.me/projects/${route.params.id}`)
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://hadinata.me/me.png'
     }
-  ]
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: computed(() => `https://hadinata.me/projects/${route.params.id}`)
+    }
+  ],
+  script: computed(() => {
+    if (!project.value) return []
+    return [
+      {
+        key: `project-${project.value.id}-schema`,
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          name: project.value.title,
+          description: project.value.shortDescription,
+          url: `https://hadinata.me/projects/${project.value.id}`,
+          author: {
+            '@type': 'Person',
+            name: 'Hadinata Jenta',
+            url: 'https://hadinata.me'
+          },
+          keywords: Array.isArray(project.value.stack) ? project.value.stack.join(', ') : undefined
+        })
+      }
+    ]
+  })
 })
 </script>

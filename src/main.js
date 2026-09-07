@@ -15,9 +15,13 @@ const PROJECT_IDS = Array.isArray(db?.projects)
  * Called at build time — resolves /projects/:id into /projects/1, /projects/2, etc.
  */
 export function includedRoutes(paths) {
-  return paths.flatMap((path) =>
-    path === '/projects/:id'
-      ? PROJECT_IDS.map((id) => `/projects/${id}`)
-      : [path]
-  )
+  return paths.flatMap((path) => {
+    if (path === '/projects/:id') {
+      return PROJECT_IDS.map((id) => `/projects/${id}`)
+    }
+    if (path.includes(':pathMatch')) {
+      return []
+    }
+    return [path]
+  })
 }

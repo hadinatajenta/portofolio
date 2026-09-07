@@ -3,6 +3,7 @@ import Experience from '../views/Experience.vue'
 import Projects from '../views/Projects.vue'
 import Contact from '../views/Contact.vue'
 import ProjectDetail from '../views/ProjectDetail.vue'
+import NotFound from '../views/NotFound.vue'
 
 export const routes = [
   { path: '/', component: LandingPage, name: 'home' },
@@ -10,4 +11,6 @@ export const routes = [
   { path: '/projects', component: Projects, name: 'projects' },
   { path: '/projects/:id', component: ProjectDetail, name: 'project-detail' },
   { path: '/contact', component: Contact, name: 'contact' },
+  { path: '/404', component: NotFound, name: 'not-found-page' },
+  { path: '/:pathMatch(.*)*', component: NotFound, name: 'not-found' },
 ]

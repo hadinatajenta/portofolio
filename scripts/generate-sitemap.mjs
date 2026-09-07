@@ -3,7 +3,7 @@
  * Runs as postbuild script: reads db.json, builds all /projects/:id URLs,
  * and writes sitemap.xml into dist/.
  */
-import { readFileSync, writeFileSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -72,4 +72,28 @@ console.log(`[sitemap] Written to public/sitemap.xml (${allRoutes.length} URLs)`
 if (existsSync(resolve(ROOT, 'dist'))) {
   writeFileSync(distPath, sitemap, 'utf-8')
   console.log(`[sitemap] Written to dist/sitemap.xml`)
+
+  // --- Ensure flat aliases for all routes so preview and all hosts work seamlessly ---
+  const distDir = resolve(ROOT, 'dist')
+  let aliasesCreated = 0
+  for (const route of allRoutes) {
+    if (route.path === '/') continue
+    const cleanPath = route.path.replace(/^\//, '')
+    const nestedFile = resolve(distDir, cleanPath, 'index.html')
+    const flatFile = resolve(distDir, `${cleanPath}.html`)
+    if (existsSync(nestedFile)) {
+      copyFileSync(nestedFile, flatFile)
+      aliasesCreated++
+    }
+  }
+
+  // Ensure dist/404.html exists for Vercel and static hosting platforms
+  const nested404 = resolve(distDir, '404', 'index.html')
+  const flat404 = resolve(distDir, '404.html')
+  if (existsSync(nested404)) {
+    copyFileSync(nested404, flat404)
+    aliasesCreated++
+  }
+
+  console.log(`[build] Created ${aliasesCreated} flat HTML aliases in dist/`)
 }
