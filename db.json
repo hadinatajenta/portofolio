@@ -802,8 +802,8 @@
   "hero": {
     "content": {
       "title": "Hi, I'm Hadinata",
-      "subtitle": "Backend & Systems Engineer specializing in Go microservices, event-driven pipelines, and enterprise integrations.",
-      "description": "Backend Engineer with 3+ years of experience building reliable microservices and distributed integrations within enterprise financial ecosystems at Bank Rakyat Indonesia. Experienced in architecting event-driven pipelines with RabbitMQ, designing resilient API contracts, and delivering end-to-end web products with Go, Laravel, and Vue 3.",
+      "subtitle": "Backend & Systems Engineer specializing in Go, distributed microservices, and enterprise financial ecosystems.",
+      "description": "Building reliable services and event-driven pipelines with RabbitMQ at Bank Rakyat Indonesia. Focused on resilient API contracts, observable distributed systems, and production reliability.",
       "primaryCta": {
         "label": "Download CV",
         "to": "/Hadinata_Jenta_Latest.pdf"
@@ -814,21 +814,21 @@
       },
       "stats": [
         {
-          "label": "Professional Exp.",
+          "label": "Backend Exp.",
           "value": "3+ Yrs"
         },
         {
-          "label": "Systems Built",
+          "label": "Production Systems",
           "value": "10+"
         },
         {
-          "label": "Core Integrations",
+          "label": "Enterprise Integrations",
           "value": "4+"
         }
       ],
       "profileImage": {
         "src": "/Me2.png",
-        "alt": "Hadinata Jenta"
+        "alt": "Hadinata Jenta — Backend & Systems Engineer"
       }
     },
     "galleryImages": [
