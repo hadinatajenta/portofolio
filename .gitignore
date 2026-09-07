@@ -26,4 +26,8 @@ dist-ssr
 .gitignore
 .gitignore*.md
 *.md
+!README.md
+!AGENTS.md
+!CLAUDE.md
+!SKILL.md
 *.pdf
