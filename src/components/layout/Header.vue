@@ -2,8 +2,30 @@
   <header class="sticky top-0 inset-x-0 z-50 bg-[var(--color-backdrop)] border-b border-[var(--color-border)] backdrop-blur-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between gap-4">
-        <router-link to="/" class="flex items-center gap-2 text-lg text-[var(--color-text)] transition hover:opacity-70 font-dot">
-          <span class="tracking-wide font-bold text-base sm:text-xl text-[var(--color-text)]">Hadinata Jenta</span>
+        <router-link
+          to="/"
+          class="group flex items-center gap-2 sm:gap-2.5 text-[var(--color-text)] transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] rounded-lg"
+          aria-label="Hadinata Jenta — Home"
+        >
+          <!-- Pixel Brand Mark [ H ] -->
+          <span
+            class="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border border-[var(--color-border-strong)] bg-[var(--color-surface)] overflow-hidden select-none shadow-xs group-hover:border-[var(--color-text)] transition-all flex-shrink-0"
+            aria-hidden="true"
+          >
+            <img
+              v-if="brandLogoSrc"
+              :src="brandLogoSrc"
+              alt="H"
+              class="h-full w-full object-cover select-none pointer-events-none transition-[filter]"
+              :class="{ 'invert': !isDark }"
+            />
+            <span v-else class="font-dot font-bold text-xs sm:text-sm leading-none text-white select-none">H</span>
+          </span>
+
+          <!-- Restrained Wordmark -->
+          <span class="font-dot text-sm sm:text-base md:text-lg font-medium tracking-normal text-[var(--color-text)] whitespace-nowrap select-none">
+            Hadinata Jenta
+          </span>
         </router-link>
 
         <nav class="hidden md:flex items-center gap-8">
@@ -126,6 +148,7 @@ import { useRoute } from "vue-router";
 import { useTheme } from "../../composables/useTheme";
 
 const { isDark, toggleTheme } = useTheme();
+const brandLogoSrc = ref('/favicon.svg');
 const isOpen = ref(false);
 const route = useRoute();
 
