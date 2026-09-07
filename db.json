@@ -807,7 +807,7 @@
         "SonarQube / SAST"
       ]
     },
-    "profileImage": "/me.png",
+    "profileImage": "/Me2.png",
     "role": "Backend & Systems Engineer",
     "philosophy": "I favor pragmatic architecture, clear service boundaries, and observable systems over premature complexity. In production, explicit trade-offs and reliable error handling matter far more than theoretical perfection."
   },
@@ -817,8 +817,8 @@
       "subtitle": "Backend & Systems Engineer specializing in Go microservices, event-driven pipelines, and enterprise integrations.",
       "description": "Backend Engineer with 3+ years of experience building reliable microservices and distributed integrations within enterprise financial ecosystems at Bank Rakyat Indonesia. Experienced in architecting event-driven pipelines with RabbitMQ, designing resilient API contracts, and delivering end-to-end web products with Go, Laravel, and Vue 3.",
       "primaryCta": {
-        "label": "View My Work",
-        "to": "/projects"
+        "label": "Download CV",
+        "to": "/Hadinata_Jenta_Latest.pdf"
       },
       "secondaryCta": {
         "label": "My Experience",
@@ -839,14 +839,12 @@
         }
       ],
       "profileImage": {
-        "src": "/me.png",
+        "src": "/Me2.png",
         "alt": "Hadinata Jenta"
       }
     },
     "galleryImages": [
-      "/me.png",
-      "/img/portrait-2.jpg",
-      "/img/portrait-3.jpg"
+      "/Me2.png"
     ]
   },
   "footer": {

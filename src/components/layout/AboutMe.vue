@@ -44,7 +44,7 @@
         <div class="w-full lg:w-1/2 flex flex-col items-center">
           <div class="relative mb-8">
             <div class="w-90 aspect-square overflow-hidden rounded-lg border-2 border-[var(--color-border-hover)]">
-              <img src="/me.png" alt="photo" class="w-full h-full object-cover object-top" />
+              <img src="/Me2.png" alt="photo" class="w-full h-full object-cover object-top" />
             </div>
           </div>
         </div>

@@ -1,20 +1,41 @@
 import { ref } from 'vue'
 
 const isDark = ref(false)
+let mediaListenerAttached = false
 
 export function useTheme() {
   const init = () => {
-    // Check localStorage first, otherwise default to light (as per requirements)
-    const saved = localStorage.getItem('theme')
+    // Check localStorage first, otherwise default to system preference
+    const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null
     if (saved) {
       isDark.value = saved === 'dark'
+    } else if (typeof window !== 'undefined' && window.matchMedia) {
+      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
     } else {
-      isDark.value = false // Default to light
+      isDark.value = false
     }
     applyTheme()
+
+    // Listen for system theme changes if no explicit user preference is stored
+    if (!mediaListenerAttached && typeof window !== 'undefined' && window.matchMedia) {
+      mediaListenerAttached = true
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      const handleSystemThemeChange = (e) => {
+        if (!localStorage.getItem('theme')) {
+          isDark.value = e.matches
+          applyTheme()
+        }
+      }
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleSystemThemeChange)
+      } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleSystemThemeChange)
+      }
+    }
   }
 
   const applyTheme = () => {
+    if (typeof document === 'undefined') return
     document.documentElement.classList.toggle('dark', isDark.value)
     
     // Update theme-color meta tag for mobile browsers

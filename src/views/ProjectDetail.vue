@@ -215,7 +215,7 @@ useHead({
     },
     {
       property: 'og:image',
-      content: 'https://hadinata.me/me.png'
+      content: 'https://hadinata.me/Me2.png'
     },
     {
       name: 'twitter:title',
@@ -231,7 +231,7 @@ useHead({
     },
     {
       name: 'twitter:image',
-      content: 'https://hadinata.me/me.png'
+      content: 'https://hadinata.me/Me2.png'
     }
   ],
   link: [

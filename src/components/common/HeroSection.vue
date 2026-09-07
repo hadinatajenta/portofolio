@@ -12,16 +12,17 @@
                     </p>
                 </div>
 
-                <!-- 2. Photo: Early identity on mobile (order-2); Right column on desktop (col-start-2 row-span-3) -->
-                <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-3 flex justify-center lg:justify-end self-center">
+                <!-- 2. Portrait: Editorial visual anchor (mobile: order-2, desktop: col-start-2 row-span-3) -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-3 flex justify-center lg:justify-end self-center lg:self-stretch items-center">
                     <button type="button"
                         aria-haspopup="dialog"
-                        aria-label="View profile photo in gallery"
-                        class="group relative flex h-48 w-48 sm:h-56 sm:w-56 lg:h-72 lg:w-72 xl:h-80 xl:w-80 items-center justify-center overflow-hidden rounded-2xl border-2 border-[var(--color-border-hover)] bg-[var(--color-bg-elevated)] shadow-lg transition hover:border-[var(--color-border-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)]"
+                        aria-label="View portrait in full size"
+                        class="group relative block w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[380px] xl:max-w-[430px] aspect-[4/5] lg:aspect-[3/4] xl:aspect-[4/5] overflow-hidden rounded-2xl lg:rounded-3xl cursor-zoom-in transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]"
                         @click="showGallery = true">
                         <img :src="heroContent.profileImage.src" :alt="heroContent.profileImage.alt"
-                            width="320" height="320" decoding="async" fetchpriority="high"
-                            class="h-full w-full object-cover object-[center_18%] transition group-hover:scale-105" />
+                            width="1024" height="1536" decoding="async" fetchpriority="high"
+                            class="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+                        <div class="pointer-events-none absolute inset-0 rounded-2xl lg:rounded-3xl ring-1 ring-inset ring-[var(--color-border)]/40"></div>
                     </button>
                 </div>
 
@@ -36,12 +37,11 @@
                 <!-- 4. CTAs & Stats -->
                 <div class="order-4 lg:col-start-1 lg:row-start-3 space-y-6 sm:space-y-8 text-left">
                     <div class="flex flex-wrap items-center gap-3">
-                        <BaseButton :to="heroContent.primaryCta.to" :label="heroContent.primaryCta.label" />
-                        <a href="/Hadinata_Jenta_Latest.pdf"
+                        <a :href="heroContent.primaryCta.to || '/Hadinata_Jenta_Latest.pdf'"
                             download="Hadinata-Jenta-CV.pdf"
                             aria-label="Download CV (PDF)"
-                            class="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--color-border-strong)] px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
-                            Download CV
+                            class="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm font-semibold text-[var(--color-btn-text)] bg-[var(--color-btn-bg)] border border-[var(--color-btn-bg)] transition-all duration-300 hover:opacity-85 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
+                            {{ heroContent.primaryCta.label || 'Download CV' }}
                             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -83,8 +83,8 @@
                     </svg>
                 </button>
 
-                <div class="relative overflow-hidden rounded-xl border-2 border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
-                    <img :src="currentImage" alt="Hadinata portrait" class="w-full h-full object-cover" />
+                <div class="relative overflow-hidden rounded-xl border-2 border-[var(--color-border)] bg-[var(--color-bg-elevated)] max-h-[75vh] flex items-center justify-center">
+                    <img :src="currentImage" alt="Hadinata portrait" class="max-h-[72vh] w-auto max-w-full object-contain mx-auto" />
                 </div>
 
                 <div v-if="galleryImages.length > 1" class="mt-4 flex items-center justify-between gap-4">
@@ -118,7 +118,6 @@
 
 <script setup>
 import { onMounted, onUnmounted } from "vue";
-import BaseButton from "./BaseButton.vue";
 import { useHeroData } from "../../composables/useHeroData";
 
 const {
