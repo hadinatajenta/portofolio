@@ -1,4 +1,28 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "hadinata.vercel.app"
+        }
+      ],
+      "destination": "https://hadinata.me/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.hadinata.me"
+        }
+      ],
+      "destination": "https://hadinata.me/$1",
+      "permanent": true
+    }
+  ]
 }
