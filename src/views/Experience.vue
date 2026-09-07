@@ -11,51 +11,54 @@
         </p>
       </div>
 
-      <div class="relative space-y-8">
-        <div class="relative space-y-12 sm:space-y-16">
-          <article v-for="(item, index) in experiences" :key="index"
-            class="relative pb-10 sm:pb-12 border-b border-[var(--color-border)] last:border-b-0">
-            <div class="relative space-y-4">
-              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-2">
-                <div>
-                  <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">
-                    {{ item.title }}
-                  </h2>
-                  <p class="text-sm font-medium text-[var(--color-text-secondary)] mt-0.5">
-                    {{ item.company }}
-                  </p>
-                </div>
-                <div class="flex-shrink-0">
-                  <time
-                    :datetime="item.dateEnd ? item.dateStart + '/' + item.dateEnd : item.dateStart"
-                    class="text-xs sm:text-sm font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider font-dot"
-                  >
-                    {{ item.period }}
-                  </time>
-                </div>
-              </div>
-
-              <p class="text-base leading-relaxed text-[var(--color-text-secondary)]">
-                {{ item.description }}
+      <div class="space-y-6 sm:space-y-8">
+        <article v-for="(item, index) in experiences" :key="index"
+          class="group relative rounded-2xl border-2 border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 sm:p-8 transition-all duration-300 hover:border-[var(--color-border-hover)] hover:shadow-lg space-y-5">
+          
+          <!-- Role Header -->
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-text)]">
+                {{ item.title }}
+              </h2>
+              <p class="text-sm sm:text-base font-medium text-[var(--color-text-secondary)] mt-0.5">
+                {{ item.company }}
               </p>
-
-              <div v-if="item.highlights" class="space-y-3">
-                <ul class="ml-5 space-y-2 text-sm text-[var(--color-text-secondary)]">
-                  <li v-for="(highlight, idx) in item.highlights" :key="idx" class="flex gap-3">
-                    <span class="mt-1.5 h-1 w-1 rounded-full bg-[var(--color-text)] flex-shrink-0"></span>
-                    <span>{{ highlight }}</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div v-if="item.tags" class="flex flex-wrap gap-2 pt-2">
-                <span v-for="tag in item.tags" :key="tag" class="tag-pill text-[var(--color-text-secondary)] bg-[var(--color-surface-hover)] border-[var(--color-border)] hover:bg-[var(--color-border-hover)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)]">
-                  {{ tag }}
-                </span>
-              </div>
             </div>
-          </article>
-        </div>
+            <div class="flex-shrink-0">
+              <time
+                :datetime="item.dateEnd ? item.dateStart + '/' + item.dateEnd : item.dateStart"
+                class="text-xs sm:text-sm font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider font-dot"
+              >
+                {{ item.period }}
+              </time>
+            </div>
+          </div>
+
+          <!-- Tech Stack Badges (Instant Recruiter Scannability) -->
+          <div v-if="item.tags" class="flex flex-wrap items-center gap-1.5 pt-0.5 pb-1 border-b border-[var(--color-border)]">
+            <span v-for="tag in item.tags" :key="tag"
+              class="inline-flex items-center text-[11px] sm:text-xs font-semibold uppercase tracking-wide px-2.5 py-1 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-dot transition-colors group-hover:border-[var(--color-border-strong)]">
+              {{ tag }}
+            </span>
+          </div>
+
+          <!-- Description -->
+          <p class="text-sm sm:text-base leading-relaxed text-[var(--color-text-secondary)]">
+            {{ item.description }}
+          </p>
+
+          <!-- Key Highlights -->
+          <div v-if="item.highlights" class="space-y-2.5 pt-1">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-text-muted)] font-dot">Key Responsibilities &amp; Impact</p>
+            <ul class="ml-1 space-y-2 text-sm text-[var(--color-text-secondary)]">
+              <li v-for="(highlight, idx) in item.highlights" :key="idx" class="flex gap-3">
+                <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--color-text-tertiary)] flex-shrink-0"></span>
+                <span class="leading-relaxed">{{ highlight }}</span>
+              </li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
   </DefaultLayout>

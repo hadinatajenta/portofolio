@@ -71,13 +71,13 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Get in touch with Hadinata Jenta for backend development, freelance projects, or collaboration. Reach out via Email, WhatsApp, or LinkedIn.'
+      content: 'Get in touch with Hadinata Jenta for backend development, freelance projects, or collaboration. Connect via GitHub, LinkedIn, WhatsApp, or Email.'
     },
     { property: 'og:title', content: 'Contact — Hadinata Jenta' },
-    { property: 'og:description', content: 'Get in touch with Hadinata Jenta for backend development, freelance, or collaboration.' },
+    { property: 'og:description', content: 'Get in touch with Hadinata Jenta for backend development, freelance, or collaboration. Connect via GitHub, LinkedIn, WhatsApp, or Email.' },
     { property: 'og:url', content: 'https://hadinata.me/contact' },
     { name: 'twitter:title', content: 'Contact — Hadinata Jenta' },
-    { name: 'twitter:description', content: 'Reach out to Hadinata Jenta via Email, WhatsApp, or LinkedIn.' },
+    { name: 'twitter:description', content: 'Reach out to Hadinata Jenta via GitHub, LinkedIn, WhatsApp, or Email.' },
   ],
   link: [
     { rel: 'canonical', href: 'https://hadinata.me/contact' }

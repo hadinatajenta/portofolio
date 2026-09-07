@@ -8,7 +8,7 @@
         </a>
         <Headers />
 
-        <main id="main-content" tabindex="-1" class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 md:pb-16 focus:outline-none">
+        <main id="main-content" tabindex="-1" class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 md:pt-10 pb-12 md:pb-16 focus:outline-none">
             <slot />
         </main>
 

@@ -68,23 +68,9 @@
           {
             "id": "mms-dg1",
             "title": "Microservices Architecture Overview",
-            "type": "UML",
-            "imageUrl": null,
-            "description": "Placeholder — replace with architecture diagram"
-          },
-          {
-            "id": "mms-dg2",
-            "title": "Merchant Onboarding Flow",
-            "type": "Flow",
-            "imageUrl": null,
-            "description": "Placeholder — replace with flow diagram"
-          },
-          {
-            "id": "mms-dg3",
-            "title": "MMS Database Schema",
-            "type": "ERD",
-            "imageUrl": null,
-            "description": "Placeholder — replace with ERD image"
+            "type": "Architecture",
+            "imageUrl": "/diagrams/mms-architecture.jpg",
+            "description": "Distributed microservices topology running on Red Hat OpenShift, showing Go microservices, RabbitMQ async messaging pipelines, Redis caching, and enterprise banking integrations."
           }
         ],
         "docs": [
@@ -177,24 +163,10 @@
         "diagrams": [
           {
             "id": "iam-dg1",
-            "title": "IAM Database Schema",
-            "type": "ERD",
-            "imageUrl": null,
-            "description": "Placeholder — replace with ERD image"
-          },
-          {
-            "id": "iam-dg2",
-            "title": "Authentication Flow",
+            "title": "Centralized IAM Authentication Flow",
             "type": "Sequence",
-            "imageUrl": null,
-            "description": "Placeholder — replace with sequence diagram"
-          },
-          {
-            "id": "iam-dg3",
-            "title": "RBAC Architecture",
-            "type": "UML",
-            "imageUrl": null,
-            "description": "Placeholder — replace with UML diagram"
+            "imageUrl": "/diagrams/iam-architecture.jpg",
+            "description": "Full authentication lifecycle and authorization flow: JWT issuance, in-memory Redis permission caching, PostgreSQL audit logging, and Prometheus scraping."
           }
         ],
         "docs": [
@@ -279,17 +251,10 @@
         "diagrams": [
           {
             "id": "and-dg1",
-            "title": "CMS Database Schema",
-            "type": "ERD",
-            "imageUrl": null,
-            "description": "Placeholder — replace with ERD image"
-          },
-          {
-            "id": "and-dg2",
-            "title": "Article Publishing Workflow",
-            "type": "Flow",
-            "imageUrl": null,
-            "description": "Placeholder — replace with flow diagram"
+            "title": "Andalasnet CMS Architecture",
+            "type": "Architecture",
+            "imageUrl": "/diagrams/andalasnet-architecture.jpg",
+            "description": "Laravel 9 monolithic architecture showing separation between public reader portal, multi-role editorial CMS, ad management, invoice engine, and MySQL storage."
           }
         ],
         "docs": []
@@ -347,7 +312,15 @@
             "description": "Placeholder — replace with Figma link and screenshot"
           }
         ],
-        "diagrams": [],
+        "diagrams": [
+          {
+            "id": "port-dg1",
+            "title": "Portfolio System & Prerender Pipeline",
+            "type": "Architecture",
+            "imageUrl": "/diagrams/portfolio-architecture.jpg",
+            "description": "Vue 3 architecture showcasing composable data layer, Unhead SEO management, Vite-SSG prerender pipeline, and static deployment to Vercel CDN."
+          }
+        ],
         "docs": []
       }
     },
@@ -736,9 +709,14 @@
   ],
   "socialLinks": [
     {
-      "name": "Gmail",
-      "icon": "📧",
-      "url": "mailto:hadinatajenta122@gmail.com"
+      "name": "GitHub",
+      "icon": "🐙",
+      "url": "https://github.com/hadinatajenta"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "🔗",
+      "url": "https://linkedin.com/in/hadinatajenta"
     },
     {
       "name": "WhatsApp",
@@ -746,29 +724,19 @@
       "url": "https://wa.me/6282181394215"
     },
     {
-      "name": "LinkedIn",
-      "icon": "🔗",
-      "url": "https://linkedin.com/in/hadinatajenta"
+      "name": "Gmail",
+      "icon": "📧",
+      "url": "mailto:hadinatajenta122@gmail.com"
     }
   ],
   "contactMethods": [
     {
-      "id": "email",
-      "icon": "📧",
-      "title": "Email",
-      "description": "hadinatajenta122@gmail.com",
-      "link": "mailto:hadinatajenta122@gmail.com",
-      "linkText": "Send Email",
-      "target": "",
-      "rel": ""
-    },
-    {
-      "id": "whatsapp",
-      "icon": "💬",
-      "title": "WhatsApp",
-      "description": "+62 821-8139-4215",
-      "link": "https://wa.me/6282181394215",
-      "linkText": "Chat on WhatsApp",
+      "id": "github",
+      "icon": "🐙",
+      "title": "GitHub",
+      "description": "github.com/hadinatajenta",
+      "link": "https://github.com/hadinatajenta",
+      "linkText": "View GitHub",
       "target": "_blank",
       "rel": "noopener noreferrer"
     },
@@ -781,6 +749,26 @@
       "linkText": "View Profile",
       "target": "_blank",
       "rel": "noopener noreferrer"
+    },
+    {
+      "id": "whatsapp",
+      "icon": "💬",
+      "title": "WhatsApp",
+      "description": "+62 821-8139-4215",
+      "link": "https://wa.me/6282181394215",
+      "linkText": "Chat on WhatsApp",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "id": "email",
+      "icon": "📧",
+      "title": "Email",
+      "description": "hadinatajenta122@gmail.com",
+      "link": "mailto:hadinatajenta122@gmail.com",
+      "linkText": "Send Email",
+      "target": "",
+      "rel": ""
     }
   ],
   "about": {

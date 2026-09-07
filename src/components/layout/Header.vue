@@ -24,17 +24,45 @@
           </router-link>
         </div>
 
-        <button type="button"
-          class="md:hidden inline-flex items-center justify-center rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-[var(--color-text)] transition hover:border-[var(--color-border-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-hover)]"
-          @click="toggleMenu" :aria-expanded="isOpen" aria-controls="mobile-navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <svg v-if="!isOpen" class="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-          <svg v-else class="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div class="flex items-center gap-2 md:hidden">
+          <!-- Mobile Theme Toggle in Navbar -->
+          <button
+            type="button"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-border)] bg-transparent text-[var(--color-text)] transition hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)]"
+            :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+            @click="toggleTheme"
+          >
+            <!-- Sun Icon (when Dark, click to go light) -->
+            <svg v-if="isDark" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (when Light, click to go dark) -->
+            <svg v-else class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Mobile Menu Hamburger Button -->
+          <button type="button"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-border)] bg-transparent text-[var(--color-text)] transition hover:border-[var(--color-border-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-hover)]"
+            @click="toggleMenu" :aria-expanded="isOpen" aria-controls="mobile-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <svg v-if="!isOpen" class="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg v-else class="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -51,6 +79,36 @@
                 clip-rule="evenodd" />
             </svg>
           </router-link>
+
+          <!-- Appearance toggle in menu drawer -->
+          <button
+            type="button"
+            class="w-full flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)]"
+            @click="toggleTheme"
+          >
+            <span class="flex items-center gap-2">
+              <svg v-if="isDark" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg v-else class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              Appearance
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text)] font-mono uppercase">
+              <span class="h-2 w-2 rounded-full" :class="isDark ? 'bg-indigo-400' : 'bg-amber-400'"></span>
+              {{ isDark ? 'Dark' : 'Light' }}
+            </span>
+          </button>
+
           <router-link to="/contact"
             class="flex items-center justify-center rounded-lg border border-[var(--color-btn-bg)] bg-[var(--color-btn-bg)] px-4 py-3 text-sm font-semibold text-[var(--color-btn-text)] transition hover:opacity-80 mt-2"
             @click="closeMenu">
@@ -65,7 +123,9 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
+import { useTheme } from "../../composables/useTheme";
 
+const { isDark, toggleTheme } = useTheme();
 const isOpen = ref(false);
 const route = useRoute();
 

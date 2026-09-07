@@ -1,13 +1,13 @@
 <template>
     <section id="hero" class="relative overflow-hidden">
-        <div class="relative py-6 sm:py-12 lg:py-16">
-            <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-8 lg:gap-x-16 lg:gap-y-6 items-center">
+        <div class="relative py-2 sm:py-6 lg:py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-4 sm:gap-8 lg:gap-x-16 lg:gap-y-6 items-center">
                 <!-- 1. Heading & Subtitle -->
-                <div class="order-1 lg:col-start-1 lg:row-start-1 space-y-3 sm:space-y-4 text-left">
+                <div class="order-1 lg:col-start-1 lg:row-start-1 space-y-2 sm:space-y-4 text-left">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text)]">
                         {{ heroContent.title }}
                     </h1>
-                    <p class="text-base sm:text-lg text-[var(--color-text-secondary)] font-medium">
+                    <p class="text-base sm:text-lg text-[var(--color-text-secondary)] font-medium max-w-[32ch] lg:max-w-none">
                         {{ heroContent.subtitle }}
                     </p>
                 </div>
@@ -17,25 +17,19 @@
                     <button type="button"
                         aria-haspopup="dialog"
                         aria-label="View portrait in full size"
-                        class="group relative block w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[380px] xl:max-w-[430px] aspect-[4/5] lg:aspect-[3/4] xl:aspect-[4/5] overflow-hidden rounded-2xl lg:rounded-3xl cursor-zoom-in transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]"
+                        class="group relative block w-[min(82vw,220px)] sm:w-full sm:max-w-[300px] lg:max-w-[380px] xl:max-w-[430px] aspect-[4/5] lg:aspect-[3/4] xl:aspect-[4/5] overflow-hidden rounded-xl lg:rounded-3xl cursor-zoom-in transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-strong)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]"
                         @click="showGallery = true">
                         <img :src="heroContent.profileImage.src" :alt="heroContent.profileImage.alt"
                             width="1024" height="1536" decoding="async" fetchpriority="high"
                             class="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-                        <div class="pointer-events-none absolute inset-0 rounded-2xl lg:rounded-3xl ring-1 ring-inset ring-[var(--color-border)]/40"></div>
+                        <div class="pointer-events-none absolute inset-0 rounded-xl lg:rounded-3xl ring-1 ring-inset ring-[var(--color-border)]/30"></div>
                     </button>
                 </div>
 
-                <!-- 3. Bio / Description -->
-                <div v-if="heroContent.description"
-                    class="order-3 lg:col-start-1 lg:row-start-2 text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed max-w-2xl text-left">
-                    <p>
-                        {{ heroContent.description }}
-                    </p>
-                </div>
+                <!-- 3. CTAs & Stats (mobile: before bio) -->
+                <!-- 4. Bio / Description (mobile: after CTAs) -->
 
-                <!-- 4. CTAs & Stats -->
-                <div class="order-4 lg:col-start-1 lg:row-start-3 space-y-6 sm:space-y-8 text-left">
+                <div class="order-3 lg:col-start-1 lg:row-start-3 space-y-5 sm:space-y-8 text-left">
                     <div class="flex flex-wrap items-center gap-3">
                         <a :href="heroContent.primaryCta.to || '/Hadinata_Jenta_Latest.pdf'"
                             download="Hadinata-Jenta-CV.pdf"
@@ -57,12 +51,20 @@
                         </router-link>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8 border-t-2 border-[var(--color-border)]">
+                    <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-5 sm:pt-8 border-t-2 border-[var(--color-border)]">
                         <div v-for="stat in heroContent.stats" :key="stat.label">
                             <p class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--color-text-tertiary)] uppercase">{{ stat.label }}</p>
                             <p class="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold text-[var(--color-text)] font-dot">{{ stat.value }}</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Bio / Description (mobile: after CTAs) -->
+                <div v-if="heroContent.description"
+                    class="order-4 lg:col-start-1 lg:row-start-2 text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed max-w-2xl text-left">
+                    <p>
+                        {{ heroContent.description }}
+                    </p>
                 </div>
             </div>
         </div>
