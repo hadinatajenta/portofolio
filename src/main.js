@@ -4,7 +4,18 @@ import App from './App.vue'
 import { routes } from './router/index'
 import db from '../db.json'
 
-export const createApp = ViteSSG(App, { routes })
+export const createApp = ViteSSG(App, {
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      return { el: to.hash, behavior: 'smooth' }
+    }
+    return { top: 0, left: 0 }
+  },
+})
 
 const PROJECT_IDS = Array.isArray(db?.projects)
   ? db.projects.map((project) => project.id).filter((id) => Number.isInteger(id))

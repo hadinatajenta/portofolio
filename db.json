@@ -839,11 +839,11 @@
     "name": "Hadinata Jenta",
     "role": "Backend & Systems Engineer",
     "location": "DKI Jakarta, Indonesia",
-    "intro": "Experienced in building microservices with Go and Laravel, event-driven pipelines with RabbitMQ, and enterprise integrations across financial environments at Bank Rakyat Indonesia.",
-    "ctaBadge": "Open for engagements",
-    "ctaTitle": "Let\\'s build something reliable together",
-    "ctaDescription": "Available for backend, full-stack, or system integration work. Let\\'s talk about what you need.",
-    "ctaButtonLabel": "Let's collaborate",
+    "intro": "Building reliable backend microservices, event-driven pipelines with RabbitMQ, and enterprise integrations across financial environments at Bank Rakyat Indonesia.",
+    "ctaBadge": "Available for selective opportunities",
+    "ctaTitle": "Let's build something reliable together",
+    "ctaDescription": "Available for backend, distributed systems, or enterprise integration work. Let's talk about what you need.",
+    "ctaButtonLabel": "Let's work together",
     "highlights": [
       {
         "value": "3+ Yrs",
