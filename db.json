@@ -724,9 +724,9 @@
       "url": "https://wa.me/6282181394215"
     },
     {
-      "name": "Gmail",
+      "name": "Email",
       "icon": "📧",
-      "url": "mailto:hadinatajenta122@gmail.com"
+      "url": "mailto:contact@hadinata.me"
     }
   ],
   "contactMethods": [
@@ -764,8 +764,8 @@
       "id": "email",
       "icon": "📧",
       "title": "Email",
-      "description": "hadinatajenta122@gmail.com",
-      "link": "mailto:hadinatajenta122@gmail.com",
+      "description": "contact@hadinata.me",
+      "link": "mailto:contact@hadinata.me",
       "linkText": "Send Email",
       "target": "",
       "rel": ""
