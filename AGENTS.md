@@ -1,150 +1,352 @@
-# AGENTS.md — Repository Instructions for AI Agents
+# AGENTS.md — Portfolio
 
-General operational guidelines and repository rules for AI coding agents working on the personal portfolio codebase of Hadinata Jenta.
-
----
-
-## 1. Project Overview
-
-This repository is a personal engineering portfolio for **Hadinata Jenta**, a Backend & Systems Engineer specializing in Go microservices, event-driven architectures (RabbitMQ), and enterprise integrations at Bank Rakyat Indonesia.
-
-The site is built with **Vue 3**, styled with **Tailwind CSS v4** and CSS theme tokens, and statically prerendered using **vite-ssg**. All portfolio data is statically sourced from a single local database file (`db.json`).
+Project context for AI coding agents (Claude Code, Cursor, Aider, etc.).
+Read this file before making any change. It is the source of truth for
+conventions in this repo.
 
 ---
 
-## 2. Architecture
+## 1. What this is
 
-* **Framework**: Vue 3 (v3.5.x) using Composition API with `<script setup>`.
-* **Build System**: Vite (v7.x) with `@vitejs/plugin-vue` and `@tailwindcss/vite`.
-* **Prerendering (SSG)**: `vite-ssg` builds 13+ static HTML pages into `dist/` at build time. Dynamic routes (`/projects/:id`) are discovered via `includedRoutes()` in `src/main.js`.
-* **Postbuild Processing**: `scripts/generate-sitemap.mjs` generates `sitemap.xml` for both `public/` and `dist/`, and creates flat `.html` aliases in `dist/` (e.g. `dist/projects.html`, `dist/404.html`) for clean URL resolution across static hosts.
-* **Routing**: `vue-router` (v4.x) with HTML5 history mode, prerendered into static HTML files by `vite-ssg`.
-* **Styling**: Tailwind CSS v4 `@theme` tokens and semantic CSS custom properties in `src/style.css` supporting light and dark themes.
-* **State Management**: Lightweight Vue 3 reactive singletons (`ref`, `computed`) housed in domain composables (`src/composables/`). No external state library (Pinia/Vuex) is used.
-* **Data Layer**: Static local JSON (`db.json`) imported via `src/data/localDb.js`. No runtime database or backend API server.
-* **Hosting / Deployment**: Configured for Vercel static deployment via `vercel.json` with canonical redirect rules and clean URLs.
+Personal portfolio site for Hadinata Jenta. Single practitioner.
+Vue 3 SPA with static fallback pages, deployed to Vercel.
+
+**Design discipline lives in `SKILL.md`.** That file describes the
+aesthetic, tokens, motion rules, and anti-patterns. Read it before
+touching any UI. This file (AGENTS.md) only covers _how the code is
+organized_ — not what it should look like.
 
 ---
 
-## 3. Important Directories
+## 2. Stack
 
-* [`src/views/`](file:///Users/erendt/Code/portofolio/src/views): Route-level page components (`LandingPage.vue`, `Projects.vue`, `ProjectDetail.vue`, `Experience.vue`, `Contact.vue`, `NotFound.vue`).
-* [`src/components/`](file:///Users/erendt/Code/portofolio/src/components): Reusable UI components:
-  * `common/`: Shared building blocks (`HeroSection.vue`, `BaseButton.vue`, `BaseCard.vue`, `AboutSection.vue`).
-  * `layout/`: Global layout components (`Header.vue`, `Footer.vue`).
-  * `projects/`: Project archive, cards, table rows, and detail section tabs (`detail/sections/`).
-  * `ui/`: Floating utilities (`ThemeToggle.vue`).
-* [`src/composables/`](file:///Users/erendt/Code/portofolio/src/composables): Domain logic and reactive singletons (`useProjectsData.js`, `useTheme.js`, `useContactData.js`, `useHeroData.js`, `useExperienceData.js`, `useFooterData.js`, `useAboutData.js`).
-* [`src/data/`](file:///Users/erendt/Code/portofolio/src/data): Data adapters (`localDb.js` re-exporting `db.json`).
-* [`src/router/`](file:///Users/erendt/Code/portofolio/src/router): Route definitions in `index.js`.
-* [`src/layouts/`](file:///Users/erendt/Code/portofolio/src/layouts): Global wrapper (`DefaultLayout.vue`) with skip links, header, main container, footer, and theme toggle.
-* [`public/`](file:///Users/erendt/Code/portofolio/public): Static assets served directly at the root (favicon suite, `Me2.png`, `diagrams/`, `manifest.json`, `robots.txt`, `sitemap.xml`, `Hadinata_Jenta_Latest.pdf`).
-* [`scripts/`](file:///Users/erendt/Code/portofolio/scripts): Node.js build automation scripts (`generate-sitemap.mjs`).
-* [`db.json`](file:///Users/erendt/Code/portofolio/db.json): Single source of truth for portfolio content (projects, experiences, hero text, contact methods, social links).
+| Layer     | Choice                                   |
+| --------- | ---------------------------------------- |
+| Framework | Vue 3, Composition API, `<script setup>` |
+| Build     | Vite                                     |
+| Router    | Vue Router 4                             |
+| State     | Pinia (store/)                           |
+| Styling   | Tailwind CSS + CSS custom properties     |
+| Data      | `db.json` via `json-server` (local dev)  |
+| Deploy    | Vercel (`vercel.json`)                   |
+
+Do not add dependencies without asking. Especially:
+
+- No UI component libraries (shadcn-vue, PrimeVue, etc.)
+- No icon packs (use inline SVG)
+- No animation libraries (no GSAP, no framer-motion equivalent)
+- No CSS-in-JS
 
 ---
 
-## 4. Development Commands
+## 3. Commands
 
-The repository uses npm. All available commands from `package.json`:
-
-```bash
-# Install dependencies
-npm install
-
-# Start local development server (Vite dev server)
-npm run dev
-
-# Run full production build (SSG prerender + sitemap generation)
-npm run build
-
-# Preview the built production dist directory locally (http://localhost:4173)
-npm run preview
+```
+npm run dev       # start Vite + json-server (see package.json)
+npm run build     # production build to dist/
+npm run preview   # preview built output
 ```
 
-> **Testing, Linting & Formatting**: Not currently configured in `package.json`. Always run `npm run build` to validate template syntax, imports, and SSR/SSG compatibility.
+Sitemap is generated by `scripts/generate-sitemap.mjs`. Do not hand-edit
+`public/sitemap.xml`.
 
 ---
 
-## 5. Coding Rules
+## 4. Directory conventions
 
-* **Vue 3 Composition API**: Always use `<script setup>`. Do not use the Options API.
-* **Component Responsibility**: Views manage page-level metadata (`useHead`), layout composition, and route params. Components handle presentation and localized interaction. Composables handle data transformation and reactive state.
-* **Composables**: Keep composables focused on a single domain. Export reactive refs and computed properties. Do not create composables for single-use trivial template logic.
-* **SSR/SSG Safety**: Guard any browser-only APIs (`window`, `document`, `localStorage`, `matchMedia`) with `typeof window !== 'undefined'` checks. Code in module scopes or setup functions executes in Node.js during `vite-ssg build`.
-* **State Ownership**: Centralize state in existing composables (`src/composables/`). Do not introduce Pinia, Vuex, or ad-hoc global event buses.
-* **Routing**: Use `<router-link>` for internal navigation. Use standard `<a>` with `target="_blank"` and `rel="noopener noreferrer"` for external links. Never attach `@click` handlers to `div` or `span` for routing.
-* **Styling Conventions**:
-  * Use Tailwind CSS v4 utility classes.
-  * Use semantic CSS variables (`var(--color-text)`, `var(--color-bg)`, `var(--color-border)`, `var(--color-surface)`) defined in `src/style.css`.
-  * Do not hardcode raw hex colors in component templates when theme tokens exist.
-* **Pixel Typography**: The `font-dot` class (`DotGothic16`) is reserved for the brand identity (brand mark, hero headings, tech badges, terminal labels, and stats). Do not apply `font-dot` to long-form body text or paragraphs.
+```
+src/
+├── views/              # One file per route. Thin wrappers.
+├── layouts/            # Page shells (DefaultLayout.vue)
+├── components/
+│   ├── common/         # Base* primitives, cross-page sections
+│   ├── layout/         # Header, Footer, nav, page chrome
+│   ├── projects/       # Project-specific UI
+│   └── ui/             # Micro UI (ThemeToggle, etc.)
+├── composables/        # use*Data.js — one per view/feature
+├── data/               # localDb.js — data access layer
+├── router/             # Route definitions
+├── store/              # Pinia stores
+└── style.css           # Tailwind entry + :root tokens
+```
 
----
+**Rules:**
 
-## 6. Responsive Design Rules
-
-* **Mobile-First Approach**: Write base styles for mobile viewports (`< 640px`), layer progressive enhancements with `sm:`, `md:`, `lg:`, and `xl:`.
-* **Standard Container Strategy**: Keep layout widths bound to `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` as defined in `DefaultLayout.vue`.
-* **Header Constraints**: Header height must remain locked at `h-16` (64px). Ensure brand wordmark and action buttons fit within 375px screens without horizontal scroll.
-* **Touch Targets**: Interactive elements on mobile must have a minimum touch target of 36x36px to 44x44px.
-* **Intrinsic Layouts**: Prefer CSS Grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`) and Flexbox over fixed pixel widths. Avoid unnecessary custom breakpoints.
-
----
-
-## 7. Performance Rules
-
-* **Zero Heavy Dependencies**: Do not add runtime animation libraries, UI component libraries, or charting libraries. Keep the bundle lightweight.
-* **Image Optimization**:
-  * Keep source images in `public/` web-optimized (PNG/WebP/SVG). Avoid uncompressed multi-megabyte assets.
-  * Always provide explicit `alt` attributes on images.
-  * Use vector SVGs (such as `favicon.svg`) where resolution independence is required.
-* **Prerendering Considerations**: Because the site uses SSG, avoid expensive runtime computations on initial load. Compute filters and summaries in composables using `computed`.
-* **Fonts**: `DotGothic16` and `Inter` are loaded via Google Fonts with `preconnect` in `index.html`. Do not add additional font families.
+- A view renders a layout, which composes sections, which compose
+  components. Never reach across layers.
+- `use*Data.js` composables are the _only_ place that knows about
+  `db.json` shape. Components receive plain props.
+- New section? Create `components/common/<Name>Section.vue` and use it
+  in a layout or view. Do not inline large sections into a view.
+- New project-specific widget? `components/projects/`.
 
 ---
 
-## 8. Accessibility Rules
+## 5. Design tokens
 
-* **Semantic HTML First**: Use `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`, `<button>`, and `<a>`.
-* **Skip Link**: Preserve the skip-to-content link in `DefaultLayout.vue` (`<a href="#main-content">Skip to content</a>`) pointing to `<main id="main-content" tabindex="-1">`.
-* **Keyboard Accessibility**:
-  * Ensure all interactive elements have visible focus rings (`focus-visible:ring-2`).
-  * Modals and mobile drawers must close on `Escape` key press.
-  * Modal overlays must lock body scroll and trap focus when active.
-* **Screen Reader Labels**: Decorative icons and brand marks must have `aria-hidden="true"`. Icon-only buttons must have descriptive `aria-label` attributes.
-* **Color Contrast**: Verify that text satisfies WCAG AA contrast in both light mode and dark mode against background tokens.
+All design tokens live as **CSS custom properties in `src/style.css`**,
+mirrored into `tailwind.config.js` under `theme.extend`.
 
----
+```
+:root { --bg, --fg, --fg-2, --fg-3, --accent, --line, --ease, ... }
+       ↓ mirrored
+theme.extend.colors.bg, .fg, .accent, ...
+```
 
-## 9. Data & Security
+**Rules:**
 
-* **Public Nature of Data**: All data in `db.json` and `src/` is bundled and delivered to the client as static JavaScript/HTML. Treat all content in this repository as entirely public.
-* **No Secrets**: Never commit API keys, private tokens, passwords, or personal credentials.
-* **Enterprise Confidentiality**: Content describing projects at Bank Rakyat Indonesia (BRI) or previous companies must respect confidentiality. Never include private internal IP addresses, production database credentials, unreleased proprietary code, or confidential customer data.
-* **Direct Asset Access**: Files placed in `public/` are served at the web root `/`. Keep file names organized and avoid leaving unused temporary files in `public/`.
+- Never write a hex color in a component. Use a Tailwind class
+  (`bg-bg`, `text-fg-2`, `border-line`) or a CSS var
+  (`var(--accent)`).
+- Never write a duration in ms in a component. Use
+  `duration-[var(--d-base)]` or a utility class defined once.
+- Never add a new color to `tailwind.config.js` without adding it to
+  `:root` first. The CSS vars are the source of truth; the config is
+  a mirror for utility generation.
 
----
-
-## 10. Change Safety Workflow
-
-When modifying code in this repository, follow this sequence:
-
-1. **Inspect**: Read relevant files, composables, and data structures.
-2. **Make Focused Change**: Modify only the necessary files. Avoid sweeping refactors.
-3. **Build**: Execute `npm run build` and ensure `vite-ssg build` and `generate-sitemap.mjs` succeed with 0 errors.
-4. **Verify Routes**: Check affected routes (`/`, `/projects`, `/projects/:id`, `/experience`, `/contact`, `/404`).
-5. **Verify Themes & Viewports**: Check both Light and Dark themes, and verify layout at 375px, 430px, and desktop widths.
+Full token set: see `SKILL.md` §2.
 
 ---
 
-## 11. Things Agents Must NOT Do
+## 6. Component conventions
 
-* **DO NOT** add Pinia, Vuex, or any state management library.
-* **DO NOT** convert static `db.json` imports into mock REST API or fetch services.
-* **DO NOT** remove or break `includedRoutes()` in `src/main.js` (this will break SSG builds).
-* **DO NOT** change canonical URLs or page routes without explicit user instruction (affects SEO).
-* **DO NOT** add arbitrary fonts or heavy UI component libraries (e.g. Vuetify, Element Plus, Bootstrap).
-* **DO NOT** invent false metrics, exaggerated achievements, or fake companies in `db.json`.
-* **DO NOT** break the 64px header height constraint or modify navigation structure when editing wordmarks.
-* **DO NOT** commit placeholder or "Lorem ipsum" copy to production views.
+**SFC structure (mandatory order):**
+
+```vue
+<script setup>
+// 1. imports
+// 2. props (defineProps)
+// 3. emits (defineEmits)
+// 4. composables
+// 5. refs / computed
+// 6. lifecycle
+// 7. functions
+</script>
+
+<template>
+  <!-- semantic HTML, no div soup -->
+</template>
+
+<style scoped>
+/* only when Tailwind can't express it (rare) */
+</style>
+```
+
+**Naming:**
+
+- Components: `PascalCase.vue`, multi-word (`BaseButton`, not `Button`)
+- Base primitives: prefix `Base*` (`BaseButton`, `BaseCard`, `BaseAnchor`)
+- Section components: suffix `*Section` (`HeroSection`, `AboutSection`)
+- Views: `PascalCase` matching route name (`ProjectDetail.vue`)
+
+**Props:**
+
+- Use `defineProps` with type + default + validator where relevant.
+- Boolean props default to `false`, never `true`.
+- Prefer explicit props over `v-bind="$attrs"` forwarding.
+
+**Emits:**
+
+- `defineEmits(['update:modelValue', 'submit'])`
+- Never emit DOM events; wrap them.
+
+**Slots:**
+
+- Default slot for content.
+- Named slots for structural variation (`#header`, `#footer`).
+- No render props, no scoped slots unless the parent truly needs data.
+
+---
+
+## 7. Styling rules
+
+**Tailwind first.** Reach for utilities before a `<style>` block.
+A `<style scoped>` block is allowed only for:
+
+- Keyframes that Tailwind can't express
+- Complex `::before` / `::after` compositions
+- `:has()` or advanced selectors
+
+**Class order** (matches Prettier plugin):
+
+1. layout (`flex`, `grid`, `block`)
+2. spacing (`p-`, `m-`, `gap-`)
+3. sizing (`w-`, `h-`)
+4. typography (`text-`, `font-`, `tracking-`)
+5. color (`bg-`, `text-`, `border-`)
+6. effects (`opacity-`, `shadow-`)
+7. motion (`transition-`, `duration-`, `ease-`)
+8. state (`hover:`, `focus-visible:`, `active:`)
+
+**Never:**
+
+- Arbitrary values for colors (`bg-[#E8B44A]`) — use the token
+- Inline `style=""` for anything except dynamic transforms
+- `!important` (Tailwind's `!` prefix included) unless overriding
+  a third-party library
+
+---
+
+## 8. Motion rules
+
+Full contract in `SKILL.md` §6. Summary:
+
+- Animate only `transform` and `opacity`.
+- Durations from tokens: `--d-fast` (120ms), `--d-base` (180ms),
+  `--d-slow` (260ms).
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (exposed as `--ease`).
+- Reveal pattern: `v-reveal` directive (see §9) using
+  IntersectionObserver. Never animate on mount.
+- Hover: prefer opacity fade of a pseudo-element. Do not transition
+  color directly.
+- `prefers-reduced-motion: reduce` must disable all of the above in
+  both CSS and JS.
+
+---
+
+## 9. The `v-reveal` directive
+
+Registered globally in `main.js`. Usage:
+
+```vue
+<section v-reveal class="sec">
+  ...
+</section>
+```
+
+Behavior:
+
+- Adds `data-reveal` attribute on mount.
+- Uses a shared IntersectionObserver
+  (`rootMargin: '0px 0px -10% 0px'`, `threshold: 0.06`).
+- Adds `.is-in` class once when entering viewport, then unobserves.
+- If `prefers-reduced-motion: reduce` is active, immediately adds
+  `.is-in` on mount and skips the observer entirely.
+
+Do not roll your own reveal logic in a component. Use the directive.
+
+---
+
+## 10. Data layer
+
+`db.json` is the local mock. `src/data/localDb.js` wraps it.
+
+**Pattern:**
+
+```js
+// src/composables/useProjectsData.js
+import { localDb } from "@/data/localDb";
+
+export function useProjectsData() {
+  const projects = ref([]);
+  const loading = ref(true);
+  const error = ref(null);
+
+  onMounted(async () => {
+    try {
+      projects.value = await localDb.getProjects();
+    } catch (e) {
+      error.value = e;
+    } finally {
+      loading.value = false;
+    }
+  });
+
+  return { projects, loading, error };
+}
+```
+
+**Rules:**
+
+- Every view has exactly one `use*Data` composable for its primary
+  content. Side data (contact form, theme) has its own composable.
+- Composables are pure — no DOM access, no routing, no store writes.
+- Shape returned by `localDb` is the shape components receive as props.
+  Do not reshape in the view.
+
+---
+
+## 11. Theme (light/dark)
+
+`useTheme.js` + `ThemeToggle.vue` handle theme switching.
+The design tokens in `:root` have light and dark variants:
+
+```css
+:root { --bg: #F5F3EE; ... }              /* light default */
+@media (prefers-color-scheme: dark) { ... }
+:root[data-theme="dark"] { ... }           /* manual override */
+```
+
+**Rules:**
+
+- Never hard-code a color for one theme only. Both themes must satisfy
+  the contrast minimums in `SKILL.md` §5.
+- Component code reads tokens, never branches on `theme === 'dark'`.
+- The theme button's behavior is documented in
+  `THEME_BUTTON_GUIDE.md`. Read it before touching `ThemeToggle.vue`.
+
+---
+
+## 12. Routing
+
+`src/router/index.js` maps routes to views. Static fallback pages live
+in `dist/` (regenerated on build) and mirror the SPA routes for SEO.
+
+**Rules:**
+
+- One view per route. No layout logic in the router.
+- Route names are `kebab-case`, matching the view file.
+- Meta fields allowed: `title`, `description`, `ogImage`.
+- Never put data fetching in route guards.
+
+---
+
+## 13. What NOT to do
+
+- Do not create a new folder for one component.
+- Do not add a prop just to pass it through two levels. Use a slot.
+- Do not fetch data in `<template>` or in a `computed`.
+- Do not use `watch` where a `computed` will do.
+- Do not use `v-if` where a `v-show` is more appropriate (or vice
+  versa).
+- Do not put prose in a `<style>` block. Ever.
+- Do not use `@apply` in a component — it hides what's happening and
+  breaks token enforcement. Define a component or a utility class in
+  `style.css` instead.
+- Do not add `console.log` to committed code.
+- Do not commit `dist/` (it's built).
+- Do not hand-edit `public/sitemap.xml`.
+
+---
+
+## 14. Redesign in progress
+
+This repo is mid-migration to the "Editorial Instrument" aesthetic
+described in `SKILL.md`. Old and new coexist.
+
+**When touching a file:**
+
+1. Check whether it's been migrated (look for tokens-only colors and
+   `.sec` + `.sec-head` pattern).
+2. If not migrated, migrate it as part of the change — don't patch the
+   old style.
+3. If you migrate a view, also migrate the components only it uses.
+4. After migration, delete the old CSS. Do not leave it commented.
+
+**Migration order (top-down):**
+LandingPage → AboutMe → Experience → Projects → ProjectDetail →
+Contact → NotFound
+
+Do not migrate two views in parallel. The design system drifts.
+
+---
+
+## 15. When in doubt
+
+- Aesthetic question → `SKILL.md`
+- Structure question → this file, §4
+- Motion question → `SKILL.md` §6 + §9 of this file
+- Data question → §10 of this file
+- Theme question → `THEME_BUTTON_GUIDE.md`
+
+If the answer isn't in one of those, ask before inventing.
