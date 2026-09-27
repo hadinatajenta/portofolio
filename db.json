@@ -801,7 +801,7 @@
   },
   "hero": {
     "content": {
-      "title": "Hi, I'm Hadinata",
+      "title": "Hadinata Jenta",
       "subtitle": "Backend & Systems Engineer specializing in Go, distributed microservices, and enterprise financial ecosystems.",
       "description": "Building reliable services and event-driven pipelines with RabbitMQ at Bank Rakyat Indonesia. Focused on resilient API contracts, observable distributed systems, and production reliability.",
       "primaryCta": {
